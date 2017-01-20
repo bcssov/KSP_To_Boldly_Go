@@ -84,7 +84,7 @@ namespace KSP_To_Boldly_Go_Common.Utlities
             tabIndent++;
             var properties = obj.GetType().GetProperties();
             // Skip configurable headers
-            foreach (var property in properties.Where(p => p.PropertyType != typeof(KopernicusHeader)))
+            foreach (var property in properties.Where(p => p.PropertyType != typeof(KopernicusHeader) && p.GetCustomAttributes(typeof(NonSerializedAttribute), true) == null))
             {
                 if (property.CanRead)
                 {
