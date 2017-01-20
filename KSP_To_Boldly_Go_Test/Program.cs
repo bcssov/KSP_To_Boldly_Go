@@ -34,7 +34,7 @@ namespace KSP_To_Boldly_Go_Test
             var path = System.IO.Path.Combine(System.IO.Directory.GetParent(Assembly.GetExecutingAssembly().Location).FullName, "output.cfg");
             var fs = new FileStream(path, FileMode.Create);
             var serializer = new KopernicusSerializer();
-            serializer.Serialize<KopernicusMain>(new KopernicusMain(), fs);
+            serializer.Serialize(new KopernicusMain(), fs);
         }
 
         #endregion Methods

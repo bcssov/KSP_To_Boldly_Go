@@ -37,7 +37,7 @@ namespace KSP_To_Boldly_Go_Common.Utlities
             using (var stream = new StreamWriter(serializationStream))
             {
                 var header = obj.Header;
-                if (!string.IsNullOrWhiteSpace(header.ToString()))
+                if (!string.IsNullOrWhiteSpace(header))
                 {
                     stream.WriteLine(header);
                 }
@@ -86,16 +86,16 @@ namespace KSP_To_Boldly_Go_Common.Utlities
             {
                 if (property.CanRead)
                 {
-                    var value = property.GetValue(obj);
-                    if (value != null)
+                    var propValue = property.GetValue(obj);
+                    if (propValue != null)
                     {
                         if (property.PropertyType.IsClass && !(property.PropertyType.IsPrimitive || property.PropertyType.Equals(typeof(string)) || property.PropertyType.Equals(typeof(DateTime))))
                         {
                             // Write starting bracket
                             var sb = new StringBuilder();
-                            if (value is IKopernicusObject && !string.IsNullOrWhiteSpace(((IKopernicusObject)value).Header))
+                            if (propValue is IKopernicusObject && !string.IsNullOrWhiteSpace(((IKopernicusObject)propValue).Header))
                             {
-                                AppendLine(sb, tabIndent, "{0}", ((IKopernicusObject)value).Header.ToString());
+                                AppendLine(sb, tabIndent, "{0}", ((IKopernicusObject)propValue).Header);
                             }
                             else
                             {
@@ -104,7 +104,7 @@ namespace KSP_To_Boldly_Go_Common.Utlities
                             AppendLine(sb, tabIndent, "{");
                             // Dump what we have so far
                             stream.Write(sb.ToString());
-                            WriteStream(stream, value, tabIndent);
+                            WriteStream(stream, propValue, tabIndent);
                             // Write closing bracket
                             sb = new StringBuilder();
                             AppendLine(sb, tabIndent, "}");
@@ -112,12 +112,12 @@ namespace KSP_To_Boldly_Go_Common.Utlities
                         }
                         else
                         {
-                            if (!(value is KopernicusHeader) && !string.IsNullOrWhiteSpace(value.ToString()))
+                            if (!(propValue is KopernicusHeader) && !string.IsNullOrWhiteSpace(propValue.ToString()))
                             {
                                 // TODO: Color special handling. Might need refactoring in the future...
-                                if (value is Color)
+                                if (propValue is Color)
                                 {
-                                    var c = ((Color)value);
+                                    var c = ((Color)propValue);
                                     var sb = new StringBuilder();
                                     AppendLine(sb, tabIndent, "{0} = {1}", property.Name, c.ToConfigString());
                                     stream.Write(sb.ToString());
@@ -125,7 +125,7 @@ namespace KSP_To_Boldly_Go_Common.Utlities
                                 else
                                 {
                                     var sb = new StringBuilder();
-                                    AppendLine(sb, tabIndent, "{0} = {1}", property.Name, value.ToString());
+                                    AppendLine(sb, tabIndent, "{0} = {1}", property.Name, propValue.ToString());
                                     stream.Write(sb.ToString());
                                 }
                             }
