@@ -11,13 +11,16 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using KSP_To_Boldly_Go_Common.Utlities;
 using System;
+using System.ComponentModel;
 
 namespace KSP_To_Boldly_Go_Common
 {
     /// <summary>
     /// Class KopernicusHeader.
     /// </summary>
+    [TypeConverter(typeof(KopernicusHeaderTypeConverter))]
     public class KopernicusHeader
     {
         #region Fields
@@ -45,6 +48,13 @@ namespace KSP_To_Boldly_Go_Common
             {
                 _value = string.Empty;
             }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KopernicusHeader"/> class.
+        /// </summary>
+        public KopernicusHeader() : this(string.Empty)
+        {
         }
 
         #endregion Constructors

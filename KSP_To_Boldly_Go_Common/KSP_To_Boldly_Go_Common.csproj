@@ -45,6 +45,7 @@
     <Compile Include="KopernicusHeader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utlities\Extensions.cs" />
+    <Compile Include="Utlities\KopernicusHeaderTypeConverter.cs" />
     <Compile Include="Utlities\KopernicusSerializer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

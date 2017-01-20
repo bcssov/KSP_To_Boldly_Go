@@ -13,8 +13,10 @@
 // ***********************************************************************
 using KSP_To_Boldly_Go_Common.Utlities;
 using System;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 
 namespace KSP_To_Boldly_Go_Test
 {
@@ -31,6 +33,8 @@ namespace KSP_To_Boldly_Go_Test
         /// <param name="args">The arguments.</param>
         private static void Main(string[] args)
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             var path = System.IO.Path.Combine(System.IO.Directory.GetParent(Assembly.GetExecutingAssembly().Location).FullName, "output.cfg");
             var fs = new FileStream(path, FileMode.Create);
             var serializer = new KopernicusSerializer();
