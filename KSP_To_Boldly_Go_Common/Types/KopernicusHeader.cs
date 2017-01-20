@@ -11,11 +11,10 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Utlities;
 using System;
 using System.ComponentModel;
 
-namespace KSP_To_Boldly_Go_Common
+namespace KSP_To_Boldly_Go_Common.Types
 {
     /// <summary>
     /// Class KopernicusHeader.
@@ -51,7 +50,7 @@ namespace KSP_To_Boldly_Go_Common
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="KopernicusHeader"/> class.
+        /// Initializes a new instance of the <see cref="KopernicusHeader" /> class.
         /// </summary>
         public KopernicusHeader() : this(string.Empty)
         {

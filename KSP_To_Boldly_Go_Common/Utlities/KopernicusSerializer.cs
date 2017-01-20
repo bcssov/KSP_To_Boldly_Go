@@ -11,6 +11,8 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using KSP_To_Boldly_Go_Common.Models;
+using KSP_To_Boldly_Go_Common.Types;
 using System;
 using System.Drawing;
 using System.IO;

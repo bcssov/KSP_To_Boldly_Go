@@ -11,9 +11,10 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using KSP_To_Boldly_Go_Common.Types;
 using System;
 
-namespace KSP_To_Boldly_Go_Common
+namespace KSP_To_Boldly_Go_Common.Models
 {
     /// <summary>
     /// Interface IKopernicusObject

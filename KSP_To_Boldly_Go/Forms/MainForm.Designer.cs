@@ -1,4 +1,4 @@
-﻿namespace KSP_To_Boldly_Go
+﻿namespace KSP_To_Boldly_Go.Forms
 {
     partial class MainForm
     {

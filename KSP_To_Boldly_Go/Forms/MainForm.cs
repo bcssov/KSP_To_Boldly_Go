@@ -14,7 +14,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace KSP_To_Boldly_Go
+namespace KSP_To_Boldly_Go.Forms
 {
     /// <summary>
     /// Class MainForm.

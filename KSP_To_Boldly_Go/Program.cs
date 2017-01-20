@@ -1,20 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// ***********************************************************************
+// Assembly         : KSP_To_Boldly_Go
+// Author           : Mario
+// Created          : 01-20-2017
+//
+// Last Modified By : Mario
+// Last Modified On : 01-20-2017
+// ***********************************************************************
+// <copyright file="Program.cs" company="">
+//     Copyright ©  2017
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using KSP_To_Boldly_Go.Forms;
+using System;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KSP_To_Boldly_Go
 {
-    static class Program
+    /// <summary>
+    /// Class Program.
+    /// </summary>
+    internal static class Program
     {
+        #region Methods
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
@@ -22,5 +38,7 @@ namespace KSP_To_Boldly_Go
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }
+
+        #endregion Methods
     }
 }

@@ -15,7 +15,7 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace KSP_To_Boldly_Go_Common.Utlities
+namespace KSP_To_Boldly_Go_Common.Types
 {
     /// <summary>
     /// Class KopernicusHeaderTypeConverter.
@@ -64,17 +64,10 @@ namespace KSP_To_Boldly_Go_Common.Utlities
         /// <returns>An <see cref="T:System.Object" /> that represents the converted value.</returns>
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            if (value == null)
+            var convertedValue = ConvertToHeader(value);
+            if (convertedValue != null)
             {
-                return new KopernicusHeader();
-            }
-            else if (value is KopernicusHeader)
-            {
-                return (KopernicusHeader)value;
-            }
-            else if (value is string)
-            {
-                return new KopernicusHeader(value.ToString());
+                return convertedValue;
             }
             return base.ConvertFrom(context, culture, value);
         }
@@ -91,35 +84,65 @@ namespace KSP_To_Boldly_Go_Common.Utlities
         {
             if (destinationType == typeof(string))
             {
-                if (value == null)
+                var convertedValue = ConvertToString(value);
+                if (convertedValue != null)
                 {
-                    return string.Empty;
-                }
-                else if (value is KopernicusHeader)
-                {
-                    return value.ToString();
-                }
-                else if (value is string)
-                {
-                    return value.ToString();
+                    return convertedValue;
                 }
             }
             else if (destinationType == typeof(KopernicusHeader))
             {
-                if (value == null)
+                var convertedValue = ConvertToHeader(value);
+                if (convertedValue != null)
                 {
-                    return new KopernicusHeader();
-                }
-                else if (value is KopernicusHeader)
-                {
-                    return (KopernicusHeader)value;
-                }
-                else if (value is string)
-                {
-                    return new KopernicusHeader(value.ToString());
+                    return convertedValue;
                 }
             }
             return base.ConvertTo(context, culture, value, destinationType);
+        }
+
+        /// <summary>
+        /// Converts to header.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>KopernicusHeader.</returns>
+        private KopernicusHeader ConvertToHeader(object value)
+        {
+            if (value == null)
+            {
+                return new KopernicusHeader();
+            }
+            else if (value is KopernicusHeader)
+            {
+                return (KopernicusHeader)value;
+            }
+            else if (value is string)
+            {
+                return new KopernicusHeader(value.ToString());
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the specified value to a string representation.
+        /// </summary>
+        /// <param name="value">The <see cref="T:System.Object" /> to convert.</param>
+        /// <returns>An <see cref="T:System.Object" /> that represents the converted value.</returns>
+        private string ConvertToString(object value)
+        {
+            if (value == null)
+            {
+                return string.Empty;
+            }
+            else if (value is KopernicusHeader)
+            {
+                return value.ToString();
+            }
+            else if (value is string)
+            {
+                return value.ToString();
+            }
+            return null;
         }
 
         #endregion Methods

@@ -26,11 +26,11 @@ namespace KSP_To_Boldly_Go_Common.Utlities
         /// <summary>
         /// To the configuration string.
         /// </summary>
-        /// <param name="c">The c.</param>
+        /// <param name="color">The c.</param>
         /// <returns>System.String.</returns>
-        public static string ToConfigString(this Color c)
+        public static string ToConfigString(this Color color)
         {
-            return string.Format("{0},{1},{2},{3}", Math.Round(Convert.ToDouble(c.R) / 255D, 2).ToString(), Math.Round(Convert.ToDouble(c.G) / 255D, 2).ToString(), Math.Round(Convert.ToDouble(c.B) / 255D, 2).ToString(), Math.Round(Convert.ToDouble(c.A) / 255D, 2).ToString());
+            return string.Format("{0},{1},{2},{3}", Math.Round(Convert.ToDouble(color.R) / 255D, 2).ToString(), Math.Round(Convert.ToDouble(color.G) / 255D, 2).ToString(), Math.Round(Convert.ToDouble(color.B) / 255D, 2).ToString(), Math.Round(Convert.ToDouble(color.A) / 255D, 2).ToString());
         }
 
         #endregion Methods
