@@ -42,6 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\IKopernicusObject.cs" />
+    <Compile Include="Models\KopernicusBody.cs" />
+    <Compile Include="Models\KopernicusLight.cs" />
+    <Compile Include="Models\KopernicusMain.cs" />
+    <Compile Include="Models\KopernicusMaterial.cs" />
+    <Compile Include="Models\KopernicusOrbit.cs" />
+    <Compile Include="Models\KopernicusProperties.cs" />
+    <Compile Include="Models\KopernicusScaledVersion.cs" />
+    <Compile Include="Models\KopernicusTemplate.cs" />
     <Compile Include="Types\KopernicusHeader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utlities\Extensions.cs" />
