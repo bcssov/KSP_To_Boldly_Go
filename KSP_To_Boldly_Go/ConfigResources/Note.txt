@@ -1,1 +1,1 @@
-This file contains the configuration files of To Boldly Go. Edit theses files only if you know what you're doing.
+This directory contains the configuration files of To Boldly Go. Edit theses files only if you know what you're doing.

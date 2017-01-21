@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using KSP_To_Boldly_Go_Common.Serializers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// Gets or sets the header.
         /// </summary>
         /// <value>The header.</value>
-        [IgnoreDataMember]
+        [KopernicusSerializegnore]
         [Description("Kopernicus node header. Internal program property.")]
         public string Header
         {
@@ -59,7 +60,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// </summary>
         /// <value>The order.</value>
         [JsonProperty("$order")]
-        [IgnoreDataMember]
+        [KopernicusSerializegnore]
         [Description("Determines in which order the config is serialized. Internal program property.")]
         public int Order
         {
@@ -89,7 +90,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// </summary>
         /// <value>The type.</value>
         [JsonProperty("$objectType")]
-        [IgnoreDataMember]
+        [KopernicusSerializegnore]
         [Description("Used to initialize correct type. Internal program property.")]
         public string Type
         {

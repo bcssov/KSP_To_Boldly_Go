@@ -83,7 +83,7 @@ namespace KSP_To_Boldly_Go_Common.Serializers
             tabIndent++;
             var properties = obj.GetType().GetProperties();
             // Skip properties with ignore attribute
-            foreach (var property in properties.Where(p => p.GetCustomAttributes(typeof(IgnoreDataMemberAttribute), true) == null && p.CanRead))
+            foreach (var property in properties.Where(p => p.GetCustomAttributes(typeof(KopernicusSerializegnoreAttribute), true) == null && p.CanRead))
             {
                 var propValue = property.GetValue(obj);
                 if (propValue != null)

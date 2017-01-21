@@ -47,7 +47,7 @@
   <ItemGroup>
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Initialize.cs" />
-    <Compile Include="Models\IgnoreDataMemberAttribute.cs" />
+    <Compile Include="Serializers\KopernicusSerializerIgnoreAttribute.cs" />
     <Compile Include="Models\IKopernicusObject.cs" />
     <Compile Include="Models\KopernicusBody.cs" />
     <Compile Include="Models\KopernicusLight.cs" />
