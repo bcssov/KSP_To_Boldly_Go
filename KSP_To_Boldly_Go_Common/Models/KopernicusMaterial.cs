@@ -11,8 +11,9 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Types;
+using KSP_To_Boldly_Go_Common.Converters;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace KSP_To_Boldly_Go_Common.Models
@@ -20,8 +21,9 @@ namespace KSP_To_Boldly_Go_Common.Models
     /// <summary>
     /// Class KopernicusMaterial.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.IKopernicusObject" />
-    public class KopernicusMaterial : IKopernicusObject
+    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.KopernicusObject" />
+    [TypeConverter(typeof(SerializableExpandableObjectConverter))]
+    public class KopernicusMaterial : KopernicusObject
     {
         #region Properties
 
@@ -40,16 +42,6 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// </summary>
         /// <value>The emit color1.</value>
         public Color emitColor1
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the header.
-        /// </summary>
-        /// <value>The header.</value>
-        public KopernicusHeader Header
         {
             get;
             set;
@@ -76,5 +68,18 @@ namespace KSP_To_Boldly_Go_Common.Models
         }
 
         #endregion Properties
+
+        #region Methods
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString()
+        {
+            return string.IsNullOrWhiteSpace(Header) ? "Material" : Header;
+        }
+
+        #endregion Methods
     }
 }

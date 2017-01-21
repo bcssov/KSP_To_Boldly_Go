@@ -4,14 +4,13 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-20-2017
+// Last Modified On : 01-21-2017
 // ***********************************************************************
 // <copyright file="IKopernicusObject.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Types;
 using System;
 
 namespace KSP_To_Boldly_Go_Common.Models
@@ -27,7 +26,25 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// Gets or sets the header.
         /// </summary>
         /// <value>The header.</value>
-        KopernicusHeader Header { get; set; }
+        string Header { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is internal browsable.
+        /// </summary>
+        /// <value><c>true</c> if this instance is internal browsable; otherwise, <c>false</c>.</value>
+        bool ShowInternalProperties { get; set; }
+
+        /// <summary>
+        /// Gets or sets the order.
+        /// </summary>
+        /// <value>The order.</value>
+        int Order { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type.
+        /// </summary>
+        /// <value>The type.</value>
+        string Type { get; set; }
 
         #endregion Properties
     }

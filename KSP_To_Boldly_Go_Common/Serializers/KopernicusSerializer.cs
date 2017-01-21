@@ -12,14 +12,13 @@
 // <summary></summary>
 // ***********************************************************************
 using KSP_To_Boldly_Go_Common.Models;
-using KSP_To_Boldly_Go_Common.Types;
 using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace KSP_To_Boldly_Go_Common.Utlities
+namespace KSP_To_Boldly_Go_Common.Serializers
 {
     /// <summary>
     /// Class KopernicusSerializer.
@@ -83,53 +82,50 @@ namespace KSP_To_Boldly_Go_Common.Utlities
         {
             tabIndent++;
             var properties = obj.GetType().GetProperties();
-            // Skip configurable headers
-            foreach (var property in properties.Where(p => p.PropertyType != typeof(KopernicusHeader) && p.GetCustomAttributes(typeof(NonSerializedAttribute), true) == null))
+            // Skip properties with ignore attribute
+            foreach (var property in properties.Where(p => p.GetCustomAttributes(typeof(IgnoreDataMemberAttribute), true) == null && p.CanRead))
             {
-                if (property.CanRead)
+                var propValue = property.GetValue(obj);
+                if (propValue != null)
                 {
-                    var propValue = property.GetValue(obj);
-                    if (propValue != null)
+                    if (property.PropertyType.IsClass && !(property.PropertyType.IsPrimitive || property.PropertyType.Equals(typeof(string)) || property.PropertyType.Equals(typeof(DateTime))))
                     {
-                        if (property.PropertyType.IsClass && !(property.PropertyType.IsPrimitive || property.PropertyType.Equals(typeof(string)) || property.PropertyType.Equals(typeof(DateTime))))
+                        // Write starting bracket
+                        var sb = new StringBuilder();
+                        if (propValue is IKopernicusObject && !string.IsNullOrWhiteSpace(((IKopernicusObject)propValue).Header))
                         {
-                            // Write starting bracket
-                            var sb = new StringBuilder();
-                            if (propValue is IKopernicusObject && !string.IsNullOrWhiteSpace(((IKopernicusObject)propValue).Header))
-                            {
-                                AppendLine(sb, tabIndent, "{0}", ((IKopernicusObject)propValue).Header);
-                            }
-                            else
-                            {
-                                AppendLine(sb, tabIndent, "{0}", property.Name);
-                            }
-                            AppendLine(sb, tabIndent, "{");
-                            // Dump what we have so far
-                            stream.Write(sb.ToString());
-                            WriteStream(stream, propValue, tabIndent);
-                            // Write closing bracket
-                            sb = new StringBuilder();
-                            AppendLine(sb, tabIndent, "}");
-                            stream.Write(sb.ToString());
+                            AppendLine(sb, tabIndent, "{0}", ((IKopernicusObject)propValue).Header);
                         }
                         else
                         {
-                            if (!(propValue is KopernicusHeader) && !string.IsNullOrWhiteSpace(propValue.ToString()))
+                            AppendLine(sb, tabIndent, "{0}", property.Name);
+                        }
+                        AppendLine(sb, tabIndent, "{");
+                        // Dump what we have so far
+                        stream.Write(sb.ToString());
+                        WriteStream(stream, propValue, tabIndent);
+                        // Write closing bracket
+                        sb = new StringBuilder();
+                        AppendLine(sb, tabIndent, "}");
+                        stream.Write(sb.ToString());
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrWhiteSpace(propValue.ToString()))
+                        {
+                            // TODO: Color special handling. Might need refactoring in the future...
+                            if (propValue is Color)
                             {
-                                // TODO: Color special handling. Might need refactoring in the future...
-                                if (propValue is Color)
-                                {
-                                    var c = ((Color)propValue);
-                                    var sb = new StringBuilder();
-                                    AppendLine(sb, tabIndent, "{0} = {1}", property.Name, c.ToConfigString());
-                                    stream.Write(sb.ToString());
-                                }
-                                else
-                                {
-                                    var sb = new StringBuilder();
-                                    AppendLine(sb, tabIndent, "{0} = {1}", property.Name, propValue.ToString());
-                                    stream.Write(sb.ToString());
-                                }
+                                var color = ((Color)propValue);
+                                var sb = new StringBuilder();
+                                AppendLine(sb, tabIndent, "{0} = {1}", property.Name, color.ToConfigString());
+                                stream.Write(sb.ToString());
+                            }
+                            else
+                            {
+                                var sb = new StringBuilder();
+                                AppendLine(sb, tabIndent, "{0} = {1}", property.Name, propValue.ToString());
+                                stream.Write(sb.ToString());
                             }
                         }
                     }

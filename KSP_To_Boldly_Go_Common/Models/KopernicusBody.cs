@@ -1,26 +1,28 @@
 ﻿// ***********************************************************************
-// Assembly         : KSP_To_Boldly_Go_Common
+// Assembly         : KSP_To_Boldly_Go_Common[TypeConverter(typeof(SerializableExpandableObjectConverter))]
 // Author           : Mario
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-20-2017
+// Last Modified On : 01-21-2017
 // ***********************************************************************
 // <copyright file="KopernicusBody.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Types;
+using KSP_To_Boldly_Go_Common.Converters;
 using System;
+using System.ComponentModel;
 
 namespace KSP_To_Boldly_Go_Common.Models
 {
     /// <summary>
     /// Class KopernicusBody.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.IKopernicusObject" />
-    public class KopernicusBody : IKopernicusObject
+    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.KopernicusObject" />
+    [TypeConverter(typeof(SerializableExpandableObjectConverter))]
+    public class KopernicusBody : KopernicusObject
     {
         #region Properties
 
@@ -29,16 +31,6 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// </summary>
         /// <value>The cb name later.</value>
         public string cbNameLater
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the header.
-        /// </summary>
-        /// <value>The header.</value>
-        public KopernicusHeader Header
         {
             get;
             set;
@@ -65,10 +57,10 @@ namespace KSP_To_Boldly_Go_Common.Models
         }
 
         /// <summary>
-        /// Gets or sets the propereties.
+        /// Gets or sets the properties.
         /// </summary>
-        /// <value>The propereties.</value>
-        public KopernicusProperties Propereties
+        /// <value>The properties.</value>
+        public KopernicusProperties Properties
         {
             get;
             set;
@@ -95,5 +87,18 @@ namespace KSP_To_Boldly_Go_Common.Models
         }
 
         #endregion Properties
+
+        #region Methods
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString()
+        {
+            return string.IsNullOrWhiteSpace(Header) ? "Body" : Header;
+        }
+
+        #endregion Methods
     }
 }

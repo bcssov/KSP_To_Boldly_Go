@@ -1,0 +1,43 @@
+{
+    "$objectType": "KopernicusRoot",
+    "$order": 1,
+    "Body": {
+        "cbNameLater": "Sun",
+        "name": "Kerbol",
+        "Orbit": {
+            "argumentOfPeriapsis": 125,
+            "color": "1,1,0,1",
+            "inclination": 124,
+            "mode": 0,
+            "referenceBody": "Sun",
+            "semiMajorAxis": 4386767840385437
+        },
+        "Properties": {
+            "sphereOfInfluence": 220118820000
+        },
+        "ScaledVersion": {
+            "Light": {
+                "ambientLightColor": "0, 0, 0, 1",
+                "IVASunColor": "1, 1, 1, 1",
+                "IVASunIntensity": 0.75,
+                "luminosity": 1360,
+                "scaledSunlightColor": "1, 1, 1, 1",
+                "scaledSunlightIntensity": 0.75,
+                "sunLensFlareColor": "0, 0, 0, 0",
+                "sunlightColor": "1, 1, 1, 1",
+                "sunlightIntensity": 0.75,
+                "sunlightShadowStrength": 0.95
+            },
+            "Material": {
+                "rimColor": "1,1,1,1",
+                "emitColor0": "1,0.97,0.83,1",
+                "emitColor1": "1,0.887,0.72,1",
+                "sunspotColor": "0.54,0.35,0.13,1"
+            }
+        },
+        "Template": {
+            "name": "Sun"
+        }
+    },
+    "Header": "@Kopernicus"
+}

@@ -22,14 +22,25 @@ namespace KSP_To_Boldly_Go.Forms
     /// <seealso cref="System.Windows.Forms.Form" />
     public partial class MainForm : Form
     {
+        #region Fields
+
+        /// <summary>
+        /// The form
+        /// </summary>
+        private DeveloperToolsForm form;
+
+        #endregion Fields
+
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainForm"/> class.
+        /// Initializes a new instance of the <see cref="MainForm" /> class.
         /// </summary>
         public MainForm()
         {
             InitializeComponent();
+            InitDevMode();
+            KSP_To_Boldly_Go_Common.Startup.Initialize();
         }
 
         #endregion Constructors
@@ -37,10 +48,32 @@ namespace KSP_To_Boldly_Go.Forms
         #region Methods
 
         /// <summary>
+        /// Handles the Click event of the btnDevMode control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+        private void btnDevMode_Click(object sender, EventArgs e)
+        {
+            if (form == null || form.IsDisposed || form.Disposing)
+            {
+                form = new DeveloperToolsForm();
+                form.Show(this);
+            }
+        }
+
+        /// <summary>
+        /// Initializes the dev mode.
+        /// </summary>
+        private void InitDevMode()
+        {
+            btnDevMode.Visible = Configuration.DevMode;
+        }
+
+        /// <summary>
         /// Handles the Load event of the MainForm control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void MainForm_Load(object sender, EventArgs e)
         {
         }

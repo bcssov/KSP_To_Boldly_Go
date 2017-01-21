@@ -11,28 +11,20 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Types;
+using KSP_To_Boldly_Go_Common.Converters;
 using System;
+using System.ComponentModel;
 
 namespace KSP_To_Boldly_Go_Common.Models
 {
     /// <summary>
     /// Class KopernicusScaledVersion.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.IKopernicusObject" />
-    public class KopernicusScaledVersion : IKopernicusObject
+    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.KopernicusObject" />
+    [TypeConverter(typeof(SerializableExpandableObjectConverter))]
+    public class KopernicusScaledVersion : KopernicusObject
     {
         #region Properties
-
-        /// <summary>
-        /// Gets or sets the header.
-        /// </summary>
-        /// <value>The header.</value>
-        public KopernicusHeader Header
-        {
-            get;
-            set;
-        }
 
         /// <summary>
         /// Gets or sets the light.
@@ -55,5 +47,18 @@ namespace KSP_To_Boldly_Go_Common.Models
         }
 
         #endregion Properties
+
+        #region Methods
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString()
+        {
+            return string.IsNullOrWhiteSpace(Header) ? "ScaledVersion" : Header;
+        }
+
+        #endregion Methods
     }
 }

@@ -11,28 +11,20 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Types;
+using KSP_To_Boldly_Go_Common.Converters;
 using System;
+using System.ComponentModel;
 
 namespace KSP_To_Boldly_Go_Common.Models
 {
     /// <summary>
     /// Class KopernicusProperties.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.IKopernicusObject" />
-    public class KopernicusProperties : IKopernicusObject
+    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.KopernicusObject" />
+    [TypeConverter(typeof(SerializableExpandableObjectConverter))]
+    public class KopernicusProperties : KopernicusObject
     {
         #region Properties
-
-        /// <summary>
-        /// Gets or sets the header.
-        /// </summary>
-        /// <value>The header.</value>
-        public KopernicusHeader Header
-        {
-            get;
-            set;
-        }
 
         /// <summary>
         /// Gets the sphere of influence.
@@ -45,5 +37,18 @@ namespace KSP_To_Boldly_Go_Common.Models
         }
 
         #endregion Properties
+
+        #region Methods
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString()
+        {
+            return string.IsNullOrWhiteSpace(Header) ? "Properties" : Header;
+        }
+
+        #endregion Methods
     }
 }

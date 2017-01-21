@@ -11,16 +11,18 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Types;
+using KSP_To_Boldly_Go_Common.Converters;
 using System;
+using System.ComponentModel;
 
 namespace KSP_To_Boldly_Go_Common.Models
 {
     /// <summary>
     /// Class KopernicusMain.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.IKopernicusObject" />
-    public class KopernicusMain : IKopernicusObject
+    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.KopernicusObject" />
+    [TypeConverter(typeof(SerializableExpandableObjectConverter))]
+    public class KopernicusRoot : KopernicusObject
     {
         #region Properties
 
@@ -34,16 +36,19 @@ namespace KSP_To_Boldly_Go_Common.Models
             set;
         }
 
+        #endregion Properties
+
+        #region Methods
+
         /// <summary>
-        /// Gets the file header.
+        /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
-        /// <value>The file header.</value>
-        public KopernicusHeader Header
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString()
         {
-            get;
-            set;
+            return string.IsNullOrWhiteSpace(Header) ? "Root" : Header;
         }
 
-        #endregion Properties
+        #endregion Methods
     }
 }

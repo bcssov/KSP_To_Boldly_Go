@@ -28,13 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.btnDevMode = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // btnDevMode
+            // 
+            this.btnDevMode.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnDevMode.Location = new System.Drawing.Point(170, 12);
+            this.btnDevMode.Name = "btnDevMode";
+            this.btnDevMode.Size = new System.Drawing.Size(75, 23);
+            this.btnDevMode.TabIndex = 0;
+            this.btnDevMode.Text = "Dev Editor";
+            this.btnDevMode.UseVisualStyleBackColor = true;
+            this.btnDevMode.Visible = false;
+            this.btnDevMode.Click += new System.EventHandler(this.btnDevMode_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(445, 344);
+            this.Controls.Add(this.btnDevMode);
             this.Name = "MainForm";
             this.Text = "To Boldly Go";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -43,6 +57,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnDevMode;
     }
 }
 
