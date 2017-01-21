@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-20-2017
+// Last Modified On : 01-21-2017
 // ***********************************************************************
 // <copyright file="DeveloperToolsForm.cs" company="">
 //     Copyright ©  2017
@@ -53,12 +53,23 @@ namespace KSP_To_Boldly_Go.Forms
         {
             InitializeComponent();
             initialTitle = Text;
-            pgData.PropertySort = PropertySort.Alphabetical;            
+            pgData.PropertySort = PropertySort.Alphabetical;
         }
 
         #endregion Constructors
 
         #region Methods
+
+        /// <summary>
+        /// Handles the Click event of the closeToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+            Dispose();
+        }
 
         /// <summary>
         /// Handles the Click event of the loadToolStripMenuItem control.
@@ -76,8 +87,8 @@ namespace KSP_To_Boldly_Go.Forms
                 if (model != null)
                 {
                     pgData.SelectedObject = model;
-                    pgData.ExpandAllGridItems();                    
-                    Text = string.Format("{0}: {1}", initialTitle, Path.GetFileName(path));                    
+                    pgData.ExpandAllGridItems();
+                    Text = string.Format("{0}: {1}", initialTitle, Path.GetFileName(path));
                 }
                 else
                 {

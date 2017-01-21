@@ -71,6 +71,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// Gets or sets a value indicating whether [show internal properties].
         /// </summary>
         /// <value><c>true</c> if [show internal properties]; otherwise, <c>false</c>.</value>
+        [JsonIgnore]
         public bool ShowInternalProperties
         {
             get
@@ -236,9 +237,28 @@ namespace KSP_To_Boldly_Go_Common.Models
         }
 
         /// <summary>
+        /// Shoulds the serialize order.
+        /// </summary>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public bool ShouldSerializeOrder()
+        {
+            return ShowInternalProperties;
+        }
+
+        /// <summary>
+        /// Shoulds the type of the serialize.
+        /// </summary>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public bool ShouldSerializeType()
+        {
+            return ShowInternalProperties;
+        }
+
+        /// <summary>
         /// Filters the properties.
         /// </summary>
         /// <param name="properties">The properties.</param>
+        /// <param name="ignoreProperties">The ignore properties.</param>
         /// <returns>PropertyDescriptorCollection.</returns>
         private PropertyDescriptorCollection FilterProperties(PropertyDescriptorCollection properties, string[] ignoreProperties)
         {

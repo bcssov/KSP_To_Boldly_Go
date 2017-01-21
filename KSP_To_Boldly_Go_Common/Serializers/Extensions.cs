@@ -53,7 +53,7 @@ namespace KSP_To_Boldly_Go_Common.Serializers
             var g = Convert.ToInt32(Convert.ToDouble(values[1]) * 255D);
             var b = Convert.ToInt32(Convert.ToDouble(values[2]) * 255D);
             var a = Convert.ToInt32(Convert.ToDouble(values[3]) * 255D);
-            return Color.FromArgb(r, g, b, a);
+            return Color.FromArgb(a, r, g, b);
         }
 
         #endregion Methods
