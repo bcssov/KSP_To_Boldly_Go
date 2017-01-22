@@ -117,6 +117,9 @@
       <DependentUpon>App.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <None Include="ConfigResources\InterstellarSpace.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="ConfigResources\Kerbol.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

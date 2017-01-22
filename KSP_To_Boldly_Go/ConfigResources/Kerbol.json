@@ -12,12 +12,16 @@
       "Header": null
     },
     "Properties": {
+      "description": null,
+      "radius": null,
       "sphereOfInfluence": 220118820000,
       "Header": null
     },
     "ScaledVersion": {
+      "Coronas": [],
       "Light": {
         "ambientLightColor": "0,0,0,1",
+        "givesOffLight": null,
         "IVASunColor": "1,1,1,1",
         "IVASunIntensity": 0.75,
         "luminosity": 1360,
@@ -32,9 +36,11 @@
       "Material": {
         "emitColor0": "1,0.97,0.83,1",
         "emitColor1": "1,0.89,0.72,1",
+        "Header": "",
+        "inverseFade": null,
         "rimColor": "1,1,1,1",
         "sunspotColors": "0,0,0,0",
-        "Header": null
+        "texture": null
       },
       "Header": null
     },
