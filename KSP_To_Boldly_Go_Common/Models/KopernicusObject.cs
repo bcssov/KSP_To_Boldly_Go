@@ -92,6 +92,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         [JsonProperty("$objectType")]
         [KopernicusSerializegnore]
         [Description("Used to initialize correct type. Internal program property.")]
+        [ReadOnly(true)]
         public string Type
         {
             get;

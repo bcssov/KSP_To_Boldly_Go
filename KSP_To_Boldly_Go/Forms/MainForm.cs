@@ -39,8 +39,7 @@ namespace KSP_To_Boldly_Go.Forms
         public MainForm()
         {
             InitializeComponent();
-            InitDevMode();
-            KSP_To_Boldly_Go_Common.Startup.Initialize();
+            Initialize();
         }
 
         #endregion Constructors
@@ -62,11 +61,12 @@ namespace KSP_To_Boldly_Go.Forms
         }
 
         /// <summary>
-        /// Initializes the dev mode.
+        /// Initializes this instance.
         /// </summary>
-        private void InitDevMode()
+        private void Initialize()
         {
             btnDevMode.Visible = Configuration.DevMode;
+            KSP_To_Boldly_Go_Common.Startup.Initialize();
         }
 
         /// <summary>

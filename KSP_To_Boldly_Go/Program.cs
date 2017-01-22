@@ -13,6 +13,7 @@
 // ***********************************************************************
 using KSP_To_Boldly_Go.Forms;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
@@ -59,8 +60,12 @@ namespace KSP_To_Boldly_Go
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-            Application.ThreadException += Application_ThreadException;
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            // Do not catch exceptions and log them if debugger is attached
+            if (!Debugger.IsAttached)
+            {
+                Application.ThreadException += Application_ThreadException;
+                AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            }            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

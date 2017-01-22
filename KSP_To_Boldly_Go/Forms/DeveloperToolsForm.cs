@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-21-2017
+// Last Modified On : 01-22-2017
 // ***********************************************************************
 // <copyright file="DeveloperToolsForm.cs" company="">
 //     Copyright ©  2017
@@ -64,7 +64,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// Handles the Click event of the closeToolStripMenuItem control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -83,11 +83,10 @@ namespace KSP_To_Boldly_Go.Forms
             {
                 path = openFileDialog1.FileName;
                 var contents = File.ReadAllText(path);
-                model = ModelResolver.GetModel(contents);
+                model = ModelManager.GetKoperniusObjectModel(contents);
                 if (model != null)
                 {
                     pgData.SelectedObject = model;
-                    pgData.ExpandAllGridItems();
                     Text = string.Format("{0}: {1}", initialTitle, Path.GetFileName(path));
                 }
                 else
@@ -98,15 +97,46 @@ namespace KSP_To_Boldly_Go.Forms
         }
 
         /// <summary>
+        /// Handles the Click event of the newToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new NewObjectForm();
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                var instance = ModelManager.GetKopernicusObjectFromType(form.SelectedType);
+                pgData.SelectedObject = instance;
+                model = instance;
+                Text = string.Format("{0}: {1}", initialTitle, form.SelectedType);
+                path = string.Empty;
+            }
+        }
+
+        /// <summary>
         /// Handles the Click event of the saveToolStripMenuItem control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(path) && model != null)
+            if (model != null)
             {
-                File.WriteAllText(path, JsonConvert.SerializeObject(model));
+                if (string.IsNullOrWhiteSpace(path))
+                {
+                    saveFileDialog1.InitialDirectory = Configuration.JsonConfigPath;
+                    if (saveFileDialog1.ShowDialog(this) == DialogResult.OK)
+                    {
+                        path = saveFileDialog1.FileName;
+                        Text = string.Format("{0}: {1}", initialTitle, Path.GetFileName(path));
+                        File.WriteAllText(path, JsonConvert.SerializeObject(model));
+                    }
+                }
+                else
+                {
+                    File.WriteAllText(path, JsonConvert.SerializeObject(model));
+                }
             }
         }
 

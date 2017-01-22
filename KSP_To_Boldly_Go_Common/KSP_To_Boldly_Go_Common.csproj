@@ -58,7 +58,7 @@
     <Compile Include="Models\KopernicusProperties.cs" />
     <Compile Include="Models\KopernicusScaledVersion.cs" />
     <Compile Include="Models\KopernicusTemplate.cs" />
-    <Compile Include="Models\ModelResolver.cs" />
+    <Compile Include="Models\ModelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Converters\SerializableExpandableObjectConverter.cs" />
     <Compile Include="Serializers\Extensions.cs" />
