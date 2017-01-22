@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : KSP_To_Boldly_Go_Common[TypeConverter(typeof(SerializableExpandableObjectConverter))]
+// Assembly         : KSP_To_Boldly_Go.Common[TypeConverter(typeof(SerializableExpandableObjectConverter))]
 // Author           : Mario
 // Created          : 01-20-2017
 //
@@ -11,16 +11,16 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Converters;
+using KSP_To_Boldly_Go.Common.Converters;
 using System;
 using System.ComponentModel;
 
-namespace KSP_To_Boldly_Go_Common.Models
+namespace KSP_To_Boldly_Go.Common.Models
 {
     /// <summary>
     /// Class KopernicusBody.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.KopernicusObject" />
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Models.KopernicusObject" />
     [TypeConverter(typeof(SerializableExpandableObjectConverter))]
     public class KopernicusBody : KopernicusObject
     {

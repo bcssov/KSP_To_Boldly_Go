@@ -1,36 +1,36 @@
 ﻿// ***********************************************************************
-// Assembly         : KSP_To_Boldly_Go_Common
+// Assembly         : KSP_To_Boldly_Go.Common
 // Author           : Mario
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
 // Last Modified On : 01-20-2017
 // ***********************************************************************
-// <copyright file="KopernicusProperties.cs" company="">
+// <copyright file="KopernicusMain.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Converters;
+using KSP_To_Boldly_Go.Common.Converters;
 using System;
 using System.ComponentModel;
 
-namespace KSP_To_Boldly_Go_Common.Models
+namespace KSP_To_Boldly_Go.Common.Models
 {
     /// <summary>
-    /// Class KopernicusProperties.
+    /// Class KopernicusMain.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.KopernicusObject" />
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Models.KopernicusObject" />
     [TypeConverter(typeof(SerializableExpandableObjectConverter))]
-    public class KopernicusProperties : KopernicusObject
+    public class KopernicusRoot : KopernicusObject, IKopernicusRootObject
     {
         #region Properties
 
         /// <summary>
-        /// Gets the sphere of influence.
+        /// Gets or sets the body.
         /// </summary>
-        /// <value>The sphere of influence.</value>
-        public long sphereOfInfluence
+        /// <value>The body.</value>
+        public KopernicusBody Body
         {
             get;
             set;
@@ -46,7 +46,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            return string.IsNullOrWhiteSpace(Header) ? "Properties" : Header;
+            return string.IsNullOrWhiteSpace(Header) ? "Root" : Header;
         }
 
         #endregion Methods

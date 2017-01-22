@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : KSP_To_Boldly_Go_Common
+// Assembly         : KSP_To_Boldly_Go.Common
 // Author           : Mario
 // Created          : 01-20-2017
 //
@@ -14,7 +14,7 @@
 using System;
 using System.ComponentModel;
 
-namespace KSP_To_Boldly_Go_Common.Converters
+namespace KSP_To_Boldly_Go.Common.Converters
 {
     /// <summary>
     /// Class SerializableExpandableObjectConverter.

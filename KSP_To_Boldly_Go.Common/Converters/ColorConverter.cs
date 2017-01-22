@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : KSP_To_Boldly_Go_Common
+// Assembly         : KSP_To_Boldly_Go.Common
 // Author           : Mario
 // Created          : 01-20-2017
 //
@@ -11,14 +11,14 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Serializers;
+using KSP_To_Boldly_Go.Common.Serializers;
 using Newtonsoft.Json;
 
 using System;
 
 using System.Drawing;
 
-namespace KSP_To_Boldly_Go_Common.Converters
+namespace KSP_To_Boldly_Go.Common.Converters
 {
     /// <summary>
     /// Class ColorConverter.
@@ -35,7 +35,7 @@ namespace KSP_To_Boldly_Go_Common.Converters
         /// <returns><c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.</returns>
         public override bool CanConvert(Type objectType)
         {
-            return (objectType == typeof(Color));
+            return (objectType == typeof(Color?) || objectType == typeof(Color));
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace KSP_To_Boldly_Go_Common.Converters
             {
                 return value.ToString().ToColor();
             }
-            return Color.Empty;
+            return null;
         }
 
         /// <summary>
@@ -64,7 +64,10 @@ namespace KSP_To_Boldly_Go_Common.Converters
         /// <param name="serializer">The calling serializer.</param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue(((Color)value).ToConfigString());
+            if (value != null)
+            {
+                writer.WriteValue(((Color)value).ToConfigString());
+            }
         }
 
         #endregion Methods

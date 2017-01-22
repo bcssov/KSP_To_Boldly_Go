@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : KSP_To_Boldly_Go_Common
+// Assembly         : KSP_To_Boldly_Go.Common
 // Author           : Mario
 // Created          : 01-20-2017
 //
@@ -11,17 +11,17 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Converters;
+using KSP_To_Boldly_Go.Common.Converters;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 
-namespace KSP_To_Boldly_Go_Common.Models
+namespace KSP_To_Boldly_Go.Common.Models
 {
     /// <summary>
     /// Class KopernicusOrbit.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.KopernicusObject" />
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Models.KopernicusObject" />
     [TypeConverter(typeof(SerializableExpandableObjectConverter))]
     public class KopernicusOrbit : KopernicusObject
     {
@@ -31,7 +31,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// Gets the argument of periapsis.
         /// </summary>
         /// <value>The argument of periapsis.</value>
-        public long argumentOfPeriapsis
+        public long? argumentOfPeriapsis
         {
             get;
             set;
@@ -41,7 +41,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// Gets the color.
         /// </summary>
         /// <value>The color.</value>
-        public Color color
+        public Color? color
         {
             get;
             set;
@@ -51,7 +51,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// Gets the inclination.
         /// </summary>
         /// <value>The inclination.</value>
-        public long inclination
+        public long? inclination
         {
             get;
             set;
@@ -61,7 +61,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// Gets the mode.
         /// </summary>
         /// <value>The mode.</value>
-        public long mode
+        public long? mode
         {
             get;
             set;
@@ -81,7 +81,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// Gets the semi major axis.
         /// </summary>
         /// <value>The semi major axis.</value>
-        public long semiMajorAxis
+        public long? semiMajorAxis
         {
             get;
             set;

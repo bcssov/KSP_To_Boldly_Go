@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : KSP_To_Boldly_Go_Common
+// Assembly         : KSP_To_Boldly_Go.Common
 // Author           : Mario
 // Created          : 01-20-2017
 //
@@ -11,13 +11,13 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Converters;
+using KSP_To_Boldly_Go.Common.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
-namespace KSP_To_Boldly_Go_Common
+namespace KSP_To_Boldly_Go.Common
 {
     /// <summary>
     /// Class Startup.

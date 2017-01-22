@@ -1,46 +1,36 @@
 ﻿// ***********************************************************************
-// Assembly         : KSP_To_Boldly_Go_Common
+// Assembly         : KSP_To_Boldly_Go.Common
 // Author           : Mario
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
 // Last Modified On : 01-20-2017
 // ***********************************************************************
-// <copyright file="KopernicusScaledVersion.cs" company="">
+// <copyright file="KopernicusTemplate.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Converters;
+using KSP_To_Boldly_Go.Common.Converters;
 using System;
 using System.ComponentModel;
 
-namespace KSP_To_Boldly_Go_Common.Models
+namespace KSP_To_Boldly_Go.Common.Models
 {
     /// <summary>
-    /// Class KopernicusScaledVersion.
+    /// Class KopernicusTemplate.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.KopernicusObject" />
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Models.KopernicusObject" />
     [TypeConverter(typeof(SerializableExpandableObjectConverter))]
-    public class KopernicusScaledVersion : KopernicusObject
+    public class KopernicusTemplate : KopernicusObject
     {
         #region Properties
 
         /// <summary>
-        /// Gets or sets the light.
+        /// Gets the name.
         /// </summary>
-        /// <value>The light.</value>
-        public KopernicusLight Light
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the material.
-        /// </summary>
-        /// <value>The material.</value>
-        public KopernicusMaterial Material
+        /// <value>The name.</value>
+        public string name
         {
             get;
             set;
@@ -56,7 +46,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            return string.IsNullOrWhiteSpace(Header) ? "ScaledVersion" : Header;
+            return string.IsNullOrWhiteSpace(Header) ? "Template" : Header;
         }
 
         #endregion Methods

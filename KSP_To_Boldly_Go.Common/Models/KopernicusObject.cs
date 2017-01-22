@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : KSP_To_Boldly_Go_Common
+// Assembly         : KSP_To_Boldly_Go.Common
 // Author           : Mario
 // Created          : 01-20-2017
 //
@@ -11,33 +11,34 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Serializers;
+using KSP_To_Boldly_Go.Common.Serializers;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace KSP_To_Boldly_Go_Common.Models
+namespace KSP_To_Boldly_Go.Common.Models
 {
     /// <summary>
     /// Class KopernicusObject.
     /// </summary>
     /// <seealso cref="System.ComponentModel.ICustomTypeDescriptor" />
-    /// <seealso cref="KSP_To_Boldly_Go_Common.Models.IKopernicusObject" />
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Models.IKopernicusObject" />
     public class KopernicusObject : IKopernicusObject, ICustomTypeDescriptor
     {
         #region Fields
 
         /// <summary>
-        /// The show internal properties
-        /// </summary>
-        private bool _showInternalProperties = false;
-
-        /// <summary>
         /// The hide properties
         /// </summary>
-        private string[] hideProperties = new string[] { "Order", "Type", "ShowInternalProperties" };
+        protected static readonly string[] hideProperties = new string[] { "Order", "Type", "ShowInternalProperties" };
+
+        /// <summary>
+        /// The show internal properties
+        /// </summary>
+        protected bool _showInternalProperties = false;
 
         #endregion Fields
 
@@ -49,7 +50,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// <value>The header.</value>
         [KopernicusSerializegnore]
         [Description("Kopernicus node header. Internal program property.")]
-        public string Header
+        public virtual string Header
         {
             get;
             set;
@@ -73,6 +74,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// </summary>
         /// <value><c>true</c> if [show internal properties]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
+        [KopernicusSerializegnore]
         public bool ShowInternalProperties
         {
             get
@@ -239,6 +241,67 @@ namespace KSP_To_Boldly_Go_Common.Models
         }
 
         /// <summary>
+        /// Determines whether this instance is empty.
+        /// </summary>
+        /// <returns><c>true</c> if this instance is empty; otherwise, <c>false</c>.</returns>
+        public virtual bool IsEmpty()
+        {
+            // Ignore inbuilt properties, as we know that they are used for internal use
+            var inbuiltProperties = typeof(IKopernicusObject).GetProperties().Select(p => p.Name);
+            var properties = GetType().GetProperties();
+            Dictionary<string, bool> results = new Dictionary<string, bool>();
+            foreach (var property in properties.Where(p => !inbuiltProperties.Contains(p.Name) && p.CanRead))
+            {
+                if ((typeof(IEnumerable<IKopernicusObject>).IsAssignableFrom(property.PropertyType)))
+                {
+                    var col = property.GetValue(this, null) as IEnumerable;
+                    if (col == null || col.GetCount() == 0)
+                    {
+                        results.Add(property.Name, false);
+                    }
+                    else
+                    {
+                        List<bool> colResults = new List<bool>();
+                        foreach (var item in col)
+                        {
+                            colResults.Add(((KopernicusObject)item).IsEmpty());
+                        }
+                        results.Add(property.Name, !colResults.All(p => p == true));
+                    }
+                }
+                else
+                {
+                    if (!(typeof(IKopernicusObject).IsAssignableFrom(property.PropertyType)))
+                    {
+                        var propValue = property.GetValue(this);
+                        if (propValue == null || string.IsNullOrWhiteSpace(propValue.ToString()))
+                        {
+                            results.Add(property.Name, false);                            
+                        }
+                        else
+                        {
+                            results.Add(property.Name, true);
+                        }
+                    }
+                    else
+                    {
+                        var propValue = property.GetValue(this);
+                        if (propValue == null)
+                        {
+                            results.Add(property.Name, false);
+                        }
+                        else
+                        {
+                            results.Add(property.Name, !((IKopernicusObject)propValue).IsEmpty());                            
+                        }
+                    }
+                }
+            }
+            var result = results.Select(p => p.Value).All(p => p == false);
+            return result;
+        }
+
+        /// <summary>
         /// Shoulds the serialize order.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
@@ -262,7 +325,7 @@ namespace KSP_To_Boldly_Go_Common.Models
         /// <param name="properties">The properties.</param>
         /// <param name="ignoreProperties">The ignore properties.</param>
         /// <returns>PropertyDescriptorCollection.</returns>
-        private PropertyDescriptorCollection FilterProperties(PropertyDescriptorCollection properties, string[] ignoreProperties)
+        protected virtual PropertyDescriptorCollection FilterProperties(PropertyDescriptorCollection properties, string[] ignoreProperties)
         {
             List<PropertyDescriptor> validProperties = new List<PropertyDescriptor>();
             foreach (PropertyDescriptor property in properties)

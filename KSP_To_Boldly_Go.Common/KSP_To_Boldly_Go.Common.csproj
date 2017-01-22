@@ -7,8 +7,8 @@
     <ProjectGuid>{EB222025-6859-4AB3-A4FA-351642C63ADF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KSP_To_Boldly_Go_Common</RootNamespace>
-    <AssemblyName>KSP_To_Boldly_Go_Common</AssemblyName>
+    <RootNamespace>KSP_To_Boldly_Go.Common</RootNamespace>
+    <AssemblyName>KSP_To_Boldly_Go.Common</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Initialize.cs" />
+    <Compile Include="Models\IKopernicusRootObject.cs" />
+    <Compile Include="Models\KopernicusCorona.cs" />
     <Compile Include="Serializers\KopernicusSerializerIgnoreAttribute.cs" />
     <Compile Include="Models\IKopernicusObject.cs" />
     <Compile Include="Models\KopernicusBody.cs" />

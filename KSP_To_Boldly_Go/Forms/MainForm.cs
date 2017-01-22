@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-20-2017
+// Last Modified On : 01-22-2017
 // ***********************************************************************
 // <copyright file="MainForm.cs" company="">
 //     Copyright ©  2017
@@ -55,9 +55,22 @@ namespace KSP_To_Boldly_Go.Forms
         {
             if (form == null || form.IsDisposed || form.Disposing)
             {
+                Hide();                
                 form = new DeveloperToolsForm();
+                form.FormClosed += DeveloperForm_FormClosed;
                 form.Show(this);
             }
+        }
+
+        /// <summary>
+        /// Handles the FormClosed event of the Form control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FormClosedEventArgs"/> instance containing the event data.</param>
+        private void DeveloperForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Show();
+            form.FormClosed -= DeveloperForm_FormClosed;
         }
 
         /// <summary>
@@ -66,7 +79,7 @@ namespace KSP_To_Boldly_Go.Forms
         private void Initialize()
         {
             btnDevMode.Visible = Configuration.DevMode;
-            KSP_To_Boldly_Go_Common.Startup.Initialize();
+            KSP_To_Boldly_Go.Common.Startup.Initialize();
         }
 
         /// <summary>

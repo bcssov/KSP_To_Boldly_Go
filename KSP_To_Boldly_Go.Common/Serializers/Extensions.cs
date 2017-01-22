@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-20-2017
+// Last Modified On : 01-22-2017
 // ***********************************************************************
 // <copyright file="Extensions.cs" company="">
 //     Copyright ©  2017
@@ -12,13 +12,13 @@
 // <summary></summary>
 // ***********************************************************************
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Drawing;
 
 /// <summary>
 /// The Serializers namespace.
 /// </summary>
-namespace KSP_To_Boldly_Go_Common.Serializers
+namespace KSP_To_Boldly_Go.Common.Serializers
 {
     /// <summary>
     /// Class Extensions.
@@ -28,13 +28,23 @@ namespace KSP_To_Boldly_Go_Common.Serializers
         #region Methods
 
         /// <summary>
-        /// To the configuration string.
+        /// Gets the count.
         /// </summary>
-        /// <param name="value">The c.</param>
-        /// <returns>System.String.</returns>
-        public static string ToConfigString(this Color value)
+        /// <param name="value">The value.</param>
+        /// <returns>System.Int32.</returns>
+        public static int GetCount(this IEnumerable value)
         {
-            return string.Format("{0},{1},{2},{3}", Math.Round(Convert.ToDouble(value.R) / 255D, 2).ToString(), Math.Round(Convert.ToDouble(value.G) / 255D, 2).ToString(), Math.Round(Convert.ToDouble(value.B) / 255D, 2).ToString(), Math.Round(Convert.ToDouble(value.A) / 255D, 2).ToString());
+            var collection = value as ICollection;
+            if (collection != null)
+            {
+                return collection.Count;
+            }
+            int count = 0;
+            foreach (var val in value)
+            {
+                count++;
+            }
+            return count;
         }
 
         /// <summary>
@@ -54,6 +64,16 @@ namespace KSP_To_Boldly_Go_Common.Serializers
             var b = Convert.ToInt32(Convert.ToDouble(values[2]) * 255D);
             var a = Convert.ToInt32(Convert.ToDouble(values[3]) * 255D);
             return Color.FromArgb(a, r, g, b);
+        }
+
+        /// <summary>
+        /// To the configuration string.
+        /// </summary>
+        /// <param name="value">The c.</param>
+        /// <returns>System.String.</returns>
+        public static string ToConfigString(this Color value)
+        {
+            return string.Format("{0},{1},{2},{3}", Math.Round(Convert.ToDouble(value.R) / 255D, 2).ToString(), Math.Round(Convert.ToDouble(value.G) / 255D, 2).ToString(), Math.Round(Convert.ToDouble(value.B) / 255D, 2).ToString(), Math.Round(Convert.ToDouble(value.A) / 255D, 2).ToString());
         }
 
         #endregion Methods

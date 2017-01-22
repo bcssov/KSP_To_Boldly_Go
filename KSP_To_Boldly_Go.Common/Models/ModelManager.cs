@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : KSP_To_Boldly_Go_Common
+// Assembly         : KSP_To_Boldly_Go.Common
 // Author           : Mario
 // Created          : 01-20-2017
 //
@@ -13,11 +13,12 @@
 // ***********************************************************************
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace KSP_To_Boldly_Go_Common.Models
+namespace KSP_To_Boldly_Go.Common.Models
 {
     /// <summary>
     /// Class ModelManager.
@@ -50,11 +51,11 @@ namespace KSP_To_Boldly_Go_Common.Models
         }
 
         /// <summary>
-        /// Gets the kopernius object model.
+        /// Gets the kopernius object from json.
         /// </summary>
         /// <param name="jsonContent">Content of the json.</param>
         /// <returns>System.Object.</returns>
-        public static object GetKoperniusObjectModel(string jsonContent)
+        public static object GetKoperniusObjectFromJson(string jsonContent)
         {
             if (!string.IsNullOrWhiteSpace(jsonContent))
             {
@@ -71,12 +72,12 @@ namespace KSP_To_Boldly_Go_Common.Models
         }
 
         /// <summary>
-        /// Gets the list of kopernicus object.
+        /// Gets the list of kopernicus objects.
         /// </summary>
         /// <returns>List&lt;System.String&gt;.</returns>
-        public static List<string> GetListOfKopernicusObject()
+        public static List<string> GetListOfKopernicusObjects()
         {
-            var objects = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IKopernicusObject)) && t.Name != "KopernicusObject").Select(p => p.Name).ToList();
+            var objects = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IKopernicusRootObject))).Select(p => p.Name).ToList();
             return objects;
         }
 
@@ -90,7 +91,7 @@ namespace KSP_To_Boldly_Go_Common.Models
             var instance = Activator.CreateInstance(type);
             foreach (var property in type.GetProperties())
             {
-                if (property.PropertyType.IsClass && !(property.PropertyType.IsPrimitive || property.PropertyType.Equals(typeof(string)) || property.PropertyType.Equals(typeof(DateTime))))
+                if (typeof(IKopernicusObject).IsAssignableFrom(property.PropertyType) && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
                 {
                     var childInstance = CreateKopernicusObject(property.PropertyType);
                     property.SetValue(instance, childInstance);

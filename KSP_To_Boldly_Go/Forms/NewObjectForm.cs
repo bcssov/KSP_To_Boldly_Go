@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Models;
+using KSP_To_Boldly_Go.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -41,7 +41,7 @@ namespace KSP_To_Boldly_Go.Forms
         public NewObjectForm()
         {
             InitializeComponent();
-            dataSource = ModelManager.GetListOfKopernicusObject();
+            dataSource = ModelManager.GetListOfKopernicusObjects();
             cbList.DataSource = dataSource;
         }
 

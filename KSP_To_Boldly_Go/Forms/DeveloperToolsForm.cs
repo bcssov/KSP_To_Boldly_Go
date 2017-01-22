@@ -11,10 +11,12 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go_Common.Models;
+using KSP_To_Boldly_Go.Common.Models;
+using KSP_To_Boldly_Go.Common.Serializers;
 using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace KSP_To_Boldly_Go.Forms
@@ -83,7 +85,7 @@ namespace KSP_To_Boldly_Go.Forms
             {
                 path = openFileDialog1.FileName;
                 var contents = File.ReadAllText(path);
-                model = ModelManager.GetKoperniusObjectModel(contents);
+                model = ModelManager.GetKoperniusObjectFromJson(contents);
                 if (model != null)
                 {
                     pgData.SelectedObject = model;
@@ -100,7 +102,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// Handles the Click event of the newToolStripMenuItem control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new NewObjectForm();
@@ -136,6 +138,27 @@ namespace KSP_To_Boldly_Go.Forms
                 else
                 {
                     File.WriteAllText(path, JsonConvert.SerializeObject(model));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handles the Click event of the serializeTestToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void serializeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (model != null)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    var serializer = new KopernicusSerializer();
+                    serializer.Serialize((IKopernicusObject)model, ms);
+                    var output = Encoding.ASCII.GetString(ms.ToArray());
+                    var form = new SerializationTestOutputForm(output);
+                    form.ShowDialog(this);
+                    form.Dispose();
                 }
             }
         }
