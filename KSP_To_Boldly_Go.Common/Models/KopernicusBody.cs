@@ -22,7 +22,8 @@ namespace KSP_To_Boldly_Go.Common.Models
     /// </summary>
     /// <seealso cref="KSP_To_Boldly_Go.Common.Models.KopernicusObject" />
     [TypeConverter(typeof(SerializableExpandableObjectConverter))]
-    public class KopernicusBody : KopernicusObject
+    [ObjectOrder(2)]
+    public class KopernicusBody : KopernicusObject, IKopernicusRootObject
     {
         #region Properties
 
@@ -55,6 +56,12 @@ namespace KSP_To_Boldly_Go.Common.Models
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets or sets the post spawn orbit.
+        /// </summary>
+        /// <value>The post spawn orbit.</value>
+        public KopernicusPostSpawnOrbit PostSpawnOrbit { get; set; }
 
         /// <summary>
         /// Gets or sets the properties.

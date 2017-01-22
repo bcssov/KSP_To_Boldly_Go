@@ -1,0 +1,56 @@
+{
+  "cbNameLater": null,
+  "name": null,
+  "Orbit": {
+    "argumentOfPeriapsis": null,
+    "color": null,
+    "inclination": null,
+    "mode": null,
+    "referenceBody": null,
+    "semiMajorAxis": null,
+    "Header": null
+  },
+  "PostSpawnOrbit": {
+    "referenceBody": "Kerbol"
+  },
+  "Properties": {
+    "description": null,
+    "radius": null,
+    "sphereOfInfluence": null,
+    "Header": null
+  },
+  "ScaledVersion": {
+    "Coronas": [],
+    "Light": {
+      "ambientLightColor": null,
+      "givesOffLight": null,
+      "IVASunColor": null,
+      "IVASunIntensity": null,
+      "luminosity": null,
+      "scaledSunlightColor": null,
+      "scaledSunlightIntensity": null,
+      "sunLensFlareColor": null,
+      "sunlightColor": null,
+      "sunlightIntensity": null,
+      "sunlightShadowStrength": null,
+      "Header": null
+    },
+    "Material": {
+      "emitColor0": null,
+      "emitColor1": null,
+      "Header": "",
+      "inverseFade": null,
+      "rimColor": null,
+      "sunspotColors": null,
+      "texture": null
+    },
+    "Header": null
+  },
+  "Template": {
+    "name": null,
+    "Header": null
+  },
+  "Header": "@Body[Dres]",
+  "$order": 0,
+  "$objectType": "KopernicusBody"
+}

@@ -48,7 +48,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets or sets the header.
         /// </summary>
         /// <value>The header.</value>
-        [KopernicusSerializegnore]
+        [KopernicusSerializIegnore]
         [Description("Kopernicus node header. Internal program property.")]
         public virtual string Header
         {
@@ -61,7 +61,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// </summary>
         /// <value>The order.</value>
         [JsonProperty("$order")]
-        [KopernicusSerializegnore]
+        [KopernicusSerializIegnore]
         [Description("Determines in which order the config is serialized. Internal program property.")]
         public int Order
         {
@@ -74,7 +74,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// </summary>
         /// <value><c>true</c> if [show internal properties]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
-        [KopernicusSerializegnore]
+        [KopernicusSerializIegnore]
         public bool ShowInternalProperties
         {
             get
@@ -92,7 +92,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// </summary>
         /// <value>The type.</value>
         [JsonProperty("$objectType")]
-        [KopernicusSerializegnore]
+        [KopernicusSerializIegnore]
         [Description("Used to initialize correct type. Internal program property.")]
         [ReadOnly(true)]
         public string Type

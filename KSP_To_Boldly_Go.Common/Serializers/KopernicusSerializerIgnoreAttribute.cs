@@ -16,10 +16,10 @@ using System;
 namespace KSP_To_Boldly_Go.Common.Serializers
 {
     /// <summary>
-    /// Class KopernicusSerializegnoreAttribute.
+    /// Class KopernicusSerializeIgnoreAttribute.
     /// </summary>
     /// <seealso cref="System.Attribute" />
-    public class KopernicusSerializegnoreAttribute : Attribute
+    public class KopernicusSerializIegnoreAttribute : Attribute
     {
     }
 }

@@ -1,41 +1,58 @@
 ﻿// ***********************************************************************
 // Assembly         : KSP_To_Boldly_Go.Common
 // Author           : Mario
-// Created          : 01-20-2017
+// Created          : 01-22-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-20-2017
+// Last Modified On : 01-23-2017
 // ***********************************************************************
-// <copyright file="KopernicusMain.cs" company="">
+// <copyright file="KopernicusPostSpawnOrbit.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 using KSP_To_Boldly_Go.Common.Converters;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 
 namespace KSP_To_Boldly_Go.Common.Models
 {
     /// <summary>
-    /// Class KopernicusMain.
+    /// Class KopernicusPostSpawnOrbit.
     /// </summary>
     /// <seealso cref="KSP_To_Boldly_Go.Common.Models.KopernicusObject" />
     [TypeConverter(typeof(SerializableExpandableObjectConverter))]
-    [ObjectOrder(1)]
-    public class KopernicusRoot : KopernicusObject, IKopernicusRootObject
+    public class KopernicusPostSpawnOrbit : KopernicusObject
     {
         #region Properties
 
         /// <summary>
-        /// Gets or sets the body.
+        /// Gets or sets the header.
         /// </summary>
-        /// <value>The body.</value>
-        public KopernicusBody Body
+        /// <value>The header.</value>
+        [JsonIgnore]
+        [Browsable(false)]
+        [KopernicusSerializerIgnore]
+        [Description("Kopernicus node header. Internal program property.")]
+        public override string Header
         {
-            get;
-            set;
+            get
+            {
+                return base.Header;
+            }
+
+            set
+            {
+                base.Header = value;
+            }
         }
+
+        /// <summary>
+        /// Gets or sets the reference body.
+        /// </summary>
+        /// <value>The reference body.</value>
+        public string referenceBody { get; set; }
 
         #endregion Properties
 
@@ -47,7 +64,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            return string.IsNullOrWhiteSpace(Header) ? "Root" : Header;
+            return string.IsNullOrWhiteSpace(Header) ? "PostSpawnOrbit" : Header;
         }
 
         #endregion Methods

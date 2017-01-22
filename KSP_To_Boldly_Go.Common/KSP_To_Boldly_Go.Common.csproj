@@ -49,6 +49,9 @@
     <Compile Include="Initialize.cs" />
     <Compile Include="Models\IKopernicusRootObject.cs" />
     <Compile Include="Models\KopernicusCorona.cs" />
+    <Compile Include="Models\KopernicusPostSpawnOrbit.cs" />
+    <Compile Include="Models\KopernicusSerializerIgnoreAttribute.cs" />
+    <Compile Include="Models\ObjectOrderAttribute.cs" />
     <Compile Include="Serializers\KopernicusSerializerIgnoreAttribute.cs" />
     <Compile Include="Models\IKopernicusObject.cs" />
     <Compile Include="Models\KopernicusBody.cs" />

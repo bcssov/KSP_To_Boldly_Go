@@ -77,8 +77,8 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <returns>List&lt;System.String&gt;.</returns>
         public static List<string> GetListOfKopernicusObjects()
         {
-            var objects = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IKopernicusRootObject))).Select(p => p.Name).ToList();
-            return objects;
+            var objects = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IKopernicusRootObject))).ToList();            
+            return objects.OrderBy(p => ((ObjectOrderAttribute)p.GetCustomAttribute(typeof(ObjectOrderAttribute), true)).Order).Select(p => p.Name).ToList();
         }
 
         /// <summary>
