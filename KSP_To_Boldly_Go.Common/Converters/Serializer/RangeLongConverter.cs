@@ -19,8 +19,8 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
     /// <summary>
     /// Class RangeLongConverter.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go.Common.Converters.Serializer.RangeConverter{KSP_To_Boldly_Go.Common.Types.RangeLong}" />
-    public class RangeLongConverter : RangeConverter<RangeLong>
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Converters.Serializer.TypeConverter{KSP_To_Boldly_Go.Common.Types.RangeLong}" />
+    public class RangeLongConverter : TypeConverter<RangeLong>
     {
     }
 }

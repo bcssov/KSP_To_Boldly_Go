@@ -19,11 +19,11 @@ using System.Globalization;
 namespace KSP_To_Boldly_Go.Common.Converters.Object
 {
     /// <summary>
-    /// Class RangeConverter.
+    /// Class TypeConverter.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="System.ComponentModel.StringConverter" />
-    public abstract class RangeConverter<T> : StringConverter where T : IRange
+    public abstract class TypeConverter<T> : StringConverter where T : IType
     {
         #region Methods
 

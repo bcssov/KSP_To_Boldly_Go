@@ -19,8 +19,8 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
     /// <summary>
     /// Class RangeDoubleConverter.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go.Common.Converters.Object.RangeConverter{KSP_To_Boldly_Go.Common.Types.RangeDouble}" />
-    public class RangeDoubleConverter : RangeConverter<RangeDouble>
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Converters.Object.TypeConverter{KSP_To_Boldly_Go.Common.Types.RangeDouble}" />
+    public class RangeDoubleConverter : TypeConverter<RangeDouble>
     {
     }
 }

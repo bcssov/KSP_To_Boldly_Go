@@ -18,7 +18,7 @@ namespace KSP_To_Boldly_Go.Common.Types
     /// <summary>
     /// Interface IRange
     /// </summary>
-    public interface IRange
+    public interface IType
     {
         #region Methods
 

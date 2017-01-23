@@ -21,8 +21,9 @@ namespace KSP_To_Boldly_Go.Common.Types
     /// <summary>
     /// Class Color.
     /// </summary>
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Types.IType" />
     [TypeConverter(typeof(ColorConverter))]
-    public class Color
+    public class Color : IType
     {
         #region Fields
 
@@ -47,50 +48,6 @@ namespace KSP_To_Boldly_Go.Common.Types
         private short? _r;
 
         #endregion Fields
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Color" /> class.
-        /// </summary>
-        public Color() : this(string.Empty)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Color" /> class.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        public Color(string value)
-        {
-            if (!string.IsNullOrWhiteSpace(value))
-            {
-                var values = value.Split(",".ToCharArray(), 4, StringSplitOptions.RemoveEmptyEntries);
-                for (int i = 0; i < values.Length; i++)
-                {
-                    switch (i)
-                    {
-                        case 1:
-                            G = Convert.ToInt16(values[i]);
-                            break;
-
-                        case 2:
-                            B = Convert.ToInt16(values[i]);
-                            break;
-
-                        case 3:
-                            A = Convert.ToInt16(values[i]);
-                            break;
-
-                        default:
-                            R = Convert.ToInt16(values[i]);
-                            break;
-                    }
-                }
-            }
-        }
-
-        #endregion Constructors
 
         #region Properties
 
@@ -167,6 +124,39 @@ namespace KSP_To_Boldly_Go.Common.Types
         #region Methods
 
         /// <summary>
+        /// Sets the values.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        public void SetValues(string value)
+        {
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                var values = value.Split(",".ToCharArray(), 4, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < values.Length; i++)
+                {
+                    switch (i)
+                    {
+                        case 1:
+                            G = Convert.ToInt16(values[i]);
+                            break;
+
+                        case 2:
+                            B = Convert.ToInt16(values[i]);
+                            break;
+
+                        case 3:
+                            A = Convert.ToInt16(values[i]);
+                            break;
+
+                        default:
+                            R = Convert.ToInt16(values[i]);
+                            break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
@@ -183,6 +173,20 @@ namespace KSP_To_Boldly_Go.Common.Types
             vals.Add(B.GetValueOrDefault());
             vals.Add(A.GetValueOrDefault());
             return string.Join(",", vals);
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <param name="random">The random.</param>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public string ToString(Random random)
+        {
+            return string.Format("{0},{1},{2},{3}",
+            Math.Round(Convert.ToDouble(R.GetValueOrDefault()) / 255D, 2).ToString(),
+            Math.Round(Convert.ToDouble(G.GetValueOrDefault()) / 255D, 2).ToString(),
+            Math.Round(Convert.ToDouble(B.GetValueOrDefault()) / 255D, 2).ToString(),
+            Math.Round(Convert.ToDouble(A.GetValueOrDefault()) / 255D, 2).ToString());
         }
 
         /// <summary>

@@ -19,8 +19,8 @@ namespace KSP_To_Boldly_Go.Common.Types
     /// Interface IRangeNumber
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <seealso cref="KSP_To_Boldly_Go.Common.Types.IRange" />
-    public interface IRangeNumber<T> : IRange where T : struct, IComparable, IComparable<T>, IConvertible, IEquatable<T>, IFormattable
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Types.IType" />
+    public interface IRangeNumber<T> : IType where T : struct, IComparable, IComparable<T>, IConvertible, IEquatable<T>, IFormattable
     {
         #region Properties
 

@@ -18,12 +18,12 @@ using System;
 namespace KSP_To_Boldly_Go.Common.Converters.Serializer
 {
     /// <summary>
-    /// Class RangeConverter.
+    /// Class TypeConverter.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="Newtonsoft.Json.JsonConverter" />
     /// <seealso cref="KSP_To_Boldly_Go.Common.Converters.Serializer.IConverter" />
-    public abstract class RangeConverter<T> : JsonConverter, IConverter where T : IRange
+    public abstract class TypeConverter<T> : JsonConverter, IConverter where T : IType
     {
         #region Methods
 
