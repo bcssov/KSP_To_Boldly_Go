@@ -48,17 +48,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\Object\RangeConverter.cs" />
+    <Compile Include="Converters\Object\RangeDoubleConverter.cs" />
     <Compile Include="Converters\Object\RangeLongConverter.cs" />
     <Compile Include="Converters\Serializer\ColorConverter.cs" />
     <Compile Include="Converters\Object\ColorConverter.cs" />
     <Compile Include="Converters\Serializer\ConverterManager.cs" />
     <Compile Include="Converters\Serializer\IConverter.cs" />
     <Compile Include="Converters\Serializer\RangeConverter.cs" />
+    <Compile Include="Converters\Serializer\RangeDoubleConverter.cs" />
     <Compile Include="Converters\Serializer\RangeLongConverter.cs" />
     <Compile Include="Initialize.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Types\IRange.cs" />
     <Compile Include="Types\IRangeNumber.cs" />
+    <Compile Include="Types\RangeDouble.cs" />
     <Compile Include="Types\RangeNumber.cs" />
     <Compile Include="Types\RangeLong.cs" />
     <Compile Include="UI\CollectionEditor.cs" />

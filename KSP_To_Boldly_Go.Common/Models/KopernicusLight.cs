@@ -76,7 +76,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the iva sun intensity.
         /// </summary>
         /// <value>The iva sun intensity.</value>
-        public double? IVASunIntensity
+        public RangeDouble IVASunIntensity
         {
             get;
             set;
@@ -106,7 +106,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the scaled sunlight intensity.
         /// </summary>
         /// <value>The scaled sunlight intensity.</value>
-        public double? scaledSunlightIntensity
+        public RangeDouble scaledSunlightIntensity
         {
             get;
             set;
@@ -136,7 +136,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the sunlight intensity.
         /// </summary>
         /// <value>The sunlight intensity.</value>
-        public double? sunlightIntensity
+        public RangeDouble sunlightIntensity
         {
             get;
             set;
@@ -146,7 +146,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the sunlight shadow strength.
         /// </summary>
         /// <value>The sunlight shadow strength.</value>
-        public double? sunlightShadowStrength
+        public RangeDouble sunlightShadowStrength
         {
             get;
             set;

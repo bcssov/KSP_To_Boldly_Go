@@ -97,7 +97,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets or sets the scale speed.
         /// </summary>
         /// <value>The scale speed.</value>
-        public double? scaleSpeed { get; set; }
+        public RangeDouble scaleSpeed { get; set; }
 
         /// <summary>
         /// Gets or sets the speed.

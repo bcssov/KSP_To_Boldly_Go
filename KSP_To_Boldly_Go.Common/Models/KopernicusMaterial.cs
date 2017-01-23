@@ -113,7 +113,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets or sets the inverse fade.
         /// </summary>
         /// <value>The inverse fade.</value>
-        public double? inverseFade { get; set; }
+        public RangeDouble inverseFade { get; set; }
 
         /// <summary>
         /// Gets the color of the rim.
