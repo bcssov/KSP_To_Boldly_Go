@@ -6,7 +6,7 @@
 // Last Modified By : Mario
 // Last Modified On : 01-23-2017
 // ***********************************************************************
-// <copyright file="ColorObjectConverter.cs" company="">
+// <copyright file="RangeConverter.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -19,10 +19,11 @@ using System.Globalization;
 namespace KSP_To_Boldly_Go.Common.Converters.Object
 {
     /// <summary>
-    /// Class ColorConverter.
+    /// Class RangeConverter.
     /// </summary>
+    /// <typeparam name="T"></typeparam>
     /// <seealso cref="System.ComponentModel.StringConverter" />
-    public class ColorConverter : StringConverter
+    public abstract class RangeConverter<T> : StringConverter where T : IRange
     {
         #region Methods
 
@@ -49,7 +50,7 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
         /// <returns>true if this converter can perform the conversion; otherwise, false.</returns>
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            if (destinationType == typeof(string) || destinationType == typeof(Color))
+            if (destinationType == typeof(string) || destinationType == typeof(T))
             {
                 return true;
             }
@@ -71,7 +72,9 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
             }
             else if (value is string)
             {
-                return new Color(value.ToString());
+                var instance = Activator.CreateInstance<T>();
+                instance.SetValues(value.ToString());
+                return instance;
             }
             return base.ConvertFrom(context, culture, value);
         }
@@ -92,12 +95,12 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
                 {
                     return null;
                 }
-                else if (value is Color)
+                else if (value is T)
                 {
-                    return ((Color)value).ToString();
+                    return ((T)value).ToString();
                 }
             }
-            else if (destinationType == typeof(Color))
+            else if (destinationType == typeof(T))
             {
                 if (value == null)
                 {
@@ -105,7 +108,9 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
                 }
                 else if (value is string)
                 {
-                    return new Color(value.ToString());
+                    var instance = Activator.CreateInstance<T>();
+                    instance.SetValues(value.ToString());
+                    return instance;
                 }
             }
             return base.ConvertTo(context, culture, value, destinationType);

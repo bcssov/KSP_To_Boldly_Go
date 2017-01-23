@@ -1,29 +1,29 @@
 ﻿// ***********************************************************************
 // Assembly         : KSP_To_Boldly_Go.Common
 // Author           : Mario
-// Created          : 01-20-2017
+// Created          : 01-23-2017
 //
 // Last Modified By : Mario
 // Last Modified On : 01-23-2017
 // ***********************************************************************
-// <copyright file="ColorConverter.cs" company="">
+// <copyright file="RangeConverter.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 using KSP_To_Boldly_Go.Common.Types;
 using Newtonsoft.Json;
-
 using System;
 
 namespace KSP_To_Boldly_Go.Common.Converters.Serializer
 {
     /// <summary>
-    /// Class ColorConverter.
+    /// Class RangeConverter.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go.Common.Converters.Serializer.IConverter" />
+    /// <typeparam name="T"></typeparam>
     /// <seealso cref="Newtonsoft.Json.JsonConverter" />
-    public class ColorConverter : JsonConverter, IConverter
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Converters.Serializer.IConverter" />
+    public abstract class RangeConverter<T> : JsonConverter, IConverter where T : IRange
     {
         #region Methods
 
@@ -34,7 +34,7 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
         /// <returns><c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.</returns>
         public override bool CanConvert(Type objectType)
         {
-            var result = objectType == typeof(Color);
+            var result = objectType == typeof(T);
             return result;
         }
 
@@ -51,9 +51,9 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
             var value = reader.Value;
             if (value != null)
             {
-                return FromStringToColor(value.ToString());
+                return FromStringToObject(value.ToString());
             }
-            return new Color();
+            return default(T);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
         {
             if (value != null)
             {
-                return FromColorToString((Color)value, random);
+                return FromObjectToString((T)value, random);
             }
             return string.Empty;
         }
@@ -96,21 +96,18 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
         }
 
         /// <summary>
-        /// Froms the color to string.
+        /// Froms the object to string.
         /// </summary>
+        /// <typeparam name="TRandom">The type of the t random.</typeparam>
         /// <param name="value">The value.</param>
         /// <param name="random">The random.</param>
         /// <returns>System.String.</returns>
-        private string FromColorToString(Color value, Random random)
+        private string FromObjectToString<TRandom>(TRandom value, Random random) where TRandom : T
         {
             // If random is available this means that we are called from kopernicus serializer
             if (random != null)
             {
-                return string.Format("{0},{1},{2},{3}",
-                Math.Round(Convert.ToDouble(value.R.GetValueOrDefault()) / 255D, 2).ToString(),
-                Math.Round(Convert.ToDouble(value.G.GetValueOrDefault()) / 255D, 2).ToString(),
-                Math.Round(Convert.ToDouble(value.B.GetValueOrDefault()) / 255D, 2).ToString(),
-                Math.Round(Convert.ToDouble(value.A.GetValueOrDefault()) / 255D, 2).ToString());
+                return value.ToString(random);
             }
             else
             {
@@ -119,17 +116,19 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
         }
 
         /// <summary>
-        /// Froms the color of the string to.
+        /// Froms the string to object.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>Color.</returns>
-        private Color FromStringToColor(string value)
+        /// <returns>T.</returns>
+        private T FromStringToObject(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                return null;
+                return default(T);
             }
-            return new Color(value);
+            var instance = Activator.CreateInstance<T>();
+            instance.SetValues(value);
+            return instance;
         }
 
         #endregion Methods

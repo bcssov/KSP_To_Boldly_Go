@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-22-2017
+// Last Modified On : 01-23-2017
 // ***********************************************************************
 // <copyright file="Extensions.cs" company="">
 //     Copyright ©  2017
@@ -15,14 +15,14 @@ using System;
 using System.Collections;
 
 /// <summary>
-/// The Serializers namespace.
+/// The Extensions namespace.
 /// </summary>
-namespace KSP_To_Boldly_Go.Common
+namespace KSP_To_Boldly_Go.Common.Extensions
 {
     /// <summary>
-    /// Class Extensions.
+    /// Class EnumerableExtensions.
     /// </summary>
-    public static class Extensions
+    public static partial class EnumerableExtensions
     {
         #region Methods
 
@@ -47,5 +47,6 @@ namespace KSP_To_Boldly_Go.Common
         }
 
         #endregion Methods
+
     }
 }

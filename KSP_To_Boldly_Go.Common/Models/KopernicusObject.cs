@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using KSP_To_Boldly_Go.Common.Extensions;
 using KSP_To_Boldly_Go.Common.Serializers;
 using Newtonsoft.Json;
 using System;
@@ -276,7 +277,7 @@ namespace KSP_To_Boldly_Go.Common.Models
                         var propValue = property.GetValue(this);
                         if (propValue == null || string.IsNullOrWhiteSpace(propValue.ToString()))
                         {
-                            results.Add(property.Name, false);                            
+                            results.Add(property.Name, false);
                         }
                         else
                         {
@@ -292,7 +293,7 @@ namespace KSP_To_Boldly_Go.Common.Models
                         }
                         else
                         {
-                            results.Add(property.Name, !((IKopernicusObject)propValue).IsEmpty());                            
+                            results.Add(property.Name, !((IKopernicusObject)propValue).IsEmpty());
                         }
                     }
                 }

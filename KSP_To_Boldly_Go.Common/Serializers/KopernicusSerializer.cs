@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-20-2017
+// Last Modified On : 01-23-2017
 // ***********************************************************************
 // <copyright file="KSPSerializer.cs" company="">
 //     Copyright ©  2017
@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 using KSP_To_Boldly_Go.Common.Converters.Serializer;
+using KSP_To_Boldly_Go.Common.Extensions;
 using KSP_To_Boldly_Go.Common.Models;
 using System;
 using System.Collections;
@@ -27,13 +28,35 @@ namespace KSP_To_Boldly_Go.Common.Serializers
     /// </summary>
     public class KopernicusSerializer
     {
+        #region Fields
+
+        /// <summary>
+        /// The random
+        /// </summary>
+        private Random random;
+
+        #endregion Fields
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KopernicusSerializer" /> class.
+        /// </summary>
+        /// <param name="seed">The seed.</param>
+        public KopernicusSerializer(int seed)
+        {
+            random = new Random(seed);
+        }
+
+        #endregion Constructors
+
         #region Methods
 
         /// <summary>
-        /// Serializes the specified serialization stream.
+        /// Serializes the specified object.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="obj">The graph.</param>
+        /// <param name="obj">The object.</param>
         /// <param name="serializationStream">The serialization stream.</param>
         public void Serialize<T>(T obj, Stream serializationStream) where T : IKopernicusObject
         {
@@ -117,7 +140,7 @@ namespace KSP_To_Boldly_Go.Common.Serializers
                                 if (!listItem.IsEmpty())
                                 {
                                     sb = new StringBuilder();
-                                    AppendLine(sb, tabIndent + 1, "{0}", ((IKopernicusObject)listItem).Header);
+                                    AppendLine(sb, tabIndent + 1, "{0}", listItem.Header);
                                     AppendLine(sb, tabIndent + 1, "{");
                                     stream.Write(sb.ToString());
                                     WriteStream(stream, listItem, tabIndent + 1);
@@ -172,7 +195,7 @@ namespace KSP_To_Boldly_Go.Common.Serializers
                                 var converter = ConverterManager.GetConverterForType(propValue.GetType());
                                 if (converter != null)
                                 {
-                                    AppendLine(sb, tabIndent, "{0} = {1}", property.Name, converter.ToSerializedString(propValue));
+                                    AppendLine(sb, tabIndent, "{0} = {1}", property.Name, converter.ToSerializedString(propValue, random));
                                 }
                                 else
                                 {

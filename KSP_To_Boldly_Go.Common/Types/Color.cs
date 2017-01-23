@@ -19,33 +19,32 @@ using System.ComponentModel;
 namespace KSP_To_Boldly_Go.Common.Types
 {
     /// <summary>
-    /// Class Nullable.
+    /// Class Color.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go.Common.Types.IType" />
     [TypeConverter(typeof(ColorConverter))]
-    public class Color : IType
+    public class Color
     {
         #region Fields
 
         /// <summary>
         /// The a
         /// </summary>
-        private int? _a;
+        private short? _a;
 
         /// <summary>
         /// The b
         /// </summary>
-        private int? _b;
+        private short? _b;
 
         /// <summary>
         /// The g
         /// </summary>
-        private int? _g;
+        private short? _g;
 
         /// <summary>
         /// The r
         /// </summary>
-        private int? _r;
+        private short? _r;
 
         #endregion Fields
 
@@ -72,19 +71,19 @@ namespace KSP_To_Boldly_Go.Common.Types
                     switch (i)
                     {
                         case 1:
-                            G = Convert.ToInt32(values[i]);
+                            G = Convert.ToInt16(values[i]);
                             break;
 
                         case 2:
-                            B = Convert.ToInt32(values[i]);
+                            B = Convert.ToInt16(values[i]);
                             break;
 
                         case 3:
-                            A = Convert.ToInt32(values[i]);
+                            A = Convert.ToInt16(values[i]);
                             break;
 
                         default:
-                            R = Convert.ToInt32(values[i]);
+                            R = Convert.ToInt16(values[i]);
                             break;
                     }
                 }
@@ -99,7 +98,7 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// Gets or sets a.
         /// </summary>
         /// <value>a.</value>
-        public int? A
+        public short? A
         {
             get
             {
@@ -116,7 +115,7 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// Gets or sets the b.
         /// </summary>
         /// <value>The b.</value>
-        public int? B
+        public short? B
         {
             get
             {
@@ -133,7 +132,7 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// Gets or sets the g.
         /// </summary>
         /// <value>The g.</value>
-        public int? G
+        public short? G
         {
             get
             {
@@ -150,7 +149,7 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// Gets or sets the r.
         /// </summary>
         /// <value>The r.</value>
-        public int? R
+        public short? R
         {
             get
             {

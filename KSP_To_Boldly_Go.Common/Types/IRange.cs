@@ -6,36 +6,34 @@
 // Last Modified By : Mario
 // Last Modified On : 01-23-2017
 // ***********************************************************************
-// <copyright file="IConverter.cs" company="">
+// <copyright file="IRange.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 using System;
 
-namespace KSP_To_Boldly_Go.Common.Converters.Serializer
+namespace KSP_To_Boldly_Go.Common.Types
 {
     /// <summary>
-    /// Interface IConverter
+    /// Interface IRange
     /// </summary>
-    public interface IConverter
+    public interface IRange
     {
         #region Methods
 
         /// <summary>
-        /// Determines whether this instance can convert the specified object type.
-        /// </summary>
-        /// <param name="objectType">Type of the object.</param>
-        /// <returns><c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.</returns>
-        bool CanConvert(Type objectType);
-
-        /// <summary>
-        /// To the serialized string.
+        /// Sets the values.
         /// </summary>
         /// <param name="value">The value.</param>
+        void SetValues(string value);
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
         /// <param name="random">The random.</param>
-        /// <returns>System.String.</returns>
-        string ToSerializedString(object value, Random random);
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        string ToString(Random random);
 
         #endregion Methods
     }

@@ -153,7 +153,8 @@ namespace KSP_To_Boldly_Go.Forms
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    var serializer = new KopernicusSerializer();
+                    // for test purposes we use year this project was started in :)
+                    var serializer = new KopernicusSerializer(2017);
                     serializer.Serialize((IKopernicusObject)model, ms);
                     var output = Encoding.ASCII.GetString(ms.ToArray());
                     var form = new SerializationTestOutputForm(output);

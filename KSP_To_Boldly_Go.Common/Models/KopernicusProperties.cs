@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 using KSP_To_Boldly_Go.Common.Converters.Object;
+using KSP_To_Boldly_Go.Common.Types;
 using System;
 using System.ComponentModel;
 
@@ -42,7 +43,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the sphere of influence.
         /// </summary>
         /// <value>The sphere of influence.</value>
-        public long? sphereOfInfluence
+        public RangeLong sphereOfInfluence
         {
             get;
             set;

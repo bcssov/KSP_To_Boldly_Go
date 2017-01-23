@@ -66,7 +66,7 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
             if (converters == null)
             {
                 List<IConverter> result = new List<IConverter>();
-                var objects = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IConverter))).ToList();
+                var objects = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IConverter)) && !t.IsAbstract).ToList();
                 foreach (var item in objects)
                 {
                     result.Add((IConverter)Activator.CreateInstance(item));
