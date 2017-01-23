@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 using KSP_To_Boldly_Go.Common.Converters.Object;
+using KSP_To_Boldly_Go.Common.Extensions;
 using System;
 using System.ComponentModel;
 
@@ -33,7 +34,7 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// <returns>T.</returns>
         protected override double GetRandomInRange(Random random)
         {
-            return random.NextDouble() * (Max.GetValueOrDefault() - Min.GetValueOrDefault()) + Min.GetValueOrDefault();
+            return random.NextDouble(Min.GetValueOrDefault(), Max.GetValueOrDefault());
         }
 
         /// <summary>
