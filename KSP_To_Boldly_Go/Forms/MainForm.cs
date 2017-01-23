@@ -55,7 +55,7 @@ namespace KSP_To_Boldly_Go.Forms
         {
             if (form == null || form.IsDisposed || form.Disposing)
             {
-                Hide();                
+                Hide();
                 form = new DeveloperToolsForm();
                 form.FormClosed += DeveloperForm_FormClosed;
                 form.Show(this);
@@ -79,7 +79,7 @@ namespace KSP_To_Boldly_Go.Forms
         private void Initialize()
         {
             btnDevMode.Visible = Configuration.DevMode;
-            KSP_To_Boldly_Go.Common.Startup.Initialize();
+            Common.Startup.Initialize();
         }
 
         /// <summary>

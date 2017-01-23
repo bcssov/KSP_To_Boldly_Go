@@ -36,6 +36,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +52,7 @@
     <Compile Include="Converters\Serializer\ConverterManager.cs" />
     <Compile Include="Converters\Serializer\IConverter.cs" />
     <Compile Include="Initialize.cs" />
+    <Compile Include="UI\CollectionEditor.cs" />
     <Compile Include="Models\IKopernicusRootObject.cs" />
     <Compile Include="Models\KopernicusCorona.cs" />
     <Compile Include="Models\KopernicusPostSpawnOrbit.cs" />
@@ -75,6 +79,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

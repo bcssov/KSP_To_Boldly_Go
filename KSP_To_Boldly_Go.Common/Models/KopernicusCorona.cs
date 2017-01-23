@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using KSP_To_Boldly_Go.Common.Converters.Object;
 using KSP_To_Boldly_Go.Common.Serializers;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace KSP_To_Boldly_Go.Common.Models
     /// Class KopernicusCorona.
     /// </summary>
     /// <seealso cref="KSP_To_Boldly_Go.Common.Models.KopernicusObject" />
+    [TypeConverter(typeof(SerializableExpandableObjectConverter))]
     public class KopernicusCorona : KopernicusObject
     {
         #region Fields

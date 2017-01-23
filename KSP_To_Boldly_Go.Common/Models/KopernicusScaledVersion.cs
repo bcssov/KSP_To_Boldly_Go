@@ -12,9 +12,11 @@
 // <summary></summary>
 // ***********************************************************************
 using KSP_To_Boldly_Go.Common.Converters.Object;
+using KSP_To_Boldly_Go.Common.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing.Design;
 
 namespace KSP_To_Boldly_Go.Common.Models
 {
@@ -45,6 +47,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets or sets the coronas.
         /// </summary>
         /// <value>The coronas.</value>
+        [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
         public List<KopernicusCorona> Coronas { get; set; }
 
         /// <summary>
