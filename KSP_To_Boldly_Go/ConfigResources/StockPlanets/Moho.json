@@ -3,7 +3,7 @@
   "name": null,
   "Orbit": {
     "argumentOfPeriapsis": null,
-    "color": null,
+    "color": "",
     "inclination": null,
     "mode": null,
     "referenceBody": null,
@@ -22,26 +22,26 @@
   "ScaledVersion": {
     "Coronas": [],
     "Light": {
-      "ambientLightColor": null,
+      "ambientLightColor": "",
       "givesOffLight": null,
-      "IVASunColor": null,
+      "IVASunColor": "",
       "IVASunIntensity": null,
       "luminosity": null,
-      "scaledSunlightColor": null,
+      "scaledSunlightColor": "",
       "scaledSunlightIntensity": null,
-      "sunLensFlareColor": null,
-      "sunlightColor": null,
+      "sunLensFlareColor": "",
+      "sunlightColor": "",
       "sunlightIntensity": null,
       "sunlightShadowStrength": null,
       "Header": null
     },
     "Material": {
-      "emitColor0": null,
-      "emitColor1": null,
+      "emitColor0": "",
+      "emitColor1": "",
       "Header": "",
       "inverseFade": null,
-      "rimColor": null,
-      "sunspotColors": null,
+      "rimColor": "",
+      "sunspotColors": "",
       "texture": null
     },
     "Header": null

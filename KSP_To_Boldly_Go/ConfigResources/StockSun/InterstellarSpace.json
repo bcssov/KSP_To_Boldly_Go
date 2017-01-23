@@ -1,81 +1,93 @@
 {
-    "Body": {
-        "cbNameLater": "Interstellar Space",
-        "name": null,
-        "Properties": {
-            "description": "Interstellar Space is one of the vastest emptiest regions of the Universe, It takes thousands of years to travel just from one star to another at sublight speeds, And is nearly devoid of matter. There are occasional areas of dense gas however, Which are filled with stars. But we cannot track them due to nebula interference.",
-            "radius": 10000,
-            "sphereOfInfluence": null,
-            "Header": null
-        },
-        "ScaledVersion": {
-            "Coronas": [
-                {
-                    "Header": "Corona",
-                    "Material": {
-                        "emitColor0": null,
-                        "emitColor1": null,
-                        "Header": null,
-                        "inverseFade": 2.553731,
-                        "rimColor": null,
-                        "sunspotColors": null,
-                        "texture": "To_Boldly_Go/Black"
-                    },
-                    "rotation": 0,
-                    "scaleLimitX": 5,
-                    "scaleLimitY": 5,
-                    "scaleSpeed": 0.007,
-                    "speed": -1,
-                    "updateInterval": 5
-                },
-                {
-                    "Header": "Corona",
-                    "Material": {
-                        "emitColor0": null,
-                        "emitColor1": null,
-                        "Header": null,
-                        "inverseFade": 2.553731,
-                        "rimColor": null,
-                        "sunspotColors": null,
-                        "texture": "To_Boldly_Go/Black"
-                    },
-                    "rotation": 0,
-                    "scaleLimitX": 5,
-                    "scaleLimitY": 5,
-                    "scaleSpeed": 0.009,
-                    "speed": 1,
-                    "updateInterval": 5
-                }
-            ],
-            "Light": {
-                "ambientLightColor": "0,0,0,255",
-                "givesOffLight": false,
-                "IVASunColor": "255,255,255,255",
-                "IVASunIntensity": 0.55,
-                "luminosity": 0,
-                "scaledSunlightColor": "255,255,255,255",
-                "scaledSunlightIntensity": 0.55,
-                "sunLensFlareColor": "255,255,255,255",
-                "sunlightColor": "255,255,255,255",
-                "sunlightIntensity": 0.55,
-                "sunlightShadowStrength": null,
-                "Header": null
-            },
-            "Material": {
-                "emitColor0": "0,0,0,255",
-                "emitColor1": "0,0,0,255",
-                "Header": "",
-                "inverseFade": null,
-                "rimColor": "0,0,0,255",
-                "sunspotColors": null,
-                "texture": null
-            },
-            "Header": "@ScaledVersion"
-        },
-        "Template": null,
-        "Header": "@Body[Sun]"
+  "Body": {
+    "cbNameLater": "Interstellar Space",
+    "name": null,
+    "Orbit": {
+      "argumentOfPeriapsis": null,
+      "color": null,
+      "inclination": null,
+      "mode": null,
+      "referenceBody": null,
+      "semiMajorAxis": null,
+      "Header": null
     },
-    "Header": "@Kopernicus:AFTER[Kopernicus]",
-    "$order": 2,
-    "$objectType": "KopernicusRoot"
+    "PostSpawnOrbit": {
+      "referenceBody": null
+    },
+    "Properties": {
+      "description": "Interstellar Space is one of the vastest emptiest regions of the Universe, It takes thousands of years to travel just from one star to another at sublight speeds, And is nearly devoid of matter. There are occasional areas of dense gas however, Which are filled with stars. But we cannot track them due to nebula interference.",
+      "radius": 10000,
+      "sphereOfInfluence": null,
+      "Header": null
+    },
+    "ScaledVersion": {
+      "Coronas": [
+        {
+          "Header": "Corona",
+          "Material": {
+            "emitColor0": "",
+            "emitColor1": "",
+            "Header": null,
+            "inverseFade": 2.553731,
+            "rimColor": "",
+            "sunspotColors": "",
+            "texture": "To_Boldly_Go/Black"
+          },
+          "rotation": 0,
+          "scaleLimitX": 5,
+          "scaleLimitY": 5,
+          "scaleSpeed": 0.007,
+          "speed": -1,
+          "updateInterval": 5
+        },
+        {
+          "Header": "Corona",
+          "Material": {
+            "emitColor0": "",
+            "emitColor1": "",
+            "Header": null,
+            "inverseFade": 2.553731,
+            "rimColor": "",
+            "sunspotColors": "",
+            "texture": "To_Boldly_Go/Black"
+          },
+          "rotation": 0,
+          "scaleLimitX": 5,
+          "scaleLimitY": 5,
+          "scaleSpeed": 0.009,
+          "speed": 1,
+          "updateInterval": 5
+        }
+      ],
+      "Light": {
+        "ambientLightColor": "0,0,0,255",
+        "givesOffLight": false,
+        "IVASunColor": "255,255,255,255",
+        "IVASunIntensity": 0.55,
+        "luminosity": 0,
+        "scaledSunlightColor": "255,255,255,255",
+        "scaledSunlightIntensity": 0.55,
+        "sunLensFlareColor": "255,255,255,255",
+        "sunlightColor": "255,255,255,255",
+        "sunlightIntensity": 0.55,
+        "sunlightShadowStrength": null,
+        "Header": null
+      },
+      "Material": {
+        "emitColor0": "0,0,0,255",
+        "emitColor1": "0,0,0,255",
+        "Header": "",
+        "inverseFade": null,
+        "rimColor": "0,0,0,255",
+        "sunspotColors": "",
+        "texture": null
+      },
+      "Header": "@ScaledVersion"
+    },
+    "Template": null,
+    "Header": "@Body[Sun]"
+  },
+  "Header": "@Kopernicus:AFTER[Kopernicus]",
+  "$order": 2,
+  "$objectType": "KopernicusRoot"
 }
