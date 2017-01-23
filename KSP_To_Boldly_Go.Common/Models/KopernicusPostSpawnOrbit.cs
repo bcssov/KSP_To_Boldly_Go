@@ -11,7 +11,8 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Converters;
+using KSP_To_Boldly_Go.Common.Converters.Object;
+using KSP_To_Boldly_Go.Common.Serializers;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
@@ -33,7 +34,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <value>The header.</value>
         [JsonIgnore]
         [Browsable(false)]
-        [KopernicusSerializerIgnore]
+        [KopernicusSerializeIgnore]
         [Description("Kopernicus node header. Internal program property.")]
         public override string Header
         {

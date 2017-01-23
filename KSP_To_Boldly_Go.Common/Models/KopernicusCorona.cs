@@ -51,7 +51,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets or sets the header.
         /// </summary>
         /// <value>The header.</value>
-        [KopernicusSerializIegnore]
+        [KopernicusSerializeIgnore]
         [Description("Kopernicus node header. Internal program property.")]
         public override string Header
         {

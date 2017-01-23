@@ -4,14 +4,14 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-21-2017
+// Last Modified On : 01-23-2017
 // ***********************************************************************
 // <copyright file="KopernicusBody.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Converters;
+using KSP_To_Boldly_Go.Common.Converters.Object;
 using System;
 using System.ComponentModel;
 
@@ -20,11 +20,28 @@ namespace KSP_To_Boldly_Go.Common.Models
     /// <summary>
     /// Class KopernicusBody.
     /// </summary>
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Models.IKopernicusRootObject" />
     /// <seealso cref="KSP_To_Boldly_Go.Common.Models.KopernicusObject" />
     [TypeConverter(typeof(SerializableExpandableObjectConverter))]
     [ObjectOrder(2)]
     public class KopernicusBody : KopernicusObject, IKopernicusRootObject
     {
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KopernicusBody"/> class.
+        /// </summary>
+        public KopernicusBody()
+        {
+            Orbit = new KopernicusOrbit();
+            PostSpawnOrbit = new KopernicusPostSpawnOrbit();
+            Properties = new KopernicusProperties();
+            ScaledVersion = new KopernicusScaledVersion();
+            Template = new KopernicusTemplate();
+        }
+
+        #endregion Constructors
+
         #region Properties
 
         /// <summary>

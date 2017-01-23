@@ -4,18 +4,17 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-20-2017
+// Last Modified On : 01-23-2017
 // ***********************************************************************
 // <copyright file="Initialize.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Converters;
+using KSP_To_Boldly_Go.Common.Converters.Serializer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
-using System.Collections.Generic;
 
 namespace KSP_To_Boldly_Go.Common
 {
@@ -24,6 +23,8 @@ namespace KSP_To_Boldly_Go.Common
     /// </summary>
     public static class Startup
     {
+        #region Methods
+
         /// <summary>
         /// Initializes this instance.
         /// </summary>
@@ -35,8 +36,10 @@ namespace KSP_To_Boldly_Go.Common
                 TypeNameHandling = TypeNameHandling.None,
                 // Don't use camel case, using a bit non standard approach to map classes and properties directly
                 ContractResolver = new DefaultContractResolver(),
-                Converters = new List<JsonConverter>() { new ColorConverter() }
+                Converters = ConverterManager.GetJsonConverters()
             };
         }
+
+        #endregion Methods
     }
 }

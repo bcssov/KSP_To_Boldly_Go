@@ -11,11 +11,11 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using KSP_To_Boldly_Go.Common.Converters.Serializer;
 using KSP_To_Boldly_Go.Common.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -93,7 +93,7 @@ namespace KSP_To_Boldly_Go.Common.Serializers
             tabIndent++;
             var properties = obj.GetType().GetProperties();
             // Skip properties with ignore attribute
-            foreach (var property in properties.Where(p => p.GetCustomAttributes(typeof(KopernicusSerializIegnoreAttribute), true).Count() == 0 && p.CanRead))
+            foreach (var property in properties.Where(p => p.GetCustomAttributes(typeof(KopernicusSerializeIgnoreAttribute), true).Count() == 0 && p.CanRead))
             {
                 if (typeof(IEnumerable<IKopernicusObject>).IsAssignableFrom(property.PropertyType))
                 {
@@ -103,7 +103,7 @@ namespace KSP_To_Boldly_Go.Common.Serializers
                         List<IKopernicusObject> kopernicusObjects = new List<IKopernicusObject>();
                         foreach (var item in col)
                         {
-                            kopernicusObjects.Add((KopernicusObject)item);
+                            kopernicusObjects.Add((IKopernicusObject)item);
                         }
                         if (!kopernicusObjects.All(p => p.IsEmpty()))
                         {
@@ -112,16 +112,19 @@ namespace KSP_To_Boldly_Go.Common.Serializers
                             AppendLine(sb, tabIndent, "{0}", property.Name);
                             AppendLine(sb, tabIndent, "{");
                             stream.Write(sb.ToString());
-                            foreach (var listItem in col)
+                            foreach (var listItem in kopernicusObjects)
                             {
-                                sb = new StringBuilder();
-                                AppendLine(sb, tabIndent + 1, "{0}", ((IKopernicusObject)listItem).Header);
-                                AppendLine(sb, tabIndent + 1, "{");
-                                stream.Write(sb.ToString());
-                                WriteStream(stream, listItem, tabIndent + 1);
-                                sb = new StringBuilder();
-                                AppendLine(sb, tabIndent + 1, "}");
-                                stream.Write(sb.ToString());
+                                if (!listItem.IsEmpty())
+                                {
+                                    sb = new StringBuilder();
+                                    AppendLine(sb, tabIndent + 1, "{0}", ((IKopernicusObject)listItem).Header);
+                                    AppendLine(sb, tabIndent + 1, "{");
+                                    stream.Write(sb.ToString());
+                                    WriteStream(stream, listItem, tabIndent + 1);
+                                    sb = new StringBuilder();
+                                    AppendLine(sb, tabIndent + 1, "}");
+                                    stream.Write(sb.ToString());
+                                }
                             }
                             // Write closing bracket
                             sb = new StringBuilder();
@@ -164,20 +167,18 @@ namespace KSP_To_Boldly_Go.Common.Serializers
                         {
                             if (!string.IsNullOrWhiteSpace(propValue.ToString()))
                             {
-                                // TODO: Color special handling. Might need refactoring in the future...
-                                if (propValue is Color)
+                                var sb = new StringBuilder();
+                                // Check if any converter can convert this type, if not assume some "simple" value
+                                var converter = ConverterManager.GetConverterForType(propValue.GetType());
+                                if (converter != null)
                                 {
-                                    var color = ((Color)propValue);
-                                    var sb = new StringBuilder();
-                                    AppendLine(sb, tabIndent, "{0} = {1}", property.Name, color.ToConfigString());
-                                    stream.Write(sb.ToString());
+                                    AppendLine(sb, tabIndent, "{0} = {1}", property.Name, converter.ToSerializedString(propValue));
                                 }
                                 else
                                 {
-                                    var sb = new StringBuilder();
                                     AppendLine(sb, tabIndent, "{0} = {1}", property.Name, propValue.ToString());
-                                    stream.Write(sb.ToString());
                                 }
+                                stream.Write(sb.ToString());
                             }
                         }
                     }

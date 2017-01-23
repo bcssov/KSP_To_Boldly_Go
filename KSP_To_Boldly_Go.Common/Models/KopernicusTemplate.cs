@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Converters;
+using KSP_To_Boldly_Go.Common.Converters.Object;
 using System;
 using System.ComponentModel;
 

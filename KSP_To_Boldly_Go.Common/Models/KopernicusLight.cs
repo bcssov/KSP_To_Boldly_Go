@@ -11,10 +11,10 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Converters;
+using KSP_To_Boldly_Go.Common.Converters.Object;
+using KSP_To_Boldly_Go.Common.Types;
 using System;
 using System.ComponentModel;
-using System.Drawing;
 
 namespace KSP_To_Boldly_Go.Common.Models
 {
@@ -40,7 +40,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the color of the ambient light.
         /// </summary>
         /// <value>The color of the ambient light.</value>
-        public Color? ambientLightColor
+        public Color ambientLightColor
         {
             get;
             set;
@@ -66,7 +66,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the color of the iva sun.
         /// </summary>
         /// <value>The color of the iva sun.</value>
-        public Color? IVASunColor
+        public Color IVASunColor
         {
             get;
             set;
@@ -96,7 +96,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the color of the scaled sunlight.
         /// </summary>
         /// <value>The color of the scaled sunlight.</value>
-        public Color? scaledSunlightColor
+        public Color scaledSunlightColor
         {
             get;
             set;
@@ -116,7 +116,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the color of the sun lens flare.
         /// </summary>
         /// <value>The color of the sun lens flare.</value>
-        public Color? sunLensFlareColor
+        public Color sunLensFlareColor
         {
             get;
             set;
@@ -126,7 +126,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the color of the sunlight.
         /// </summary>
         /// <value>The color of the sunlight.</value>
-        public Color? sunlightColor
+        public Color sunlightColor
         {
             get;
             set;

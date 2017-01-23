@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Converters;
+using KSP_To_Boldly_Go.Common.Converters.Object;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,6 +33,8 @@ namespace KSP_To_Boldly_Go.Common.Models
         public KopernicusScaledVersion()
         {
             Coronas = new List<KopernicusCorona>();
+            Light = new KopernicusLight();
+            Material = new KopernicusMaterial();
         }
 
         #endregion Constructors

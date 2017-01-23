@@ -14,7 +14,7 @@
 using System;
 using System.ComponentModel;
 
-namespace KSP_To_Boldly_Go.Common.Converters
+namespace KSP_To_Boldly_Go.Common.Converters.Object
 {
     /// <summary>
     /// Class SerializableExpandableObjectConverter.

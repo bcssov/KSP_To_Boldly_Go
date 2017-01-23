@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-22-2017
+// Last Modified On : 01-23-2017
 // ***********************************************************************
 // <copyright file="ModelResolver.cs" company="">
 //     Copyright ©  2017
@@ -13,7 +13,6 @@
 // ***********************************************************************
 using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -32,6 +31,11 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// </summary>
         private static readonly string modelNamespace = typeof(ModelManager).Namespace;
 
+        /// <summary>
+        /// The root objects
+        /// </summary>
+        private static List<string> rootObjects = null;
+
         #endregion Fields
 
         #region Methods
@@ -44,7 +48,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         public static object GetKopernicusObjectFromType(string type)
         {
             var className = string.Format("{0}.{1}", modelNamespace, type);
-            var instance = CreateKopernicusObject(Type.GetType(className));
+            var instance = Activator.CreateInstance(Type.GetType(className));
             ((KopernicusObject)instance).ShowInternalProperties = true;
             ((KopernicusObject)instance).Type = type;
             return instance;
@@ -77,27 +81,12 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <returns>List&lt;System.String&gt;.</returns>
         public static List<string> GetListOfKopernicusObjects()
         {
-            var objects = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IKopernicusRootObject))).ToList();            
-            return objects.OrderBy(p => ((ObjectOrderAttribute)p.GetCustomAttribute(typeof(ObjectOrderAttribute), true)).Order).Select(p => p.Name).ToList();
-        }
-
-        /// <summary>
-        /// Creates the kopernicus object.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>System.Object.</returns>
-        private static object CreateKopernicusObject(Type type)
-        {
-            var instance = Activator.CreateInstance(type);
-            foreach (var property in type.GetProperties())
+            if (rootObjects == null)
             {
-                if (typeof(IKopernicusObject).IsAssignableFrom(property.PropertyType) && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
-                {
-                    var childInstance = CreateKopernicusObject(property.PropertyType);
-                    property.SetValue(instance, childInstance);
-                }
+                var objects = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IKopernicusRootObject))).ToList();
+                rootObjects = objects.OrderBy(p => ((ObjectOrderAttribute)p.GetCustomAttribute(typeof(ObjectOrderAttribute), true)).Order).Select(p => p.Name).ToList();
             }
-            return instance;
+            return rootObjects;
         }
 
         #endregion Methods

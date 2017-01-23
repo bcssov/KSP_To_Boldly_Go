@@ -19,7 +19,7 @@ namespace KSP_To_Boldly_Go.Common.Serializers
     /// Class KopernicusSerializeIgnoreAttribute.
     /// </summary>
     /// <seealso cref="System.Attribute" />
-    public class KopernicusSerializIegnoreAttribute : Attribute
+    public class KopernicusSerializeIgnoreAttribute : Attribute
     {
     }
 }
