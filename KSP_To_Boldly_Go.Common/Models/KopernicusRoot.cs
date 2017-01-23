@@ -43,12 +43,12 @@ namespace KSP_To_Boldly_Go.Common.Models
         #region Methods
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Gets the name of the object.
         /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString()
+        /// <returns>System.String.</returns>
+        protected override string GetObjectName()
         {
-            return string.IsNullOrWhiteSpace(Header) ? "Root" : Header;
+            return "Root";
         }
 
         #endregion Methods

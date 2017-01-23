@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-22-2017
+// Last Modified On : 01-23-2017
 // ***********************************************************************
 // <copyright file="KopernicusMaterial.cs" company="">
 //     Copyright ©  2017
@@ -39,14 +39,14 @@ namespace KSP_To_Boldly_Go.Common.Models
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="KopernicusMaterial"/> class.
+        /// Initializes a new instance of the <see cref="KopernicusMaterial" /> class.
         /// </summary>
         public KopernicusMaterial() : base()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="KopernicusMaterial"/> class.
+        /// Initializes a new instance of the <see cref="KopernicusMaterial" /> class.
         /// </summary>
         /// <param name="customHeader">The custom header.</param>
         public KopernicusMaterial(string customHeader) : base()
@@ -146,15 +146,6 @@ namespace KSP_To_Boldly_Go.Common.Models
         #region Methods
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString()
-        {
-            return string.IsNullOrWhiteSpace(Header) ? "Material" : Header;
-        }
-
-        /// <summary>
         /// Filters the properties.
         /// </summary>
         /// <param name="properties">The properties.</param>
@@ -169,6 +160,15 @@ namespace KSP_To_Boldly_Go.Common.Models
                 return base.FilterProperties(properties, propsToIgnore.ToArray());
             }
             return base.FilterProperties(properties, ignoreProperties);
+        }
+
+        /// <summary>
+        /// Gets the name of the object.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        protected override string GetObjectName()
+        {
+            return "Material";
         }
 
         #endregion Methods

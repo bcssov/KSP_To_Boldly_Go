@@ -104,15 +104,6 @@ namespace KSP_To_Boldly_Go.Common.Models
         #region Methods
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString()
-        {
-            return !string.IsNullOrWhiteSpace(Header) ? Header : "Corona";
-        }
-
-        /// <summary>
         /// Filters the properties.
         /// </summary>
         /// <param name="properties">The properties.</param>
@@ -124,6 +115,15 @@ namespace KSP_To_Boldly_Go.Common.Models
             List<string> propsToIgnore = new List<string>() { "Header" };
             propsToIgnore.AddRange(ignoreProperties);
             return base.FilterProperties(properties, propsToIgnore.ToArray());
+        }
+
+        /// <summary>
+        /// Gets the name of the object.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        protected override string GetObjectName()
+        {
+            return "Corona";
         }
 
         /// <summary>

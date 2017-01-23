@@ -49,8 +49,8 @@ namespace KSP_To_Boldly_Go.Common.Models
         {
             var className = string.Format("{0}.{1}", modelNamespace, type);
             var instance = Activator.CreateInstance(Type.GetType(className));
-            ((KopernicusObject)instance).ShowInternalProperties = true;
-            ((KopernicusObject)instance).Type = type;
+            ((IKopernicusObject)instance).ShowInternalProperties = true;
+            ((IKopernicusObject)instance).Type = type;
             return instance;
         }
 
@@ -63,7 +63,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         {
             if (!string.IsNullOrWhiteSpace(jsonContent))
             {
-                var obj = JsonConvert.DeserializeObject<KopernicusObject>(jsonContent);
+                var obj = JsonConvert.DeserializeObject<KopernicusInfo>(jsonContent);
                 if (obj != null)
                 {
                     var className = string.Format("{0}.{1}", modelNamespace, obj.Type);

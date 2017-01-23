@@ -27,7 +27,7 @@ namespace KSP_To_Boldly_Go.Common.Models
     /// </summary>
     /// <seealso cref="System.ComponentModel.ICustomTypeDescriptor" />
     /// <seealso cref="KSP_To_Boldly_Go.Common.Models.IKopernicusObject" />
-    public class KopernicusObject : IKopernicusObject, ICustomTypeDescriptor
+    public abstract class KopernicusObject : IKopernicusObject, ICustomTypeDescriptor
     {
         #region Fields
 
@@ -117,6 +117,13 @@ namespace KSP_To_Boldly_Go.Common.Models
         #endregion Properties
 
         #region Methods
+
+        protected abstract string GetObjectName();
+
+        public override string ToString()
+        {
+            return string.IsNullOrWhiteSpace(Header) ? GetObjectName() : Header;
+        }
 
         /// <summary>
         /// Returns a collection of custom attributes for this instance of a component.
@@ -277,7 +284,7 @@ namespace KSP_To_Boldly_Go.Common.Models
                         List<bool> colResults = new List<bool>();
                         foreach (var item in col)
                         {
-                            colResults.Add(((KopernicusObject)item).IsEmpty());
+                            colResults.Add(((IKopernicusObject)item).IsEmpty());
                         }
                         results.Add(property.Name, !colResults.All(p => p == true));
                     }

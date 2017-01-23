@@ -25,7 +25,7 @@ namespace KSP_To_Boldly_Go.Common.UI
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CollectionEditor"/> class.
+        /// Initializes a new instance of the <see cref="CollectionEditor" /> class.
         /// </summary>
         /// <param name="type">The type of the collection for this editor to edit.</param>
         public CollectionEditor(Type type) : base(type)
@@ -43,6 +43,7 @@ namespace KSP_To_Boldly_Go.Common.UI
         protected override CollectionForm CreateCollectionForm()
         {
             var collectionForm = base.CreateCollectionForm();
+            collectionForm.Text = "Collection Editor";
 
             var layout = collectionForm.Controls[0] as TableLayoutPanel;
             if (layout != null)

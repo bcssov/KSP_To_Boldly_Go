@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-22-2017
+// Last Modified On : 01-23-2017
 // ***********************************************************************
 // <copyright file="KopernicusScaledVersion.cs" company="">
 //     Copyright ©  2017
@@ -61,12 +61,12 @@ namespace KSP_To_Boldly_Go.Common.Models
         #region Methods
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Gets the name of the object.
         /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString()
+        /// <returns>System.String.</returns>
+        protected override string GetObjectName()
         {
-            return string.IsNullOrWhiteSpace(Header) ? "ScaledVersion" : Header;
+            return "ScaledVersion";
         }
 
         #endregion Methods
