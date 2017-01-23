@@ -13,6 +13,7 @@
 // ***********************************************************************
 using KSP_To_Boldly_Go.Common.Converters.Object;
 using KSP_To_Boldly_Go.Common.Serializers;
+using KSP_To_Boldly_Go.Common.Types;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -78,19 +79,19 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets or sets the rotation.
         /// </summary>
         /// <value>The rotation.</value>
-        public long? rotation { get; set; }
+        public RangeLong rotation { get; set; }
 
         /// <summary>
         /// Gets or sets the scale limit x.
         /// </summary>
         /// <value>The scale limit x.</value>
-        public long? scaleLimitX { get; set; }
+        public RangeLong scaleLimitX { get; set; }
 
         /// <summary>
         /// Gets or sets the scale limit y.
         /// </summary>
         /// <value>The scale limit y.</value>
-        public long? scaleLimitY { get; set; }
+        public RangeLong scaleLimitY { get; set; }
 
         /// <summary>
         /// Gets or sets the scale speed.
@@ -102,13 +103,13 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets or sets the speed.
         /// </summary>
         /// <value>The speed.</value>
-        public long? speed { get; set; }
+        public RangeLong speed { get; set; }
 
         /// <summary>
         /// Gets or sets the update interval.
         /// </summary>
         /// <value>The update interval.</value>
-        public long? updateInterval { get; set; }
+        public RangeLong updateInterval { get; set; }
 
         #endregion Properties
 

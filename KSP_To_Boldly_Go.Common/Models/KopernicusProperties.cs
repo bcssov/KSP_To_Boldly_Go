@@ -37,7 +37,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets or sets the radius.
         /// </summary>
         /// <value>The radius.</value>
-        public long? radius { get; set; }
+        public RangeLong radius { get; set; }
 
         /// <summary>
         /// Gets the sphere of influence.

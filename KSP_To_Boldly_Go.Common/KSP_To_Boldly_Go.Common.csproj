@@ -47,11 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\Object\RangeConverter.cs" />
+    <Compile Include="Converters\Object\RangeLongConverter.cs" />
     <Compile Include="Converters\Serializer\ColorConverter.cs" />
     <Compile Include="Converters\Object\ColorConverter.cs" />
     <Compile Include="Converters\Serializer\ConverterManager.cs" />
     <Compile Include="Converters\Serializer\IConverter.cs" />
+    <Compile Include="Converters\Serializer\RangeConverter.cs" />
+    <Compile Include="Converters\Serializer\RangeLongConverter.cs" />
     <Compile Include="Initialize.cs" />
+    <Compile Include="Extensions\RandomExtensions.cs" />
+    <Compile Include="Types\IRange.cs" />
+    <Compile Include="Types\IRangeNumber.cs" />
+    <Compile Include="Types\RangeNumber.cs" />
+    <Compile Include="Types\RangeLong.cs" />
     <Compile Include="UI\CollectionEditor.cs" />
     <Compile Include="Models\IKopernicusRootObject.cs" />
     <Compile Include="Models\KopernicusCorona.cs" />
@@ -71,10 +80,9 @@
     <Compile Include="Models\ModelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Converters\Object\SerializableExpandableObjectConverter.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Serializers\KopernicusSerializer.cs" />
     <Compile Include="Types\Color.cs" />
-    <Compile Include="Types\IType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

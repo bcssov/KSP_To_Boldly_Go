@@ -86,7 +86,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the luminosity.
         /// </summary>
         /// <value>The luminosity.</value>
-        public long? luminosity
+        public RangeLong luminosity
         {
             get;
             set;

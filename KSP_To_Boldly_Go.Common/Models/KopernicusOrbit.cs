@@ -31,7 +31,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the argument of periapsis.
         /// </summary>
         /// <value>The argument of periapsis.</value>
-        public long? argumentOfPeriapsis
+        public RangeLong argumentOfPeriapsis
         {
             get;
             set;
@@ -51,7 +51,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the inclination.
         /// </summary>
         /// <value>The inclination.</value>
-        public long? inclination
+        public RangeLong inclination
         {
             get;
             set;
@@ -61,7 +61,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the mode.
         /// </summary>
         /// <value>The mode.</value>
-        public long? mode
+        public RangeLong mode
         {
             get;
             set;
@@ -81,7 +81,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the semi major axis.
         /// </summary>
         /// <value>The semi major axis.</value>
-        public long? semiMajorAxis
+        public RangeLong semiMajorAxis
         {
             get;
             set;
