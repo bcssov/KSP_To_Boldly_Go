@@ -27,20 +27,6 @@ namespace KSP_To_Boldly_Go.Common.Models
     [TypeConverter(typeof(SerializableExpandableObjectConverter))]
     public class KopernicusScaledVersion : KopernicusObject
     {
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KopernicusScaledVersion"/> class.
-        /// </summary>
-        public KopernicusScaledVersion()
-        {
-            Coronas = new List<KopernicusCorona>();
-            Light = new KopernicusLight();
-            Material = new KopernicusMaterial();
-        }
-
-        #endregion Constructors
-
         #region Properties
 
         /// <summary>

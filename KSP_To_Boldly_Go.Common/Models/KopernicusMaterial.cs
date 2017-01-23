@@ -41,7 +41,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="KopernicusMaterial"/> class.
         /// </summary>
-        public KopernicusMaterial()
+        public KopernicusMaterial() : base()
         {
         }
 
@@ -49,7 +49,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Initializes a new instance of the <see cref="KopernicusMaterial"/> class.
         /// </summary>
         /// <param name="customHeader">The custom header.</param>
-        public KopernicusMaterial(string customHeader)
+        public KopernicusMaterial(string customHeader) : base()
         {
             if (!string.IsNullOrWhiteSpace(customHeader))
             {

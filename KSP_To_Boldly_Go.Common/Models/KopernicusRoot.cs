@@ -26,18 +26,6 @@ namespace KSP_To_Boldly_Go.Common.Models
     [ObjectOrder(1)]
     public class KopernicusRoot : KopernicusObject, IKopernicusRootObject
     {
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KopernicusRoot"/> class.
-        /// </summary>
-        public KopernicusRoot()
-        {
-            Body = new KopernicusBody();
-        }
-
-        #endregion Constructors
-
         #region Properties
 
         /// <summary>

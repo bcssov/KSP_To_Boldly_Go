@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-21-2017
+// Last Modified On : 01-23-2017
 // ***********************************************************************
 // <copyright file="KopernicusObject.cs" company="">
 //     Copyright ©  2017
@@ -42,6 +42,18 @@ namespace KSP_To_Boldly_Go.Common.Models
         protected bool _showInternalProperties = false;
 
         #endregion Fields
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KopernicusObject"/> class.
+        /// </summary>
+        public KopernicusObject()
+        {
+            Initialize();
+        }
+
+        #endregion Constructors
 
         #region Properties
 
@@ -337,6 +349,27 @@ namespace KSP_To_Boldly_Go.Common.Models
                 }
             }
             return new PropertyDescriptorCollection(validProperties.ToArray());
+        }
+
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
+        protected virtual void Initialize()
+        {
+            foreach (var property in GetType().GetProperties())
+            {
+                if (typeof(IEnumerable<IKopernicusObject>).IsAssignableFrom(property.PropertyType))
+                {
+                    var generic = property.PropertyType.GetGenericArguments().First();
+                    var instance = Activator.CreateInstance(typeof(List<>).MakeGenericType(generic));
+                    property.SetValue(this, instance, null);
+                }
+                else if (typeof(IKopernicusObject).IsAssignableFrom(property.PropertyType))
+                {
+                    var instance = Activator.CreateInstance(property.PropertyType);
+                    property.SetValue(this, instance);
+                }
+            }
         }
 
         #endregion Methods
