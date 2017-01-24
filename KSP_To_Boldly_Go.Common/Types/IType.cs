@@ -23,10 +23,11 @@ namespace KSP_To_Boldly_Go.Common.Types
         #region Methods
 
         /// <summary>
-        /// Sets the values.
+        /// Parses the specified value.
         /// </summary>
         /// <param name="value">The value.</param>
-        void SetValues(string value);
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        bool Parse(string value);
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.

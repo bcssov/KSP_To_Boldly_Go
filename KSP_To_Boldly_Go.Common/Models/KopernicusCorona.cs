@@ -12,10 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 using KSP_To_Boldly_Go.Common.Converters.Object;
-using KSP_To_Boldly_Go.Common.Serializers;
 using KSP_To_Boldly_Go.Common.Types;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace KSP_To_Boldly_Go.Common.Models
@@ -27,35 +25,7 @@ namespace KSP_To_Boldly_Go.Common.Models
     [TypeConverter(typeof(SerializableExpandableObjectConverter))]
     public class KopernicusCorona : KopernicusObject
     {
-        #region Fields
-
-        /// <summary>
-        /// The header
-        /// </summary>
-        private string _header = "Corona";
-
-        #endregion Fields
-
         #region Properties
-
-        /// <summary>
-        /// Gets or sets the header.
-        /// </summary>
-        /// <value>The header.</value>
-        [KopernicusSerializeIgnore]
-        [Description("Kopernicus node header. Internal program property.")]
-        public override string Header
-        {
-            get
-            {
-                return _header;
-            }
-
-            set
-            {
-                // Internal only, cannot be set externally.
-            }
-        }
 
         /// <summary>
         /// Gets or sets the material.
@@ -104,35 +74,12 @@ namespace KSP_To_Boldly_Go.Common.Models
         #region Methods
 
         /// <summary>
-        /// Filters the properties.
-        /// </summary>
-        /// <param name="properties">The properties.</param>
-        /// <param name="ignoreProperties">The ignore properties.</param>
-        /// <returns>PropertyDescriptorCollection.</returns>
-        protected override PropertyDescriptorCollection FilterProperties(PropertyDescriptorCollection properties, string[] ignoreProperties)
-        {
-            // Header cannot be set externaly, so hide it from editors
-            List<string> propsToIgnore = new List<string>() { "Header" };
-            propsToIgnore.AddRange(ignoreProperties);
-            return base.FilterProperties(properties, propsToIgnore.ToArray());
-        }
-
-        /// <summary>
         /// Gets the name of the object.
         /// </summary>
         /// <returns>System.String.</returns>
         protected override string GetObjectName()
         {
             return "Corona";
-        }
-
-        /// <summary>
-        /// Initializes this instance.
-        /// </summary>
-        protected override void Initialize()
-        {
-            base.Initialize();
-            Material = new KopernicusMaterial("Material");
         }
 
         #endregion Methods

@@ -98,7 +98,7 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
                 else if (value is T)
                 {
                     var converter = ConverterManager.GetConverterForType<T>();
-                    converter.ToString(value, null);                    
+                    return converter.ToString(value, null);
                 }
             }
             else if (destinationType == typeof(T))

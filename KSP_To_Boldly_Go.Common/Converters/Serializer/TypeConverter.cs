@@ -68,8 +68,11 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
                 return default(T);
             }
             var instance = Activator.CreateInstance<T>();
-            instance.SetValues(value);
-            return instance;
+            if (instance.Parse(value))
+            {
+                return instance;
+            }
+            return default(T);
         }
 
         /// <summary>

@@ -32,9 +32,14 @@ namespace KSP_To_Boldly_Go.Common.Models
         #region Fields
 
         /// <summary>
-        /// The hide properties
+        /// The hidden internal properties
         /// </summary>
-        protected static readonly string[] hideProperties = new string[] { "Order", "Type", "ShowInternalProperties" };
+        protected static readonly string[] hiddenInternalProperties = new string[] { "Order", "Type", "ShowInternalProperties" };
+
+        /// <summary>
+        /// The internal properties
+        /// </summary>
+        protected static List<string> internalProperties;
 
         /// <summary>
         /// The show internal properties
@@ -220,7 +225,7 @@ namespace KSP_To_Boldly_Go.Common.Models
 
             if (!ShowInternalProperties)
             {
-                return FilterProperties(properties, hideProperties);
+                return FilterProperties(properties, hiddenInternalProperties);
             }
             return FilterProperties(properties, new string[] { "ShowInternalProperties" });
         }
@@ -237,7 +242,7 @@ namespace KSP_To_Boldly_Go.Common.Models
 
             if (!ShowInternalProperties)
             {
-                return FilterProperties(properties, hideProperties);
+                return FilterProperties(properties, hiddenInternalProperties);
             }
             return FilterProperties(properties, new string[] { "ShowInternalProperties" });
         }
@@ -260,10 +265,14 @@ namespace KSP_To_Boldly_Go.Common.Models
         public virtual bool IsEmpty()
         {
             // Ignore inbuilt properties, as we know that they are used for internal use
-            var inbuiltProperties = typeof(IKopernicusObject).GetProperties().Select(p => p.Name);
+            if (internalProperties == null || internalProperties.Count() == 0)
+            {
+                internalProperties = new List<string>();
+                internalProperties.AddRange(typeof(IKopernicusObject).GetProperties().Where(p => p.Name != "Header").Select(p => p.Name));
+            }
             var properties = GetType().GetProperties();
             Dictionary<string, bool> results = new Dictionary<string, bool>();
-            foreach (var property in properties.Where(p => !inbuiltProperties.Contains(p.Name) && p.CanRead))
+            foreach (var property in properties.Where(p => !internalProperties.Contains(p.Name) && p.CanRead))
             {
                 if ((typeof(IEnumerable<IKopernicusObject>).IsAssignableFrom(property.PropertyType)))
                 {

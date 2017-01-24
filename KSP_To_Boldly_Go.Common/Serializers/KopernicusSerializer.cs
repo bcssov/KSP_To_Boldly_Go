@@ -140,7 +140,14 @@ namespace KSP_To_Boldly_Go.Common.Serializers
                                 if (!listItem.IsEmpty())
                                 {
                                     sb = new StringBuilder();
-                                    AppendLine(sb, tabIndent + 1, "{0}", listItem.Header);
+                                    if (!string.IsNullOrWhiteSpace(listItem.Header))
+                                    {
+                                        AppendLine(sb, tabIndent + 1, "{0}", listItem.Header);
+                                    }
+                                    else
+                                    {
+                                        AppendLine(sb, tabIndent + 1, "{0}", listItem.ToString());
+                                    }
                                     AppendLine(sb, tabIndent + 1, "{");
                                     stream.Write(sb.ToString());
                                     WriteStream(stream, listItem, tabIndent + 1);

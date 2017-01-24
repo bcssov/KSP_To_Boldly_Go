@@ -149,10 +149,11 @@ namespace KSP_To_Boldly_Go.Common.Types
         }
 
         /// <summary>
-        /// Sets the values.
+        /// Parses the specified value.
         /// </summary>
         /// <param name="value">The value.</param>
-        public void SetValues(string value)
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public bool Parse(string value)
         {
             if (!string.IsNullOrWhiteSpace(value))
             {
@@ -178,7 +179,9 @@ namespace KSP_To_Boldly_Go.Common.Types
                             break;
                     }
                 }
+                return true;
             }
+            return false;
         }
 
         /// <summary>
