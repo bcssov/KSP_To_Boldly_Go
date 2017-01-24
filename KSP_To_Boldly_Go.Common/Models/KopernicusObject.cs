@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 01-24-2017
 // ***********************************************************************
 // <copyright file="KopernicusObject.cs" company="">
 //     Copyright ©  2017
@@ -46,7 +46,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="KopernicusObject"/> class.
+        /// Initializes a new instance of the <see cref="KopernicusObject" /> class.
         /// </summary>
         public KopernicusObject()
         {
@@ -117,13 +117,6 @@ namespace KSP_To_Boldly_Go.Common.Models
         #endregion Properties
 
         #region Methods
-
-        protected abstract string GetObjectName();
-
-        public override string ToString()
-        {
-            return string.IsNullOrWhiteSpace(Header) ? GetObjectName() : Header;
-        }
 
         /// <summary>
         /// Returns a collection of custom attributes for this instance of a component.
@@ -340,6 +333,15 @@ namespace KSP_To_Boldly_Go.Common.Models
         }
 
         /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString()
+        {
+            return string.IsNullOrWhiteSpace(Header) ? GetObjectName() : Header;
+        }
+
+        /// <summary>
         /// Filters the properties.
         /// </summary>
         /// <param name="properties">The properties.</param>
@@ -357,6 +359,12 @@ namespace KSP_To_Boldly_Go.Common.Models
             }
             return new PropertyDescriptorCollection(validProperties.ToArray());
         }
+
+        /// <summary>
+        /// Gets the name of the object.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        protected abstract string GetObjectName();
 
         /// <summary>
         /// Initializes this instance.
