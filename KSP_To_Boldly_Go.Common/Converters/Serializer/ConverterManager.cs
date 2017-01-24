@@ -4,13 +4,14 @@
 // Created          : 01-23-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 01-24-2017
 // ***********************************************************************
 // <copyright file="ConverterManager.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using KSP_To_Boldly_Go.Common.Types;
 using Newtonsoft.Json;
 
 using System;
@@ -30,7 +31,7 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
         /// <summary>
         /// The converters
         /// </summary>
-        private static List<IConverter> converters = null;
+        private static List<IConverter<IType>> converters = null;
 
         /// <summary>
         /// The json converters
@@ -45,8 +46,8 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
         /// Gets the type of the converter for.
         /// </summary>
         /// <param name="type">The type.</param>
-        /// <returns>IConverter.</returns>
-        public static IConverter GetConverterForType(Type type)
+        /// <returns>IConverter&lt;IType&gt;.</returns>
+        public static IConverter<IType> GetConverterForType(Type type)
         {
             var converters = GetConverters();
             if (converters != null)
@@ -58,18 +59,28 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
         }
 
         /// <summary>
+        /// Gets the type of the converter for.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>IConverter&lt;IType&gt;.</returns>
+        public static IConverter<T> GetConverterForType<T>() where T : IType
+        {
+            return (IConverter<T>)GetConverterForType(typeof(T));
+        }
+
+        /// <summary>
         /// Gets the converters.
         /// </summary>
-        /// <returns>List&lt;IConverter&gt;.</returns>
-        public static List<IConverter> GetConverters()
+        /// <returns>List&lt;IConverter&lt;IType&gt;&gt;.</returns>
+        public static List<IConverter<IType>> GetConverters()
         {
             if (converters == null)
             {
-                List<IConverter> result = new List<IConverter>();
-                var objects = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IConverter)) && !t.IsAbstract).ToList();
+                List<IConverter<IType>> result = new List<IConverter<IType>>();
+                var objects = Assembly.GetExecutingAssembly().GetTypes().Where(t => !t.IsAbstract && t.GetInterfaces().ToList().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IConverter<>))).ToList();
                 foreach (var item in objects)
                 {
-                    result.Add((IConverter)Activator.CreateInstance(item));
+                    result.Add((IConverter<IType>)Activator.CreateInstance(item));
                 }
                 converters = result;
             }

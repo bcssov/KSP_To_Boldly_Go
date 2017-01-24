@@ -4,7 +4,7 @@
 // Created          : 01-23-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 01-24-2017
 // ***********************************************************************
 // <copyright file="Color.cs" company="">
 //     Copyright ©  2017
@@ -124,6 +124,31 @@ namespace KSP_To_Boldly_Go.Common.Types
         #region Methods
 
         /// <summary>
+        /// Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj != null && obj is Color)
+            {
+                var color = (Color)obj;
+                return A.GetValueOrDefault() == color.A.GetValueOrDefault() && R.GetValueOrDefault() == color.R.GetValueOrDefault() && B.GetValueOrDefault() == color.B.GetValueOrDefault() && G.GetValueOrDefault() == color.G.GetValueOrDefault();
+            }
+            return base.Equals(obj);
+        }
+
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+        public override int GetHashCode()
+        {
+            // A bit of an overhead, however this is not intended to be called too often. Even if it is this app is not something that is intended to be run day and night.
+            return new { R, G, B, A }.GetHashCode();
+        }
+
+        /// <summary>
         /// Sets the values.
         /// </summary>
         /// <param name="value">The value.</param>
@@ -162,17 +187,7 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            if (!R.HasValue && !G.HasValue && !B.HasValue && !A.HasValue)
-            {
-                return string.Empty;
-            }
-
-            List<int> vals = new List<int>();
-            vals.Add(R.GetValueOrDefault());
-            vals.Add(G.GetValueOrDefault());
-            vals.Add(B.GetValueOrDefault());
-            vals.Add(A.GetValueOrDefault());
-            return string.Join(",", vals);
+            return ToString(null);
         }
 
         /// <summary>
@@ -182,11 +197,28 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public string ToString(Random random)
         {
-            return string.Format("{0},{1},{2},{3}",
-            Math.Round(Convert.ToDouble(R.GetValueOrDefault()) / 255D, 2).ToString(),
-            Math.Round(Convert.ToDouble(G.GetValueOrDefault()) / 255D, 2).ToString(),
-            Math.Round(Convert.ToDouble(B.GetValueOrDefault()) / 255D, 2).ToString(),
-            Math.Round(Convert.ToDouble(A.GetValueOrDefault()) / 255D, 2).ToString());
+            if (random != null)
+            {
+                return string.Format("{0},{1},{2},{3}",
+                    Math.Round(Convert.ToDouble(R.GetValueOrDefault()) / 255D, 2).ToString(),
+                    Math.Round(Convert.ToDouble(G.GetValueOrDefault()) / 255D, 2).ToString(),
+                    Math.Round(Convert.ToDouble(B.GetValueOrDefault()) / 255D, 2).ToString(),
+                    Math.Round(Convert.ToDouble(A.GetValueOrDefault()) / 255D, 2).ToString());
+            }
+            else
+            {
+                if (!R.HasValue && !G.HasValue && !B.HasValue && !A.HasValue)
+                {
+                    return string.Empty;
+                }
+
+                List<int> vals = new List<int>();
+                vals.Add(R.GetValueOrDefault());
+                vals.Add(G.GetValueOrDefault());
+                vals.Add(B.GetValueOrDefault());
+                vals.Add(A.GetValueOrDefault());
+                return string.Join(",", vals);
+            }
         }
 
         /// <summary>

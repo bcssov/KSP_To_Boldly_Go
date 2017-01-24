@@ -14,6 +14,7 @@
 // reviewed them, sorry for my laziness.
 // </summary>
 // ***********************************************************************
+using KSP_To_Boldly_Go.Common.Types;
 using System;
 
 /// <summary>
@@ -27,6 +28,25 @@ namespace KSP_To_Boldly_Go.Common.Extensions
     public static class RandomExtensions
     {
         #region Methods
+
+        /// <summary>
+        /// Nexts the color.
+        /// </summary>
+        /// <param name="random">The random.</param>
+        /// <param name="min">The minimum.</param>
+        /// <param name="max">The maximum.</param>
+        /// <returns>Color.</returns>
+        public static Color NextColor(this Random random, Color min, Color max)
+        {
+            Color color = new Color()
+            {
+                A = random.NextShort(min.A.GetValueOrDefault(), max.A.GetValueOrDefault()),
+                B = random.NextShort(min.B.GetValueOrDefault(), max.B.GetValueOrDefault()),
+                G = random.NextShort(min.G.GetValueOrDefault(), max.G.GetValueOrDefault()),
+                R = random.NextShort(min.R.GetValueOrDefault(), max.R.GetValueOrDefault())
+            };
+            return color;
+        }
 
         // Random decimal source: http://stackoverflow.com/questions/609501/generating-a-random-decimal-in-c-sharp
         /// <summary>

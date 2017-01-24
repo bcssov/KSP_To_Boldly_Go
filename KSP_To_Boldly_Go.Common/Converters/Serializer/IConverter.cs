@@ -4,13 +4,14 @@
 // Created          : 01-23-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 01-24-2017
 // ***********************************************************************
 // <copyright file="IConverter.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using KSP_To_Boldly_Go.Common.Types;
 using System;
 
 namespace KSP_To_Boldly_Go.Common.Converters.Serializer
@@ -18,7 +19,8 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
     /// <summary>
     /// Interface IConverter
     /// </summary>
-    public interface IConverter
+    /// <typeparam name="T"></typeparam>
+    public interface IConverter<out T> where T : IType
     {
         #region Methods
 
@@ -28,6 +30,13 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
         /// <param name="objectType">Type of the object.</param>
         /// <returns><c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.</returns>
         bool CanConvert(Type objectType);
+
+        /// <summary>
+        /// To the object.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>T.</returns>
+        T ToObject(string value);
 
         /// <summary>
         /// To the serialized string.

@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
 // Assembly         : KSP_To_Boldly_Go.Common
 // Author           : Mario
-// Created          : 01-23-2017
+// Created          : 01-24-2017
 //
 // Last Modified By : Mario
 // Last Modified On : 01-24-2017
 // ***********************************************************************
-// <copyright file="RangeLong.cs" company="">
+// <copyright file="RangeType.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -16,23 +16,23 @@ using System;
 namespace KSP_To_Boldly_Go.Common.Types
 {
     /// <summary>
-    /// Class RangeNumber.
+    /// Class RangeType.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <seealso cref="KSP_To_Boldly_Go.Common.Types.IRangeNumber{T}" />
-    public abstract class RangeNumber<T> : IRangeNumber<T> where T : struct, IComparable, IComparable<T>, IConvertible, IEquatable<T>, IFormattable
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Types.IRangeType{T}" />
+    public abstract class RangeType<T> : IRangeType<T> where T : IType
     {
         #region Fields
 
         /// <summary>
         /// The maximum
         /// </summary>
-        private T? _max;
+        private T _max;
 
         /// <summary>
         /// The minimum
         /// </summary>
-        private T? _min;
+        private T _min;
 
         #endregion Fields
 
@@ -42,12 +42,13 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// Gets or sets the maximum.
         /// </summary>
         /// <value>The maximum.</value>
-        public T? Max
+        public T Max
         {
             get
             {
                 return _max;
             }
+
             set
             {
                 ValidateMax(value);
@@ -59,12 +60,13 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// Gets or sets the minimum.
         /// </summary>
         /// <value>The minimum.</value>
-        public T? Min
+        public T Min
         {
             get
             {
                 return _min;
             }
+
             set
             {
                 ValidateMin(value);
@@ -117,27 +119,27 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public virtual string ToString(Random random)
         {
-            if (!Min.HasValue && !Max.HasValue)
+            if (IsNull(Min) && IsNull(Max))
             {
                 return string.Empty;
             }
-            else if (Min.HasValue && !Max.HasValue)
+            else if (!IsNull(Min) && IsNull(Max))
             {
-                return Min.GetValueOrDefault().ToString();
+                return Min.ToString(random);
             }
-            else if (Min.GetValueOrDefault().Equals(Max.GetValueOrDefault()))
+            else if (Min.Equals(Max))
             {
-                return Min.GetValueOrDefault().ToString();
+                return Min.ToString(random);
             }
             else
             {
                 if (random != null)
                 {
-                    return GetRandomInRange(random).ToString();
+                    return GetRandomInRange(random).ToString(random);
                 }
                 else
                 {
-                    return string.Format("{0} To {1}", Min.GetValueOrDefault(), Max.GetValueOrDefault());
+                    return string.Format("{0} To {1}", Min.ToString(random), Max.ToString(random));
                 }
             }
         }
@@ -153,20 +155,30 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// Parses the value.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>System.Nullable&lt;T&gt;.</returns>
-        protected abstract T? ParseValue(string value);
+        /// <returns>T.</returns>
+        protected abstract T ParseValue(string value);
 
         /// <summary>
         /// Validates the maximum.
         /// </summary>
         /// <param name="newValue">The new value.</param>
-        protected abstract void ValidateMax(T? newValue);
+        protected abstract void ValidateMax(T newValue);
 
         /// <summary>
         /// Validates the minimum.
         /// </summary>
         /// <param name="newValue">The new value.</param>
-        protected abstract void ValidateMin(T? newValue);
+        protected abstract void ValidateMin(T newValue);
+
+        /// <summary>
+        /// Determines whether the specified value is null.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns><c>true</c> if the specified value is null; otherwise, <c>false</c>.</returns>
+        private bool IsNull(T value)
+        {
+            return value == null;
+        }
 
         #endregion Methods
     }

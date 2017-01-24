@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 01-24-2017
 // ***********************************************************************
 // <copyright file="KopernicusMaterial.cs" company="">
 //     Copyright ©  2017
@@ -65,7 +65,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the emit color0.
         /// </summary>
         /// <value>The emit color0.</value>
-        public Color emitColor0
+        public RangeColor emitColor0
         {
             get;
             set;
@@ -75,7 +75,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the emit color1.
         /// </summary>
         /// <value>The emit color1.</value>
-        public Color emitColor1
+        public RangeColor emitColor1
         {
             get;
             set;
@@ -119,7 +119,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the color of the rim.
         /// </summary>
         /// <value>The color of the rim.</value>
-        public Color rimColor
+        public RangeColor rimColor
         {
             get;
             set;
@@ -129,7 +129,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the sunspot colors.
         /// </summary>
         /// <value>The sunspot colors.</value>
-        public Color sunspotColors
+        public RangeColor sunspotColors
         {
             get;
             set;

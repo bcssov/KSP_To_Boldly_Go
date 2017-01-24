@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 01-24-2017
 // ***********************************************************************
 // <copyright file="KopernicusLight.cs" company="">
 //     Copyright ©  2017
@@ -40,7 +40,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the color of the ambient light.
         /// </summary>
         /// <value>The color of the ambient light.</value>
-        public Color ambientLightColor
+        public RangeColor ambientLightColor
         {
             get;
             set;
@@ -66,7 +66,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the color of the iva sun.
         /// </summary>
         /// <value>The color of the iva sun.</value>
-        public Color IVASunColor
+        public RangeColor IVASunColor
         {
             get;
             set;
@@ -96,7 +96,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the color of the scaled sunlight.
         /// </summary>
         /// <value>The color of the scaled sunlight.</value>
-        public Color scaledSunlightColor
+        public RangeColor scaledSunlightColor
         {
             get;
             set;
@@ -116,7 +116,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the color of the sun lens flare.
         /// </summary>
         /// <value>The color of the sun lens flare.</value>
-        public Color sunLensFlareColor
+        public RangeColor sunLensFlareColor
         {
             get;
             set;
@@ -126,7 +126,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the color of the sunlight.
         /// </summary>
         /// <value>The color of the sunlight.</value>
-        public Color sunlightColor
+        public RangeColor sunlightColor
         {
             get;
             set;

@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\Object\RangeColorConverter.cs" />
     <Compile Include="Converters\Object\RangeDecimalConverter.cs" />
     <Compile Include="Converters\Object\RangeFloatConverter.cs" />
     <Compile Include="Converters\Object\RangeIntConverter.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Converters\Object\ColorConverter.cs" />
     <Compile Include="Converters\Serializer\ConverterManager.cs" />
     <Compile Include="Converters\Serializer\IConverter.cs" />
+    <Compile Include="Converters\Serializer\RangeColorConverter.cs" />
     <Compile Include="Converters\Serializer\RangeDecimalConverter.cs" />
     <Compile Include="Converters\Serializer\RangeFloatConverter.cs" />
     <Compile Include="Converters\Serializer\RangeIntConverter.cs" />
@@ -68,8 +70,10 @@
     <Compile Include="Initialize.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Models\KopernicusInfo.cs" />
+    <Compile Include="Types\IRangeType.cs" />
     <Compile Include="Types\IType.cs" />
     <Compile Include="Types\IRangeNumber.cs" />
+    <Compile Include="Types\RangeColor.cs" />
     <Compile Include="Types\RangeDecimal.cs" />
     <Compile Include="Types\RangeDouble.cs" />
     <Compile Include="Types\RangeFloat.cs" />
@@ -77,6 +81,7 @@
     <Compile Include="Types\RangeNumber.cs" />
     <Compile Include="Types\RangeLong.cs" />
     <Compile Include="Types\RangeShort.cs" />
+    <Compile Include="Types\RangeType.cs" />
     <Compile Include="UI\CollectionEditor.cs" />
     <Compile Include="Models\IKopernicusRootObject.cs" />
     <Compile Include="Models\KopernicusCorona.cs" />

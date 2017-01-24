@@ -39,21 +39,11 @@ namespace KSP_To_Boldly_Go.Common.Types
         }
 
         /// <summary>
-        /// Parses the maximum.
+        /// Parses the value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Nullable&lt;T&gt;.</returns>
-        protected override float? ParseMax(string value)
-        {
-            return Convert.ToSingle(value);
-        }
-
-        /// <summary>
-        /// Parses the minimum.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>System.Nullable&lt;T&gt;.</returns>
-        protected override float? ParseMin(string value)
+        protected override float? ParseValue(string value)
         {
             return Convert.ToSingle(value);
         }

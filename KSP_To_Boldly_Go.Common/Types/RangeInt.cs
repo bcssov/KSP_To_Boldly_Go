@@ -37,21 +37,11 @@ namespace KSP_To_Boldly_Go.Common.Types
         }
 
         /// <summary>
-        /// Parses the maximum.
+        /// Parses the value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Nullable&lt;T&gt;.</returns>
-        protected override int? ParseMax(string value)
-        {
-            return Convert.ToInt32(value);
-        }
-
-        /// <summary>
-        /// Parses the minimum.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>System.Nullable&lt;T&gt;.</returns>
-        protected override int? ParseMin(string value)
+        protected override int? ParseValue(string value)
         {
             return Convert.ToInt32(value);
         }

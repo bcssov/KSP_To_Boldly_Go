@@ -39,21 +39,11 @@ namespace KSP_To_Boldly_Go.Common.Types
         }
 
         /// <summary>
-        /// Parses the maximum.
+        /// Parses the value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Nullable&lt;T&gt;.</returns>
-        protected override decimal? ParseMax(string value)
-        {
-            return Convert.ToDecimal(value);
-        }
-
-        /// <summary>
-        /// Parses the minimum.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>System.Nullable&lt;T&gt;.</returns>
-        protected override decimal? ParseMin(string value)
+        protected override decimal? ParseValue(string value)
         {
             return Convert.ToDecimal(value);
         }

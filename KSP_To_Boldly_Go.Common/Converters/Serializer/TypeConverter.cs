@@ -23,7 +23,7 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="Newtonsoft.Json.JsonConverter" />
     /// <seealso cref="KSP_To_Boldly_Go.Common.Converters.Serializer.IConverter" />
-    public abstract class TypeConverter<T> : JsonConverter, IConverter where T : IType
+    public abstract class TypeConverter<T> : JsonConverter, IConverter<T> where T : IType
     {
         #region Methods
 
@@ -54,6 +54,16 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
                 return FromStringToObject(value.ToString());
             }
             return default(T);
+        }
+
+        /// <summary>
+        /// To the object.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>T.</returns>
+        public T ToObject(string value)
+        {
+            return FromStringToObject(value);
         }
 
         /// <summary>

@@ -4,13 +4,14 @@
 // Created          : 01-23-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 01-24-2017
 // ***********************************************************************
 // <copyright file="RangeConverter.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using KSP_To_Boldly_Go.Common.Converters.Serializer;
 using KSP_To_Boldly_Go.Common.Types;
 using System;
 using System.ComponentModel;
@@ -72,9 +73,8 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
             }
             else if (value is string)
             {
-                var instance = Activator.CreateInstance<T>();
-                instance.SetValues(value.ToString());
-                return instance;
+                var converter = ConverterManager.GetConverterForType<T>();
+                return converter.ToObject(value.ToString());
             }
             return base.ConvertFrom(context, culture, value);
         }
@@ -108,9 +108,8 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
                 }
                 else if (value is string)
                 {
-                    var instance = Activator.CreateInstance<T>();
-                    instance.SetValues(value.ToString());
-                    return instance;
+                    var converter = ConverterManager.GetConverterForType<T>();
+                    return converter.ToObject(value.ToString());
                 }
             }
             return base.ConvertTo(context, culture, value, destinationType);

@@ -4,7 +4,7 @@
 // Created          : 01-23-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 01-24-2017
 // ***********************************************************************
 // <copyright file="RangeDouble.cs" company="">
 //     Copyright ©  2017
@@ -38,21 +38,11 @@ namespace KSP_To_Boldly_Go.Common.Types
         }
 
         /// <summary>
-        /// Parses the maximum.
+        /// Parses the value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Nullable&lt;T&gt;.</returns>
-        protected override double? ParseMax(string value)
-        {
-            return Convert.ToDouble(value);
-        }
-
-        /// <summary>
-        /// Parses the minimum.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>System.Nullable&lt;T&gt;.</returns>
-        protected override double? ParseMin(string value)
+        protected override double? ParseValue(string value)
         {
             return Convert.ToDouble(value);
         }

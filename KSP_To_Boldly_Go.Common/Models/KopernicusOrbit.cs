@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 01-24-2017
 // ***********************************************************************
 // <copyright file="KopernicusOrbit.cs" company="">
 //     Copyright ©  2017
@@ -41,7 +41,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the color.
         /// </summary>
         /// <value>The color.</value>
-        public Color color
+        public RangeColor color
         {
             get;
             set;
