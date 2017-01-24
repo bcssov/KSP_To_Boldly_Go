@@ -195,7 +195,7 @@ namespace KSP_To_Boldly_Go.Common.Serializers
                                 var converter = ConverterManager.GetConverterForType(propValue.GetType());
                                 if (converter != null)
                                 {
-                                    AppendLine(sb, tabIndent, "{0} = {1}", property.Name, converter.ToSerializedString(propValue, random));
+                                    AppendLine(sb, tabIndent, "{0} = {1}", property.Name, converter.ToString(propValue, random));
                                 }
                                 else
                                 {

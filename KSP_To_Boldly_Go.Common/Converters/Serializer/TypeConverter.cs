@@ -51,7 +51,7 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
             var value = reader.Value;
             if (value != null)
             {
-                return FromStringToObject(value.ToString());
+                return ToObject(value.ToString());
             }
             return default(T);
         }
@@ -63,30 +63,26 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
         /// <returns>T.</returns>
         public T ToObject(string value)
         {
-            return FromStringToObject(value);
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return default(T);
+            }
+            var instance = Activator.CreateInstance<T>();
+            instance.SetValues(value);
+            return instance;
         }
 
         /// <summary>
-        /// To the serialized string.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>System.String.</returns>
-        public string ToSerializedString(object value)
-        {
-            return ToSerializedString(value, null);
-        }
-
-        /// <summary>
-        /// To the serialized string.
+        /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="random">The random.</param>
-        /// <returns>System.String.</returns>
-        public string ToSerializedString(object value, Random random)
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public string ToString(object value, Random random)
         {
             if (value != null)
             {
-                return FromObjectToString((T)value, random);
+                return ((T)value).ToString(random);
             }
             return string.Empty;
         }
@@ -101,44 +97,8 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
         {
             if (value != null)
             {
-                writer.WriteValue(ToSerializedString(value));
+                writer.WriteValue(ToString(value, null));
             }
-        }
-
-        /// <summary>
-        /// Froms the object to string.
-        /// </summary>
-        /// <typeparam name="TRandom">The type of the t random.</typeparam>
-        /// <param name="value">The value.</param>
-        /// <param name="random">The random.</param>
-        /// <returns>System.String.</returns>
-        private string FromObjectToString<TRandom>(TRandom value, Random random) where TRandom : T
-        {
-            // If random is available this means that we are called from kopernicus serializer
-            if (random != null)
-            {
-                return value.ToString(random);
-            }
-            else
-            {
-                return value.ToString();
-            }
-        }
-
-        /// <summary>
-        /// Froms the string to object.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>T.</returns>
-        private T FromStringToObject(string value)
-        {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                return default(T);
-            }
-            var instance = Activator.CreateInstance<T>();
-            instance.SetValues(value);
-            return instance;
         }
 
         #endregion Methods

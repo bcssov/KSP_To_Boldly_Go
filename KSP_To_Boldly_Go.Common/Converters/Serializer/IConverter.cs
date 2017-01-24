@@ -39,12 +39,12 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
         T ToObject(string value);
 
         /// <summary>
-        /// To the serialized string.
+        /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="random">The random.</param>
-        /// <returns>System.String.</returns>
-        string ToSerializedString(object value, Random random);
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        string ToString(object value, Random random);
 
         #endregion Methods
     }
