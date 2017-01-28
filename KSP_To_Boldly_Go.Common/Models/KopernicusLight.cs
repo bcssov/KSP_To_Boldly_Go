@@ -162,7 +162,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <returns>System.String.</returns>
         protected override string GetObjectName()
         {
-            return "Ligh";
+            return "Light";
         }
 
         #endregion Methods
