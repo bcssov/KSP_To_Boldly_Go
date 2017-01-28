@@ -34,7 +34,7 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// <returns>T.</returns>
         protected override double GetRandomInRange(Random random)
         {
-            return random.NextDouble(Min.GetValueOrDefault(), Max.GetValueOrDefault());
+            return Math.Round(random.NextDouble(Min.GetValueOrDefault(), Max.GetValueOrDefault()), 2);
         }
 
         /// <summary>
