@@ -1,0 +1,1 @@
+call D:\Programs\Cygwin\bin\bash build.sh
