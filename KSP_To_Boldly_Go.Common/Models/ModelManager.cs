@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 04-01-2017
 // ***********************************************************************
 // <copyright file="ModelResolver.cs" company="">
 //     Copyright ©  2017
@@ -44,13 +44,13 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the type of the kopernicus object from.
         /// </summary>
         /// <param name="type">The type.</param>
-        /// <returns>System.Object.</returns>
-        public static object GetKopernicusObjectFromType(string type)
+        /// <returns>IKopernicusObject.</returns>
+        public static IKopernicusObject GetKopernicusObjectFromType(string type)
         {
             var className = string.Format("{0}.{1}", modelNamespace, type);
-            var instance = Activator.CreateInstance(Type.GetType(className));
-            ((IKopernicusObject)instance).ShowInternalProperties = true;
-            ((IKopernicusObject)instance).Type = type;
+            var instance = (IKopernicusObject)Activator.CreateInstance(Type.GetType(className));
+            instance.ShowInternalProperties = true;
+            instance.Type = type;
             return instance;
         }
 
@@ -58,8 +58,8 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets the kopernius object from json.
         /// </summary>
         /// <param name="jsonContent">Content of the json.</param>
-        /// <returns>System.Object.</returns>
-        public static object GetKoperniusObjectFromJson(string jsonContent)
+        /// <returns>IKopernicusObject.</returns>
+        public static IKopernicusObject GetKoperniusObjectFromJson(string jsonContent)
         {
             if (!string.IsNullOrWhiteSpace(jsonContent))
             {
@@ -67,8 +67,8 @@ namespace KSP_To_Boldly_Go.Common.Models
                 if (obj != null)
                 {
                     var className = string.Format("{0}.{1}", modelNamespace, obj.Type);
-                    var result = JsonConvert.DeserializeObject(jsonContent, Type.GetType(className));
-                    ((KopernicusObject)result).ShowInternalProperties = true;
+                    var result = (IKopernicusObject)JsonConvert.DeserializeObject(jsonContent, Type.GetType(className));
+                    result.ShowInternalProperties = true;
                     return result;
                 }
             }

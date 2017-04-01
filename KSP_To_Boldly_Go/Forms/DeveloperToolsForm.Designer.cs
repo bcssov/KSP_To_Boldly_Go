@@ -35,10 +35,15 @@
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getNextOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.validateConfigsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.serializeTestToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.serializeTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -65,7 +70,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(948, 24);
@@ -78,7 +84,7 @@
             this.newToolStripMenuItem,
             this.loadToolStripMenuItem,
             this.saveToolStripMenuItem,
-            this.serializeTestToolStripMenuItem,
+            this.toolStripSeparator1,
             this.closeToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -108,12 +114,54 @@
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.getNextOrderToolStripMenuItem,
+            this.validateConfigsToolStripMenuItem1,
+            this.toolStripSeparator2,
+            this.serializeTestToolStripMenuItem1});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // getNextOrderToolStripMenuItem
+            // 
+            this.getNextOrderToolStripMenuItem.Name = "getNextOrderToolStripMenuItem";
+            this.getNextOrderToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.getNextOrderToolStripMenuItem.Text = "Get Next Order";
+            this.getNextOrderToolStripMenuItem.Click += new System.EventHandler(this.getNextOrderToolStripMenuItem_Click);
+            // 
+            // validateConfigsToolStripMenuItem1
+            // 
+            this.validateConfigsToolStripMenuItem1.Name = "validateConfigsToolStripMenuItem1";
+            this.validateConfigsToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
+            this.validateConfigsToolStripMenuItem1.Text = "Validate Configs";
+            this.validateConfigsToolStripMenuItem1.Click += new System.EventHandler(this.validateConfigsToolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(157, 6);
+            // 
+            // serializeTestToolStripMenuItem1
+            // 
+            this.serializeTestToolStripMenuItem1.Name = "serializeTestToolStripMenuItem1";
+            this.serializeTestToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
+            this.serializeTestToolStripMenuItem1.Text = "Serialize Test";
+            this.serializeTestToolStripMenuItem1.Click += new System.EventHandler(this.serializeTestToolStripMenuItem1_Click);
             // 
             // openFileDialog1
             // 
@@ -124,13 +172,6 @@
             // 
             this.saveFileDialog1.Filter = "To Boldly Go Json Files|*.json";
             this.saveFileDialog1.Title = "Select where to save config file";
-            // 
-            // serializeTestToolStripMenuItem
-            // 
-            this.serializeTestToolStripMenuItem.Name = "serializeTestToolStripMenuItem";
-            this.serializeTestToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.serializeTestToolStripMenuItem.Text = "Serialize Test";
-            this.serializeTestToolStripMenuItem.Click += new System.EventHandler(this.serializeTestToolStripMenuItem_Click);
             // 
             // DeveloperToolsForm
             // 
@@ -160,6 +201,11 @@
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.ToolStripMenuItem serializeTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem validateConfigsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem serializeTestToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem getNextOrderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

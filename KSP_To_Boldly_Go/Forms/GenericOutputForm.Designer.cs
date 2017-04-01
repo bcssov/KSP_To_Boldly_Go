@@ -1,6 +1,6 @@
 ﻿namespace KSP_To_Boldly_Go.Forms
 {
-    partial class SerializationTestOutputForm
+    partial class GenericOutputForm
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +42,7 @@
             this.txtOutput.Size = new System.Drawing.Size(727, 502);
             this.txtOutput.TabIndex = 0;
             // 
-            // SerializationTestOutputForm
+            // GenericOutputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -51,8 +51,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "SerializationTestOutputForm";
-            this.Text = "Serialization Test Output";
+            this.Name = "GenericOutputForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 

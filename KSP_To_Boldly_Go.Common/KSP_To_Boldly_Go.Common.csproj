@@ -104,6 +104,9 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Serializers\KopernicusSerializer.cs" />
     <Compile Include="Types\Color.cs" />
+    <Compile Include="Validators\IValidator.cs" />
+    <Compile Include="Validators\OrderValidator.cs" />
+    <Compile Include="Validators\ValidatorManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

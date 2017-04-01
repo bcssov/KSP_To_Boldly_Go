@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-22-2017
+// Last Modified On : 04-01-2017
 // ***********************************************************************
 // <copyright file="DeveloperToolsForm.cs" company="">
 //     Copyright ©  2017
@@ -13,9 +13,12 @@
 // ***********************************************************************
 using KSP_To_Boldly_Go.Common.Models;
 using KSP_To_Boldly_Go.Common.Serializers;
+using KSP_To_Boldly_Go.Common.Validators;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -37,7 +40,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// <summary>
         /// The model
         /// </summary>
-        private object model = null;
+        private IKopernicusObject model = null;
 
         /// <summary>
         /// The path
@@ -74,6 +77,46 @@ namespace KSP_To_Boldly_Go.Forms
         }
 
         /// <summary>
+        /// Gets the kopernicus objects from directory.
+        /// </summary>
+        /// <returns>List&lt;IKopernicusObject&gt;.</returns>
+        private List<IKopernicusObject> GetKopernicusObjectsFromDirectory()
+        {
+            var files = Directory.EnumerateFileSystemEntries(Configuration.JsonConfigPath, "*.json", SearchOption.AllDirectories);
+            if (files != null && files.Count() > 0)
+            {
+                List<IKopernicusObject> kopernicusObjects = new List<IKopernicusObject>();
+                foreach (var file in files)
+                {
+                    var contents = File.ReadAllText(file);
+                    var kopernicusObject = ModelManager.GetKoperniusObjectFromJson(contents);
+                    kopernicusObject.FileName = file;
+                    kopernicusObjects.Add(kopernicusObject);
+                }
+                return kopernicusObjects;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Handles the Click event of the getNextOrderToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+        private void getNextOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<IKopernicusObject> kopernicusObjects = GetKopernicusObjectsFromDirectory();
+            if (kopernicusObjects != null && kopernicusObjects.Count > 0)
+            {
+                if (model != null)
+                {
+                    model.Order = kopernicusObjects.OrderByDescending(p => p.Order).First().Order + 1;
+                    pgData.Refresh();
+                }
+            }
+        }
+
+        /// <summary>
         /// Handles the Click event of the loadToolStripMenuItem control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -88,6 +131,7 @@ namespace KSP_To_Boldly_Go.Forms
                 model = ModelManager.GetKoperniusObjectFromJson(contents);
                 if (model != null)
                 {
+                    UpdateModelPath();
                     pgData.SelectedObject = model;
                     Text = string.Format("{0}: {1}", initialTitle, Path.GetFileName(path));
                 }
@@ -113,6 +157,7 @@ namespace KSP_To_Boldly_Go.Forms
                 model = instance;
                 Text = string.Format("{0}: {1}", initialTitle, form.SelectedType);
                 path = string.Empty;
+                UpdateModelPath();
             }
         }
 
@@ -131,6 +176,7 @@ namespace KSP_To_Boldly_Go.Forms
                     if (saveFileDialog1.ShowDialog(this) == DialogResult.OK)
                     {
                         path = saveFileDialog1.FileName;
+                        UpdateModelPath();
                         Text = string.Format("{0}: {1}", initialTitle, Path.GetFileName(path));
                         File.WriteAllText(path, JsonConvert.SerializeObject(model));
                     }
@@ -143,25 +189,46 @@ namespace KSP_To_Boldly_Go.Forms
         }
 
         /// <summary>
-        /// Handles the Click event of the serializeTestToolStripMenuItem control.
+        /// Handles the Click event of the serializeTestToolStripMenuItem1 control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void serializeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+        private void serializeTestToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (model != null)
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    // for test purposes we use year this project was started in :)
-                    var serializer = new KopernicusSerializer(2017);
-                    serializer.Serialize((IKopernicusObject)model, ms);
+                    var serializer = new KopernicusSerializer("To Boldly Go".GetHashCode());
+                    serializer.Serialize(model, ms);
                     var output = Encoding.ASCII.GetString(ms.ToArray());
-                    var form = new SerializationTestOutputForm(output);
+                    var form = new GenericOutputForm(string.Format("Serialization Test Output: {0}", path), output);
                     form.ShowDialog(this);
                     form.Dispose();
                 }
             }
+        }
+
+        /// <summary>
+        /// Updates the model path.
+        /// </summary>
+        private void UpdateModelPath()
+        {
+            model.FileName = path;
+        }
+
+        /// <summary>
+        /// Handles the Click event of the validateConfigsToolStripMenuItem1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+        private void validateConfigsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            List<IKopernicusObject> kopernicusObjects = GetKopernicusObjectsFromDirectory();
+            var validationResults = ValidatorManager.ValidateModels(kopernicusObjects);
+            var form = new GenericOutputForm(string.Format("Validation Results: {0}", Configuration.JsonConfigPath), string.Join(Environment.NewLine, validationResults));
+            form.ShowDialog(this);
+            form.Dispose();
         }
 
         #endregion Methods

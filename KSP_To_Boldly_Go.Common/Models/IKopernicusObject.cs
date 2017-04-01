@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-22-2017
+// Last Modified On : 04-01-2017
 // ***********************************************************************
 // <copyright file="IKopernicusObject.cs" company="">
 //     Copyright ©  2017
@@ -21,6 +21,12 @@ namespace KSP_To_Boldly_Go.Common.Models
     public interface IKopernicusObject
     {
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the name of the file.
+        /// </summary>
+        /// <value>The name of the file.</value>
+        string FileName { get; set; }
 
         /// <summary>
         /// Gets or sets the header.

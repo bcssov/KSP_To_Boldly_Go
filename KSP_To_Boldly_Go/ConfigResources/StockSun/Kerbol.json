@@ -3,12 +3,12 @@
     "cbNameLater": "Sun",
     "name": "Kerbol",
     "Orbit": {
-      "argumentOfPeriapsis": 125,
+      "argumentOfPeriapsis": "125",
       "color": "255,255,0,255",
-      "inclination": 124,
-      "mode": 0,
+      "inclination": "124",
+      "mode": "0",
       "referenceBody": "Sun",
-      "semiMajorAxis": 4386767840385437,
+      "semiMajorAxis": "4386767840385437",
       "Header": null
     },
     "PostSpawnOrbit": {
@@ -17,7 +17,7 @@
     "Properties": {
       "description": null,
       "radius": null,
-      "sphereOfInfluence": 220118820000,
+      "sphereOfInfluence": "220118820000",
       "Header": null
     },
     "ScaledVersion": {
@@ -26,24 +26,24 @@
         "ambientLightColor": "0,0,0,255",
         "givesOffLight": null,
         "IVASunColor": "255,255,255,255",
-        "IVASunIntensity": 0.75,
-        "luminosity": 1360,
+        "IVASunIntensity": "0.75",
+        "luminosity": "1360",
         "scaledSunlightColor": "255,255,255,255",
-        "scaledSunlightIntensity": 0.75,
+        "scaledSunlightIntensity": "0.75",
         "sunLensFlareColor": "0,0,0,0",
         "sunlightColor": "255,255,255,255",
-        "sunlightIntensity": 0.75,
-        "sunlightShadowStrength": 0.95,
+        "sunlightIntensity": "0.75",
+        "sunlightShadowStrength": "0.95",
         "Header": null
       },
       "Material": {
         "emitColor0": "255,247,212,255",
         "emitColor1": "255,227,184,1",
-        "Header": "",
         "inverseFade": null,
         "rimColor": "255,255,255,255",
         "sunspotColors": "0,0,0,0",
-        "texture": null
+        "texture": null,
+        "Header": ""
       },
       "Header": null
     },

@@ -3,7 +3,7 @@
   "name": null,
   "Orbit": {
     "argumentOfPeriapsis": null,
-    "color": "",
+    "color": null,
     "inclination": null,
     "mode": null,
     "referenceBody": null,
@@ -22,27 +22,27 @@
   "ScaledVersion": {
     "Coronas": [],
     "Light": {
-      "ambientLightColor": "",
+      "ambientLightColor": null,
       "givesOffLight": null,
-      "IVASunColor": "",
+      "IVASunColor": null,
       "IVASunIntensity": null,
       "luminosity": null,
-      "scaledSunlightColor": "",
+      "scaledSunlightColor": null,
       "scaledSunlightIntensity": null,
-      "sunLensFlareColor": "",
-      "sunlightColor": "",
+      "sunLensFlareColor": null,
+      "sunlightColor": null,
       "sunlightIntensity": null,
       "sunlightShadowStrength": null,
       "Header": null
     },
     "Material": {
-      "emitColor0": "",
-      "emitColor1": "",
-      "Header": "",
+      "emitColor0": null,
+      "emitColor1": null,
       "inverseFade": null,
-      "rimColor": "",
-      "sunspotColors": "",
-      "texture": null
+      "rimColor": null,
+      "sunspotColors": null,
+      "texture": null,
+      "Header": ""
     },
     "Header": null
   },
@@ -51,6 +51,6 @@
     "Header": null
   },
   "Header": "@Body[Dres]",
-  "$order": 0,
+  "$order": 3,
   "$objectType": "KopernicusBody"
 }
