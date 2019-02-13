@@ -4,19 +4,23 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-21-2017
+// Last Modified On : 02-14-2019
 // ***********************************************************************
 // <copyright file="Program.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Forms;
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using KSP_To_Boldly_Go.Forms;
+using SimpleInjector;
 
 namespace KSP_To_Boldly_Go
 {
@@ -31,7 +35,7 @@ namespace KSP_To_Boldly_Go
         /// Handles the ThreadException event of the Application control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="ThreadExceptionEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="ThreadExceptionEventArgs" /> instance containing the event data.</param>
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             Log.Error(e.Exception);
@@ -42,7 +46,7 @@ namespace KSP_To_Boldly_Go
         /// Handles the UnhandledException event of the CurrentDomain control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="UnhandledExceptionEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="UnhandledExceptionEventArgs" /> instance containing the event data.</param>
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             if (e.ExceptionObject is Exception)
@@ -53,6 +57,20 @@ namespace KSP_To_Boldly_Go
         }
 
         /// <summary>
+        /// Initializes the di container.
+        /// </summary>
+        private static void InitDIContainer()
+        {
+            var files = new DirectoryInfo(Application.StartupPath).GetFiles().ToList();
+            var assemblies = from file in files
+                             where file.Extension.ToLowerInvariant() == ".dll"
+                             select Assembly.Load(AssemblyName.GetAssemblyName(file.FullName));
+
+            var container = new Container();
+            container.RegisterPackages(assemblies);
+        }
+
+        /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
@@ -60,12 +78,16 @@ namespace KSP_To_Boldly_Go
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+
+            InitDIContainer();
+
             // Do not catch exceptions and log them if debugger is attached
             if (!Debugger.IsAttached)
             {
                 Application.ThreadException += Application_ThreadException;
                 AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            }            
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

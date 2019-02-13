@@ -37,6 +37,9 @@
     <Reference Include="SimpleInjector, Version=4.4.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleInjector.4.4.3\lib\net45\SimpleInjector.dll</HintPath>
     </Reference>
+    <Reference Include="SimpleInjector.Packaging, Version=4.4.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Packaging.4.4.3\lib\net40\SimpleInjector.Packaging.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -70,6 +73,7 @@
     <Compile Include="Converters\Serializer\TypeConverter.cs" />
     <Compile Include="Converters\Serializer\RangeDoubleConverter.cs" />
     <Compile Include="Converters\Serializer\RangeLongConverter.cs" />
+    <Compile Include="DIPackage.cs" />
     <Compile Include="Initialize.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Models\KopernicusInfo.cs" />
