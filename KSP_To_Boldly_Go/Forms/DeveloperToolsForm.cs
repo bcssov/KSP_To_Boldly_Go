@@ -4,23 +4,23 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 04-01-2017
+// Last Modified On : 02-23-2019
 // ***********************************************************************
 // <copyright file="DeveloperToolsForm.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Models;
-using KSP_To_Boldly_Go.Common.Serializers;
-using KSP_To_Boldly_Go.Common.Validators;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using KSP_To_Boldly_Go.Common.Models;
+using KSP_To_Boldly_Go.Common.Serializers;
+using KSP_To_Boldly_Go.Common.Validators;
+using Newtonsoft.Json;
 
 namespace KSP_To_Boldly_Go.Forms
 {
@@ -82,7 +82,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// <returns>List&lt;IKopernicusObject&gt;.</returns>
         private List<IKopernicusObject> GetKopernicusObjectsFromDirectory()
         {
-            var files = Directory.EnumerateFileSystemEntries(Configuration.JsonConfigPath, "*.json", SearchOption.AllDirectories);
+            var files = Directory.EnumerateFileSystemEntries(Configuration.JsonConfigPath, Constants.JSONExtension, SearchOption.AllDirectories);
             if (files != null && files.Count() > 0)
             {
                 List<IKopernicusObject> kopernicusObjects = new List<IKopernicusObject>();
@@ -199,10 +199,10 @@ namespace KSP_To_Boldly_Go.Forms
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    var serializer = new KopernicusSerializer("To Boldly Go".GetHashCode());
+                    var serializer = new KopernicusSerializer(Constants.SerializationHashCode.GetHashCode());
                     serializer.Serialize(model, ms);
                     var output = Encoding.ASCII.GetString(ms.ToArray());
-                    var form = new GenericOutputForm(string.Format("Serialization Test Output: {0}", path), output);
+                    var form = new GenericOutputForm(string.Format(Constants.SerializationFormTitle, path), output);
                     form.ShowDialog(this);
                     form.Dispose();
                 }
@@ -226,11 +226,45 @@ namespace KSP_To_Boldly_Go.Forms
         {
             List<IKopernicusObject> kopernicusObjects = GetKopernicusObjectsFromDirectory();
             var validationResults = ValidatorManager.ValidateModels(kopernicusObjects);
-            var form = new GenericOutputForm(string.Format("Validation Results: {0}", Configuration.JsonConfigPath), string.Join(Environment.NewLine, validationResults));
+            var form = new GenericOutputForm(string.Format(Constants.ValidationResults, Configuration.JsonConfigPath), string.Join(Environment.NewLine, validationResults));
             form.ShowDialog(this);
             form.Dispose();
         }
 
         #endregion Methods
+
+        #region Classes
+
+        /// <summary>
+        /// Class Constants.
+        /// </summary>
+        private class Constants
+        {
+            #region Fields
+
+            /// <summary>
+            /// The json extension
+            /// </summary>
+            public const string JSONExtension = "*.json";
+
+            /// <summary>
+            /// The serialization form title
+            /// </summary>
+            public const string SerializationFormTitle = "Serialization Test Output: {0}";
+
+            /// <summary>
+            /// The serialization hash code
+            /// </summary>
+            public const string SerializationHashCode = "To Boldly Go";
+
+            /// <summary>
+            /// The validation results
+            /// </summary>
+            public const string ValidationResults = "Validation Results: {0}";
+
+            #endregion Fields
+        }
+
+        #endregion Classes
     }
 }

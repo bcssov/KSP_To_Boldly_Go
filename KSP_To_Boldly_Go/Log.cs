@@ -4,15 +4,15 @@
 // Created          : 01-21-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-21-2017
+// Last Modified On : 02-14-2019
 // ***********************************************************************
 // <copyright file="Logger.cs" company="">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using NLog;
 using System;
+using NLog;
 
 namespace KSP_To_Boldly_Go
 {

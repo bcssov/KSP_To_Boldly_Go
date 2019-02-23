@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-14-2019
+// Last Modified On : 02-23-2019
 // ***********************************************************************
 // <copyright file="Program.cs" company="">
 //     Copyright ©  2017
@@ -39,7 +39,7 @@ namespace KSP_To_Boldly_Go
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             Log.Error(e.Exception);
-            MessageBox.Show("Unhandled error occurred", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(Constants.ErrorMessage, Constants.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         /// <summary>
@@ -52,18 +52,18 @@ namespace KSP_To_Boldly_Go
             if (e.ExceptionObject is Exception)
             {
                 Log.Error((Exception)e.ExceptionObject);
-                MessageBox.Show("Unhandled error occurred", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Constants.ErrorMessage, Constants.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         /// <summary>
-        /// Initializes the di container.
+        /// Initializes the di containers.
         /// </summary>
-        private static void InitDIContainer()
+        private static void InitDIContainers()
         {
             var files = new DirectoryInfo(Application.StartupPath).GetFiles().ToList();
             var assemblies = from file in files
-                             where file.Extension.ToLowerInvariant() == ".dll"
+                             where file.Extension.ToLowerInvariant() == Constants.DLLExtension
                              select Assembly.Load(AssemblyName.GetAssemblyName(file.FullName));
 
             var container = new Container();
@@ -76,10 +76,10 @@ namespace KSP_To_Boldly_Go
         [STAThread]
         private static void Main()
         {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(Constants.Culture);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Constants.Culture);
 
-            InitDIContainer();
+            InitDIContainers();
 
             // Do not catch exceptions and log them if debugger is attached
             if (!Debugger.IsAttached)
@@ -94,5 +94,39 @@ namespace KSP_To_Boldly_Go
         }
 
         #endregion Methods
+
+        #region Classes
+
+        /// <summary>
+        /// Class Constants.
+        /// </summary>
+        private class Constants
+        {
+            #region Fields
+
+            /// <summary>
+            /// The culture
+            /// </summary>
+            public const string Culture = "en-US";
+
+            /// <summary>
+            /// The DLL extension
+            /// </summary>
+            public const string DLLExtension = ".dll";
+
+            /// <summary>
+            /// The error message
+            /// </summary>
+            public const string ErrorMessage = "Unhandled error occurred";
+
+            /// <summary>
+            /// The error title
+            /// </summary>
+            public const string ErrorTitle = "Error";
+
+            #endregion Fields
+        }
+
+        #endregion Classes
     }
 }

@@ -11,10 +11,10 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System.ComponentModel;
 using KSP_To_Boldly_Go.Common.Converters.Object;
 using KSP_To_Boldly_Go.Common.Types;
 using System;
-using System.ComponentModel;
 
 namespace KSP_To_Boldly_Go.Common.Models
 {
@@ -25,15 +25,6 @@ namespace KSP_To_Boldly_Go.Common.Models
     [TypeConverter(typeof(SerializableExpandableObjectConverter))]
     public class KopernicusLight : KopernicusObject
     {
-        #region Fields
-
-        /// <summary>
-        /// The gives off light
-        /// </summary>
-        private bool? _givesOffLight = null;
-
-        #endregion Fields
-
         #region Properties
 
         /// <summary>
@@ -50,17 +41,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// Gets or sets a value indicating whether [gives off light].
         /// </summary>
         /// <value><c>true</c> if [gives off light]; otherwise, <c>false</c>.</value>
-        public bool? givesOffLight
-        {
-            get
-            {
-                return _givesOffLight;
-            }
-            set
-            {
-                _givesOffLight = value;
-            }
-        }
+        public bool? givesOffLight { get; set; } = null;
 
         /// <summary>
         /// Gets the color of the iva sun.

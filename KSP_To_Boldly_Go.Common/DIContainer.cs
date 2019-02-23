@@ -18,10 +18,10 @@ using SimpleInjector.Packaging;
 namespace KSP_To_Boldly_Go.Common
 {
     /// <summary>
-    /// Class DIPackage.
+    /// Class DIContainer.
     /// </summary>
     /// <seealso cref="SimpleInjector.Packaging.IPackage" />
-    public class DIPackage : IPackage
+    public class DIContainer : IPackage
     {
         #region Methods
 

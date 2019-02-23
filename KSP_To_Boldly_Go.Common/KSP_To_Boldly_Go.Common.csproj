@@ -73,7 +73,7 @@
     <Compile Include="Converters\Serializer\TypeConverter.cs" />
     <Compile Include="Converters\Serializer\RangeDoubleConverter.cs" />
     <Compile Include="Converters\Serializer\RangeLongConverter.cs" />
-    <Compile Include="DIPackage.cs" />
+    <Compile Include="DIContainer.cs" />
     <Compile Include="Initialize.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Models\KopernicusInfo.cs" />
