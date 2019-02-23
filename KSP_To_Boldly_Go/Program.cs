@@ -6,7 +6,7 @@
 // Last Modified By : Mario
 // Last Modified On : 02-23-2019
 // ***********************************************************************
-// <copyright file="Program.cs" company="">
+// <copyright file="Program.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -14,13 +14,10 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using KSP_To_Boldly_Go.DIConfig;
 using KSP_To_Boldly_Go.Forms;
-using SimpleInjector;
 
 namespace KSP_To_Boldly_Go
 {
@@ -38,8 +35,7 @@ namespace KSP_To_Boldly_Go
         /// <param name="e">The <see cref="ThreadExceptionEventArgs" /> instance containing the event data.</param>
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
-            Log.Error(e.Exception);
-            MessageBox.Show(Constants.ErrorMessage, Constants.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            LogError(e.Exception);
         }
 
         /// <summary>
@@ -51,36 +47,15 @@ namespace KSP_To_Boldly_Go
         {
             if (e.ExceptionObject is Exception)
             {
-                Log.Error((Exception)e.ExceptionObject);
-                MessageBox.Show(Constants.ErrorMessage, Constants.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogError((Exception)e.ExceptionObject);
             }
         }
 
         /// <summary>
-        /// Initializes the di containers.
+        /// Initializes the application configuration.
         /// </summary>
-        private static void InitDIContainers()
+        private static void InitAppConfig()
         {
-            var files = new DirectoryInfo(Application.StartupPath).GetFiles().ToList();
-            var assemblies = from file in files
-                             where file.Extension.ToLowerInvariant() == Constants.DLLExtension
-                             select Assembly.Load(AssemblyName.GetAssemblyName(file.FullName));
-
-            var container = new Container();
-            container.RegisterPackages(assemblies);
-        }
-
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        private static void Main()
-        {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(Constants.Culture);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Constants.Culture);
-
-            InitDIContainers();
-
             // Do not catch exceptions and log them if debugger is attached
             if (!Debugger.IsAttached)
             {
@@ -90,7 +65,72 @@ namespace KSP_To_Boldly_Go
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+        }
+
+        /// <summary>
+        /// Initializes the culture.
+        /// </summary>
+        private static void InitCulture()
+        {
+            var culture = new CultureInfo(Constants.Culture);
+
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+        }
+
+        /// <summary>
+        /// Initializes the di.
+        /// </summary>
+        private static void InitDI()
+        {
+            Bootstrap.Init(Application.StartupPath);
+
+            RegisterServices();
+
+            Bootstrap.Complete();
+        }
+
+        /// <summary>
+        /// Logs the error.
+        /// </summary>
+        /// <param name="e">The e.</param>
+        private static void LogError(Exception e)
+        {
+            if (e != null)
+            {
+                var log = DIResolver.Get<Log>();
+                log.Error(e);
+                MessageBox.Show(Constants.ErrorMessage, Constants.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        private static void Main()
+        {
+            InitCulture();
+
+            InitAppConfig();
+
+            InitDI();
+
+            Application.Run(DIResolver.Get<MainForm>());
+        }
+
+        /// <summary>
+        /// Registers the services.
+        /// </summary>
+        private static void RegisterServices()
+        {
+            var container = DIContainer.Container;
+            container.Register<MainForm>();
+            container.Register<DeveloperToolsForm>();
+            container.Register<GenericOutputForm>();
+            container.Register<NewObjectForm>();
+            container.Register<Configuration>();
+            container.Register<Log>();
         }
 
         #endregion Methods
@@ -108,11 +148,6 @@ namespace KSP_To_Boldly_Go
             /// The culture
             /// </summary>
             public const string Culture = "en-US";
-
-            /// <summary>
-            /// The DLL extension
-            /// </summary>
-            public const string DLLExtension = ".dll";
 
             /// <summary>
             /// The error message

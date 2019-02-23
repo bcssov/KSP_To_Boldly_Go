@@ -4,9 +4,9 @@
 // Created          : 01-21-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-14-2019
+// Last Modified On : 02-23-2019
 // ***********************************************************************
-// <copyright file="Logger.cs" company="">
+// <copyright file="Logger.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -36,7 +36,7 @@ namespace KSP_To_Boldly_Go
         /// Logs the error.
         /// </summary>
         /// <param name="ex">The ex.</param>
-        public static void Error(Exception ex)
+        public void Error(Exception ex)
         {
             if (ex != null)
             {
@@ -48,7 +48,7 @@ namespace KSP_To_Boldly_Go
         /// Logs the information.
         /// </summary>
         /// <param name="message">The message.</param>
-        public static void Info(string message)
+        public void Info(string message)
         {
             if (!string.IsNullOrEmpty(message))
             {

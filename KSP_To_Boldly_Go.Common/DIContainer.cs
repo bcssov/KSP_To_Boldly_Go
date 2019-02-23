@@ -12,7 +12,10 @@
 // <summary></summary>
 // ***********************************************************************
 using System;
-using SimpleInjector;
+using KSP_To_Boldly_Go.Common.Converters.Serializer;
+using KSP_To_Boldly_Go.Common.Models;
+using KSP_To_Boldly_Go.Common.Types;
+using KSP_To_Boldly_Go.Common.Validators;
 using SimpleInjector.Packaging;
 
 namespace KSP_To_Boldly_Go.Common
@@ -29,8 +32,15 @@ namespace KSP_To_Boldly_Go.Common
         /// Registers the set of services in the specified <paramref name="container" />.
         /// </summary>
         /// <param name="container">The container the set of services is registered into.</param>
-        public void RegisterServices(Container container)
+        public void RegisterServices(SimpleInjector.Container container)
         {
+            container.Collection.Register(typeof(IConverter<>));
+            container.Collection.Register(typeof(IKopernicusObject));
+            container.Collection.Register(typeof(IKopernicusRootObject));
+            container.Collection.Register(typeof(IRangeNumber<>));
+            container.Collection.Register(typeof(IRangeType<>));
+            container.Collection.Register(typeof(IType));
+            container.Collection.Register(typeof(IValidator));
         }
 
         #endregion Methods

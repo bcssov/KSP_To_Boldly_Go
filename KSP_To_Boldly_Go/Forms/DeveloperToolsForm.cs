@@ -6,7 +6,7 @@
 // Last Modified By : Mario
 // Last Modified On : 02-23-2019
 // ***********************************************************************
-// <copyright file="DeveloperToolsForm.cs" company="">
+// <copyright file="DeveloperToolsForm.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -20,6 +20,7 @@ using System.Windows.Forms;
 using KSP_To_Boldly_Go.Common.Models;
 using KSP_To_Boldly_Go.Common.Serializers;
 using KSP_To_Boldly_Go.Common.Validators;
+using KSP_To_Boldly_Go.DIConfig;
 using Newtonsoft.Json;
 
 namespace KSP_To_Boldly_Go.Forms
@@ -31,6 +32,11 @@ namespace KSP_To_Boldly_Go.Forms
     public partial class DeveloperToolsForm : Form
     {
         #region Fields
+
+        /// <summary>
+        /// The configuration
+        /// </summary>
+        private Configuration config;
 
         /// <summary>
         /// The initial title
@@ -54,9 +60,11 @@ namespace KSP_To_Boldly_Go.Forms
         /// <summary>
         /// Initializes a new instance of the <see cref="DeveloperToolsForm" /> class.
         /// </summary>
-        public DeveloperToolsForm()
+        /// <param name="config">The configuration.</param>
+        public DeveloperToolsForm(Configuration config)
         {
             InitializeComponent();
+            this.config = config;
             initialTitle = Text;
             pgData.PropertySort = PropertySort.Alphabetical;
         }
@@ -82,7 +90,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// <returns>List&lt;IKopernicusObject&gt;.</returns>
         private List<IKopernicusObject> GetKopernicusObjectsFromDirectory()
         {
-            var files = Directory.EnumerateFileSystemEntries(Configuration.JsonConfigPath, Constants.JSONExtension, SearchOption.AllDirectories);
+            var files = Directory.EnumerateFileSystemEntries(config.JsonConfigPath, Constants.JSONExtension, SearchOption.AllDirectories);
             if (files != null && files.Count() > 0)
             {
                 List<IKopernicusObject> kopernicusObjects = new List<IKopernicusObject>();
@@ -123,7 +131,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = Configuration.JsonConfigPath;
+            openFileDialog1.InitialDirectory = config.JsonConfigPath;
             if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
             {
                 path = openFileDialog1.FileName;
@@ -149,7 +157,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new NewObjectForm();
+            var form = DIResolver.Get<NewObjectForm>();
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var instance = ModelManager.GetKopernicusObjectFromType(form.SelectedType);
@@ -172,7 +180,7 @@ namespace KSP_To_Boldly_Go.Forms
             {
                 if (string.IsNullOrWhiteSpace(path))
                 {
-                    saveFileDialog1.InitialDirectory = Configuration.JsonConfigPath;
+                    saveFileDialog1.InitialDirectory = config.JsonConfigPath;
                     if (saveFileDialog1.ShowDialog(this) == DialogResult.OK)
                     {
                         path = saveFileDialog1.FileName;
@@ -202,7 +210,8 @@ namespace KSP_To_Boldly_Go.Forms
                     var serializer = new KopernicusSerializer(Constants.SerializationHashCode.GetHashCode());
                     serializer.Serialize(model, ms);
                     var output = Encoding.ASCII.GetString(ms.ToArray());
-                    var form = new GenericOutputForm(string.Format(Constants.SerializationFormTitle, path), output);
+                    var form = DIResolver.Get<GenericOutputForm>();
+                    form.SetContent(string.Format(Constants.SerializationFormTitle, path), output);
                     form.ShowDialog(this);
                     form.Dispose();
                 }
@@ -226,7 +235,8 @@ namespace KSP_To_Boldly_Go.Forms
         {
             List<IKopernicusObject> kopernicusObjects = GetKopernicusObjectsFromDirectory();
             var validationResults = ValidatorManager.ValidateModels(kopernicusObjects);
-            var form = new GenericOutputForm(string.Format(Constants.ValidationResults, Configuration.JsonConfigPath), string.Join(Environment.NewLine, validationResults));
+            var form = DIResolver.Get<GenericOutputForm>();
+            form.SetContent(string.Format(Constants.ValidationResults, config.JsonConfigPath), string.Join(Environment.NewLine, validationResults));
             form.ShowDialog(this);
             form.Dispose();
         }

@@ -6,7 +6,7 @@
 // Last Modified By : Mario
 // Last Modified On : 02-23-2019
 // ***********************************************************************
-// <copyright file="Configuration.cs" company="">
+// <copyright file="Configuration.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -20,7 +20,7 @@ namespace KSP_To_Boldly_Go
     /// <summary>
     /// Class Configuration.
     /// </summary>
-    public static class Configuration
+    public class Configuration
     {
         #region Properties
 
@@ -28,13 +28,13 @@ namespace KSP_To_Boldly_Go
         /// Gets a value indicating whether [dev mode].
         /// </summary>
         /// <value><c>true</c> if [dev mode]; otherwise, <c>false</c>.</value>
-        public static bool DevMode { get; } = Properties.Settings.Default.DeveloperMode;
+        public bool DevMode { get; } = Properties.Settings.Default.DeveloperMode;
 
         /// <summary>
         /// Gets the json configuration path.
         /// </summary>
         /// <value>The json configuration path.</value>
-        public static string JsonConfigPath { get; } = Path.Combine(Application.StartupPath, Constants.ConfigResources);
+        public string JsonConfigPath { get; } = Path.Combine(Application.StartupPath, Constants.ConfigResources);
 
         #endregion Properties
 
