@@ -4,9 +4,9 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-23-2019
+// Last Modified On : 02-24-2019
 // ***********************************************************************
-// <copyright file="KopernicusObject.cs" company="">
+// <copyright file="KopernicusObject.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -15,6 +15,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using KSP_To_Boldly_Go.Common.Extensions;
 using KSP_To_Boldly_Go.Common.Serializers;
@@ -46,6 +47,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="KopernicusObject" /> class.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "Design decision.")]
         public KopernicusObject()
         {
             Initialize();

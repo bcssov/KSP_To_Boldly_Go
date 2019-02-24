@@ -84,10 +84,14 @@ namespace KSP_To_Boldly_Go.Forms
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Justification = "Already checking if can dispose, code analysis is playing dumb!")]
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            Dispose();
+            if (this != null && !IsDisposed && !Disposing)
+            {
+                Dispose();
+            }
         }
 
         /// <summary>
