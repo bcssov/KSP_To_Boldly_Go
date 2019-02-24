@@ -30,23 +30,23 @@ namespace KSP_To_Boldly_Go.Forms
         private IConfiguration config;
 
         /// <summary>
-        /// The form opener
+        /// The form handler
         /// </summary>
-        private IFormsHandler formOpener;
+        private IFormHandler formHandler;
 
         #endregion Fields
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainForm" /> class.
+        /// Initializes a new instance of the <see cref="MainForm"/> class.
         /// </summary>
         /// <param name="config">The configuration.</param>
-        /// <param name="formOpener">The form opener.</param>
-        public MainForm(IConfiguration config, IFormsHandler formOpener)
+        /// <param name="formHandler">The form handler.</param>
+        public MainForm(IConfiguration config, IFormHandler formHandler)
         {
             this.config = config;
-            this.formOpener = formOpener;
+            this.formHandler = formHandler;
             InitializeComponent();
             Initialize();
         }
@@ -62,7 +62,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void btnDevMode_Click(object sender, EventArgs e)
         {
-            var form = formOpener.GetFormOrDefault<DeveloperToolsForm>();
+            var form = formHandler.GetFormOrDefault<DeveloperToolsForm>();
             if (!form.Visible || form.Disposing || form.IsDisposed)
             {
                 Hide();
@@ -78,7 +78,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="e">The <see cref="FormClosedEventArgs" /> instance containing the event data.</param>
         private void DeveloperForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            var form = formOpener.GetFormOrDefault<DeveloperToolsForm>();
+            var form = formHandler.GetFormOrDefault<DeveloperToolsForm>();
             Show();
             form.FormClosed -= DeveloperForm_FormClosed;
         }

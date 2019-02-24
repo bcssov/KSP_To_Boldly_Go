@@ -20,9 +20,9 @@ using System.Windows.Forms;
 namespace KSP_To_Boldly_Go.Forms
 {
     /// <summary>
-    /// Interface IFormsHandler
+    /// Interface IFormHandler
     /// </summary>
-    public interface IFormsHandler
+    public interface IFormHandler
     {
         #region Methods
 

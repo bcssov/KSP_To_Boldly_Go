@@ -23,10 +23,10 @@ using KSP_To_Boldly_Go.DependencyInjection;
 namespace KSP_To_Boldly_Go.Forms
 {
     /// <summary>
-    /// Class FormsHandler.
+    /// Class FormHandler.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go.Forms.IFormsHandler" />
-    public class FormsHandler : IFormsHandler
+    /// <seealso cref="KSP_To_Boldly_Go.Forms.IFormHandler" />
+    public class FormHandler : IFormHandler
     {
         #region Fields
 
@@ -40,9 +40,9 @@ namespace KSP_To_Boldly_Go.Forms
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FormsHandler"/> class.
+        /// Initializes a new instance of the <see cref="FormHandler"/> class.
         /// </summary>
-        public FormsHandler()
+        public FormHandler()
         {
             manager = new FormManager();
         }

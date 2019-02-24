@@ -116,7 +116,7 @@ namespace KSP_To_Boldly_Go
 
             InitDI();
 
-            var form = DIResolver.Get<IFormsHandler>().GetFormOrDefault<MainForm>();
+            var form = DIResolver.Get<IFormHandler>().GetFormOrDefault<MainForm>();
             Application.Run(form);
         }
 
@@ -128,17 +128,26 @@ namespace KSP_To_Boldly_Go
             var container = DIContainer.Container;
 
             #region Forms
+
             container.RegisterWithoutTransientWarning<MainForm>();
             container.RegisterWithoutTransientWarning<DeveloperToolsForm>();
             container.RegisterWithoutTransientWarning<GenericOutputForm>();
             container.RegisterWithoutTransientWarning<NewObjectForm>();
-            #endregion
+
+            #endregion Forms
+
+            #region Handlers
+
+            container.RegisterSingleton<IFormHandler, FormHandler>();
+
+            #endregion Handlers
 
             #region Services
-            container.RegisterSingleton<IFormsHandler, FormsHandler>();
+
             container.Register<IConfiguration, Configuration>();
-            container.Register<ILogger, Logger>(); 
-            #endregion
+            container.Register<ILogger, Logger>();
+
+            #endregion Services
         }
 
         #endregion Methods

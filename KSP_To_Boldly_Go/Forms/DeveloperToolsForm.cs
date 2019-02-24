@@ -38,9 +38,9 @@ namespace KSP_To_Boldly_Go.Forms
         private IConfiguration config;
 
         /// <summary>
-        /// The new object form
+        /// The form handler
         /// </summary>
-        private IFormsHandler formOpener;
+        private IFormHandler formHandler;
 
         /// <summary>
         /// The initial title
@@ -65,12 +65,12 @@ namespace KSP_To_Boldly_Go.Forms
         /// Initializes a new instance of the <see cref="DeveloperToolsForm"/> class.
         /// </summary>
         /// <param name="config">The configuration.</param>
-        /// <param name="formOpener">The form opener.</param>
-        public DeveloperToolsForm(IConfiguration config, IFormsHandler formOpener)
+        /// <param name="formHandler">The form handler.</param>
+        public DeveloperToolsForm(IConfiguration config, IFormHandler formHandler)
         {
             InitializeComponent();
             this.config = config;
-            this.formOpener = formOpener;
+            this.formHandler = formHandler;
             initialTitle = Text;
             pgData.PropertySort = PropertySort.Alphabetical;
         }
@@ -167,7 +167,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = formOpener.GetFormOrDefault<NewObjectForm>();
+            var form = formHandler.GetFormOrDefault<NewObjectForm>();
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var instance = ModelManager.GetKopernicusObjectFromType(form.SelectedType);
@@ -220,7 +220,7 @@ namespace KSP_To_Boldly_Go.Forms
                     var serializer = new KopernicusSerializer(Constants.SerializationHashCode.GetHashCode());
                     serializer.Serialize(model, ms);
                     var output = Encoding.ASCII.GetString(ms.ToArray());
-                    var form = formOpener.GetFormOrDefault<GenericOutputForm>();
+                    var form = formHandler.GetFormOrDefault<GenericOutputForm>();
                     form.SetContent(string.Format(Constants.SerializationFormTitle, path), output);
                     form.ShowDialog(this);
                     form.Dispose();
@@ -247,7 +247,7 @@ namespace KSP_To_Boldly_Go.Forms
             var validationResults = ValidatorManager.ValidateModels(kopernicusObjects);
             if (validationResults?.Count > 0)
             {
-                var form = formOpener.GetFormOrDefault<GenericOutputForm>();
+                var form = formHandler.GetFormOrDefault<GenericOutputForm>();
                 form.SetContent(string.Format(Constants.ValidationResults, config.JsonConfigPath), string.Join(Environment.NewLine, validationResults));
                 form.ShowDialog(this);
                 form.Dispose();

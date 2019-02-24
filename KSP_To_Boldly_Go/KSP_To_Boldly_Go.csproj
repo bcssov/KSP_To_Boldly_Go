@@ -85,8 +85,8 @@
     <Compile Include="Forms\DeveloperToolsForm.Designer.cs">
       <DependentUpon>DeveloperToolsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormsHandler.cs" />
-    <Compile Include="Forms\IFormsHandler.cs" />
+    <Compile Include="Forms\FormHandler.cs" />
+    <Compile Include="Forms\IFormHandler.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
