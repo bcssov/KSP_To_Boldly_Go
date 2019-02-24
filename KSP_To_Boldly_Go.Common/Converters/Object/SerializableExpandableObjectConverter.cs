@@ -4,9 +4,9 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 02-24-2019
 // ***********************************************************************
-// <copyright file="SerializableExpandableObjectConverter.cs" company="">
+// <copyright file="SerializableExpandableObjectConverter.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -32,11 +32,8 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
         /// <returns>true if this converter can perform the conversion; otherwise, false.</returns>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            if (sourceType == typeof(string))
-            {
-                return false;
-            }
-            return base.CanConvertFrom(context, sourceType);
+            // Ignore strings due to project nature
+            return sourceType == typeof(string) ? false : base.CanConvertFrom(context, sourceType);
         }
 
         /// <summary>
@@ -47,11 +44,8 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
         /// <returns>true if this converter can perform the conversion; otherwise, false.</returns>
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            if (destinationType == typeof(string))
-            {
-                return false;
-            }
-            return base.CanConvertTo(context, destinationType);
+            // Ignore strings due to project nature
+            return destinationType == typeof(string) ? false : base.CanConvertTo(context, destinationType);
         }
 
         #endregion Methods
