@@ -88,7 +88,7 @@ namespace KSP_To_Boldly_Go.Forms
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            if (this != null && !IsDisposed && !Disposing)
+            if (!IsDisposed && !Disposing)
             {
                 Dispose();
             }
