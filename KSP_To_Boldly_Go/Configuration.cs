@@ -20,7 +20,8 @@ namespace KSP_To_Boldly_Go
     /// <summary>
     /// Class Configuration.
     /// </summary>
-    public class Configuration
+    /// <seealso cref="KSP_To_Boldly_Go.IConfiguration" />
+    public class Configuration : IConfiguration
     {
         #region Properties
 

@@ -17,7 +17,7 @@ using SimpleInjector;
 /// <summary>
 /// The DIConfig namespace.
 /// </summary>
-namespace KSP_To_Boldly_Go.DIConfig
+namespace KSP_To_Boldly_Go.DependencyInjection
 {
     /// <summary>
     /// Class DIContainer.

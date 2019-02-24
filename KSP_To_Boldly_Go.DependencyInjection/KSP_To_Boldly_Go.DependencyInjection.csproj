@@ -7,8 +7,8 @@
     <ProjectGuid>{8B67A6DF-F1CE-46E0-9261-7E55130B41E8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KSP_To_Boldly_Go.DIConfig</RootNamespace>
-    <AssemblyName>KSP_To_Boldly_Go.DIConfig</AssemblyName>
+    <RootNamespace>KSP_To_Boldly_Go.DependencyInjection</RootNamespace>
+    <AssemblyName>KSP_To_Boldly_Go.DependencyInjection</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Bootstrap.cs" />
     <Compile Include="DIContainer.cs" />
+    <Compile Include="DIExtensions.cs" />
     <Compile Include="DIResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

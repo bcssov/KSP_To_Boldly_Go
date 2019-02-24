@@ -52,6 +52,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GenericOutputForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.ResumeLayout(false);
             this.PerformLayout();
 

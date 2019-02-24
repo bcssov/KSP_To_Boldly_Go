@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSP_To_Boldly_Go", "KSP_To_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSP_To_Boldly_Go.Common", "KSP_To_Boldly_Go.Common\KSP_To_Boldly_Go.Common.csproj", "{EB222025-6859-4AB3-A4FA-351642C63ADF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSP_To_Boldly_Go.DIConfig", "KSP_To_Boldly_Go.DIConfig\KSP_To_Boldly_Go.DIConfig.csproj", "{8B67A6DF-F1CE-46E0-9261-7E55130B41E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSP_To_Boldly_Go.DependencyInjection", "KSP_To_Boldly_Go.DependencyInjection\KSP_To_Boldly_Go.DependencyInjection.csproj", "{8B67A6DF-F1CE-46E0-9261-7E55130B41E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

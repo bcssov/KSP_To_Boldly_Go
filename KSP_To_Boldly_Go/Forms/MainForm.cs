@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-23-2019
+// Last Modified On : 02-24-2019
 // ***********************************************************************
 // <copyright file="MainForm.cs" company="Mario">
 //     Copyright ©  2017
@@ -13,7 +13,6 @@
 // ***********************************************************************
 using System;
 using System.Windows.Forms;
-using KSP_To_Boldly_Go.DIConfig;
 
 namespace KSP_To_Boldly_Go.Forms
 {
@@ -28,12 +27,12 @@ namespace KSP_To_Boldly_Go.Forms
         /// <summary>
         /// The configuration
         /// </summary>
-        private Configuration config;
+        private IConfiguration config;
 
         /// <summary>
-        /// The form
+        /// The form opener
         /// </summary>
-        private DeveloperToolsForm form;
+        private IFormsHandler formOpener;
 
         #endregion Fields
 
@@ -43,9 +42,11 @@ namespace KSP_To_Boldly_Go.Forms
         /// Initializes a new instance of the <see cref="MainForm" /> class.
         /// </summary>
         /// <param name="config">The configuration.</param>
-        public MainForm(Configuration config)
+        /// <param name="formOpener">The form opener.</param>
+        public MainForm(IConfiguration config, IFormsHandler formOpener)
         {
             this.config = config;
+            this.formOpener = formOpener;
             InitializeComponent();
             Initialize();
         }
@@ -61,10 +62,10 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void btnDevMode_Click(object sender, EventArgs e)
         {
-            if (form == null || form.IsDisposed || form.Disposing)
+            var form = formOpener.GetFormOrDefault<DeveloperToolsForm>();
+            if (!form.Visible || form.Disposing || form.IsDisposed)
             {
                 Hide();
-                form = DIResolver.Get<DeveloperToolsForm>();
                 form.FormClosed += DeveloperForm_FormClosed;
                 form.Show(this);
             }
@@ -77,6 +78,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="e">The <see cref="FormClosedEventArgs" /> instance containing the event data.</param>
         private void DeveloperForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            var form = formOpener.GetFormOrDefault<DeveloperToolsForm>();
             Show();
             form.FormClosed -= DeveloperForm_FormClosed;
         }

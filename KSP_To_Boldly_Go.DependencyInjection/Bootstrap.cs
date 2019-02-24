@@ -16,12 +16,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using SimpleInjector;
-using SimpleInjector.Lifestyles;
 
 /// <summary>
 /// The DIConfig namespace.
 /// </summary>
-namespace KSP_To_Boldly_Go.DIConfig
+namespace KSP_To_Boldly_Go.DependencyInjection
 {
     /// <summary>
     /// Class Bootstrap.
@@ -52,13 +51,6 @@ namespace KSP_To_Boldly_Go.DIConfig
         public static void Init(string path)
         {
             var container = new Container();
-
-            var threadScopedLifeStyle = new ThreadScopedLifestyle();
-            var hybridLifeStyle = Lifestyle.CreateHybrid(defaultLifestyle: threadScopedLifeStyle, fallbackLifestyle: Lifestyle.Transient);
-
-            container.Options.DefaultLifestyle = hybridLifeStyle;
-            container.Options.DefaultScopedLifestyle = threadScopedLifeStyle;
-
             DIContainer.Init(container, path);
         }
 

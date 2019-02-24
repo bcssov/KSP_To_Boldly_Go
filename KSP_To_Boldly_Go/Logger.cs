@@ -17,16 +17,17 @@ using NLog;
 namespace KSP_To_Boldly_Go
 {
     /// <summary>
-    /// Class Log.
+    /// Class Logger.
     /// </summary>
-    public class Log
+    /// <seealso cref="KSP_To_Boldly_Go.ILogger" />
+    public class Logger : ILogger
     {
         #region Fields
 
         /// <summary>
         /// The log
         /// </summary>
-        private static Logger log = LogManager.GetCurrentClassLogger();
+        private static NLog.Logger log = LogManager.GetCurrentClassLogger();
 
         #endregion Fields
 

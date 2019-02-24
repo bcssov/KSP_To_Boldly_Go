@@ -85,6 +85,8 @@
     <Compile Include="Forms\DeveloperToolsForm.Designer.cs">
       <DependentUpon>DeveloperToolsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormsHandler.cs" />
+    <Compile Include="Forms\IFormsHandler.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,7 +105,9 @@
     <Compile Include="Forms\GenericOutputForm.Designer.cs">
       <DependentUpon>GenericOutputForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Log.cs" />
+    <Compile Include="IConfiguration.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\DeveloperToolsForm.resx">
@@ -184,9 +188,9 @@
       <Project>{eb222025-6859-4ab3-a4fa-351642c63adf}</Project>
       <Name>KSP_To_Boldly_Go.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\KSP_To_Boldly_Go.DIConfig\KSP_To_Boldly_Go.DIConfig.csproj">
+    <ProjectReference Include="..\KSP_To_Boldly_Go.DependencyInjection\KSP_To_Boldly_Go.DependencyInjection.csproj">
       <Project>{8b67a6df-f1ce-46e0-9261-7e55130b41e8}</Project>
-      <Name>KSP_To_Boldly_Go.DIConfig</Name>
+      <Name>KSP_To_Boldly_Go.DependencyInjection</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

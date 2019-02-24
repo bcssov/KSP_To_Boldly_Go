@@ -16,7 +16,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
-using KSP_To_Boldly_Go.DIConfig;
+using KSP_To_Boldly_Go.DependencyInjection;
 using KSP_To_Boldly_Go.Forms;
 
 namespace KSP_To_Boldly_Go
@@ -98,7 +98,7 @@ namespace KSP_To_Boldly_Go
         {
             if (e != null)
             {
-                var log = DIResolver.Get<Log>();
+                var log = DIResolver.Get<ILogger>();
                 log.Error(e);
                 MessageBox.Show(Constants.ErrorMessage, Constants.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -116,7 +116,8 @@ namespace KSP_To_Boldly_Go
 
             InitDI();
 
-            Application.Run(DIResolver.Get<MainForm>());
+            var form = DIResolver.Get<IFormsHandler>().GetFormOrDefault<MainForm>();
+            Application.Run(form);
         }
 
         /// <summary>
@@ -125,12 +126,19 @@ namespace KSP_To_Boldly_Go
         private static void RegisterServices()
         {
             var container = DIContainer.Container;
-            container.Register<MainForm>();
-            container.Register<DeveloperToolsForm>();
-            container.Register<GenericOutputForm>();
-            container.Register<NewObjectForm>();
-            container.Register<Configuration>();
-            container.Register<Log>();
+
+            #region Forms
+            container.RegisterWithoutTransientWarning<MainForm>();
+            container.RegisterWithoutTransientWarning<DeveloperToolsForm>();
+            container.RegisterWithoutTransientWarning<GenericOutputForm>();
+            container.RegisterWithoutTransientWarning<NewObjectForm>();
+            #endregion
+
+            #region Services
+            container.RegisterSingleton<IFormsHandler, FormsHandler>();
+            container.Register<IConfiguration, Configuration>();
+            container.Register<ILogger, Logger>(); 
+            #endregion
         }
 
         #endregion Methods

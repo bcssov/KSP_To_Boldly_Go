@@ -126,9 +126,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KSP_To_Boldly_Go.DIConfig\KSP_To_Boldly_Go.DIConfig.csproj">
+    <ProjectReference Include="..\KSP_To_Boldly_Go.DependencyInjection\KSP_To_Boldly_Go.DependencyInjection.csproj">
       <Project>{8b67a6df-f1ce-46e0-9261-7e55130b41e8}</Project>
-      <Name>KSP_To_Boldly_Go.DIConfig</Name>
+      <Name>KSP_To_Boldly_Go.DependencyInjection</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

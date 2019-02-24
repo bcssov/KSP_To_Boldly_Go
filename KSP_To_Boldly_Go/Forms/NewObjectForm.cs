@@ -4,17 +4,17 @@
 // Created          : 01-22-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-22-2017
+// Last Modified On : 02-23-2019
 // ***********************************************************************
-// <copyright file="NewObjectForm.cs" company="">
+// <copyright file="NewObjectForm.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using KSP_To_Boldly_Go.Common.Models;
 
 namespace KSP_To_Boldly_Go.Forms
 {
@@ -63,7 +63,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// Handles the SelectedIndexChanged event of the cbList control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void cbList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbList.SelectedValue != null)

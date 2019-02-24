@@ -14,9 +14,9 @@
 using System;
 
 /// <summary>
-/// The DIConfig namespace.
+/// The DependencyInjection namespace.
 /// </summary>
-namespace KSP_To_Boldly_Go.DIConfig
+namespace KSP_To_Boldly_Go.DependencyInjection
 {
     /// <summary>
     /// Class DIResolver.
