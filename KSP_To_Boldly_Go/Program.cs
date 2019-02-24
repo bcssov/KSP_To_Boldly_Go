@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-23-2019
+// Last Modified On : 02-24-2019
 // ***********************************************************************
 // <copyright file="Program.cs" company="Mario">
 //     Copyright ©  2017
@@ -19,6 +19,9 @@ using System.Windows.Forms;
 using KSP_To_Boldly_Go.DependencyInjection;
 using KSP_To_Boldly_Go.Forms;
 
+/// <summary>
+/// The KSP_To_Boldly_Go namespace.
+/// </summary>
 namespace KSP_To_Boldly_Go
 {
     /// <summary>
@@ -142,12 +145,12 @@ namespace KSP_To_Boldly_Go
 
             #endregion Handlers
 
-            #region Services
+            #region Program Management
 
             container.Register<IConfiguration, Configuration>();
             container.Register<ILogger, Logger>();
 
-            #endregion Services
+            #endregion Program Management
         }
 
         #endregion Methods

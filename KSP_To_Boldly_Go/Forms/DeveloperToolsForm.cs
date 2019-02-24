@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-23-2019
+// Last Modified On : 02-24-2019
 // ***********************************************************************
 // <copyright file="DeveloperToolsForm.cs" company="Mario">
 //     Copyright ©  2017
@@ -57,20 +57,27 @@ namespace KSP_To_Boldly_Go.Forms
         /// </summary>
         private string path = string.Empty;
 
+        /// <summary>
+        /// The serializer
+        /// </summary>
+        private IKopernicusSerializer serializer;
+
         #endregion Fields
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DeveloperToolsForm"/> class.
+        /// Initializes a new instance of the <see cref="DeveloperToolsForm" /> class.
         /// </summary>
         /// <param name="config">The configuration.</param>
         /// <param name="formHandler">The form handler.</param>
-        public DeveloperToolsForm(IConfiguration config, IFormHandler formHandler)
+        /// <param name="serializer">The serializer.</param>
+        public DeveloperToolsForm(IConfiguration config, IFormHandler formHandler, IKopernicusSerializer serializer)
         {
             InitializeComponent();
             this.config = config;
             this.formHandler = formHandler;
+            this.serializer = serializer;
             initialTitle = Text;
             pgData.PropertySort = PropertySort.Alphabetical;
         }
@@ -217,7 +224,7 @@ namespace KSP_To_Boldly_Go.Forms
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    var serializer = new KopernicusSerializer(Constants.SerializationHashCode.GetHashCode());
+                    serializer.Seed = Constants.SerializationHashCode.GetHashCode();
                     serializer.Serialize(model, ms);
                     var output = Encoding.ASCII.GetString(ms.ToArray());
                     var form = formHandler.GetFormOrDefault<GenericOutputForm>();

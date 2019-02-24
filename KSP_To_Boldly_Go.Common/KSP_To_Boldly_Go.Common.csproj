@@ -69,8 +69,9 @@
     <Compile Include="Converters\Object\RangeLongConverter.cs" />
     <Compile Include="Converters\Serializer\ColorConverter.cs" />
     <Compile Include="Converters\Object\ColorConverter.cs" />
-    <Compile Include="Converters\Serializer\ConverterManager.cs" />
+    <Compile Include="Converters\Serializer\ConverterHandler.cs" />
     <Compile Include="Converters\Serializer\IConverter.cs" />
+    <Compile Include="Converters\Serializer\IConverterHandler.cs" />
     <Compile Include="Converters\Serializer\RangeColorConverter.cs" />
     <Compile Include="Converters\Serializer\RangeDecimalConverter.cs" />
     <Compile Include="Converters\Serializer\RangeFloatConverter.cs" />
@@ -80,9 +81,12 @@
     <Compile Include="Converters\Serializer\RangeDoubleConverter.cs" />
     <Compile Include="Converters\Serializer\RangeLongConverter.cs" />
     <Compile Include="DIContainer.cs" />
-    <Compile Include="Initialize.cs" />
+    <Compile Include="IJsonSerializerSettings.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
+    <Compile Include="JsonSerializerSettings.cs" />
     <Compile Include="Models\KopernicusInfo.cs" />
+    <Compile Include="Serializers\IKopernicusSerializer.cs" />
+    <Compile Include="Serializers\KopernicusSerializer.cs" />
     <Compile Include="Types\IRangeType.cs" />
     <Compile Include="Types\IType.cs" />
     <Compile Include="Types\IRangeNumber.cs" />
@@ -115,7 +119,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Converters\Object\SerializableExpandableObjectConverter.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
-    <Compile Include="Serializers\KopernicusSerializer.cs" />
     <Compile Include="Types\Color.cs" />
     <Compile Include="Validators\IValidator.cs" />
     <Compile Include="Validators\OrderValidator.cs" />

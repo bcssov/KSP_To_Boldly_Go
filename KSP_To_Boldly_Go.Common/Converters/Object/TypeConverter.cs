@@ -17,8 +17,6 @@ using System.Globalization;
 using KSP_To_Boldly_Go.Common.Converters.Serializer;
 using KSP_To_Boldly_Go.Common.Types;
 
-using System;
-
 namespace KSP_To_Boldly_Go.Common.Converters.Object
 {
     /// <summary>
@@ -114,7 +112,8 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
         /// <returns>System.Object.</returns>
         private object ConvertObjectToString(object value)
         {
-            var converter = ConverterManager.GetConverterForType<T>();
+            var handler = DependencyInjection.DIContainer.Container.GetInstance<IConverterHandler>();
+            var converter = handler.CreateConverter<T>();
             return converter.ToString(value, null);
         }
 
@@ -125,7 +124,8 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
         /// <returns>System.Object.</returns>
         private object ConvertStringToObject(object value)
         {
-            var converter = ConverterManager.GetConverterForType<T>();
+            var handler = DependencyInjection.DIContainer.Container.GetInstance<IConverterHandler>();
+            var converter = handler.CreateConverter<T>();
             return converter.ToObject(value.ToString());
         }
 

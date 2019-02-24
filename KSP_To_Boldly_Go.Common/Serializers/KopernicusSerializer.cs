@@ -4,31 +4,40 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 02-24-2019
 // ***********************************************************************
-// <copyright file="KSPSerializer.cs" company="">
+// <copyright file="KopernicusSerializer.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Converters.Serializer;
-using KSP_To_Boldly_Go.Common.Extensions;
-using KSP_To_Boldly_Go.Common.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using KSP_To_Boldly_Go.Common.Converters.Serializer;
+using KSP_To_Boldly_Go.Common.Extensions;
+using KSP_To_Boldly_Go.Common.Models;
 
+/// <summary>
+/// The Serializers namespace.
+/// </summary>
 namespace KSP_To_Boldly_Go.Common.Serializers
 {
     /// <summary>
     /// Class KopernicusSerializer.
     /// </summary>
-    public class KopernicusSerializer
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Serializers.IKopernicusSerializer" />
+    public class KopernicusSerializer : IKopernicusSerializer
     {
         #region Fields
+
+        /// <summary>
+        /// The seed
+        /// </summary>
+        private int _seed;
 
         /// <summary>
         /// The random
@@ -42,13 +51,43 @@ namespace KSP_To_Boldly_Go.Common.Serializers
         /// <summary>
         /// Initializes a new instance of the <see cref="KopernicusSerializer" /> class.
         /// </summary>
-        /// <param name="seed">The seed.</param>
-        public KopernicusSerializer(int seed)
+        /// <param name="converterHandler">The converter handler.</param>
+        public KopernicusSerializer(IConverterHandler converterHandler)
         {
-            random = new Random(seed);
+            ConverterHandler = converterHandler;
         }
 
         #endregion Constructors
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the seed.
+        /// </summary>
+        /// <value>The seed.</value>
+        public int Seed
+        {
+            get
+            {
+                return _seed;
+            }
+            set
+            {
+                if (value != _seed)
+                {
+                    random = new Random(_seed);
+                }
+                _seed = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the converter handler.
+        /// </summary>
+        /// <value>The converter handler.</value>
+        protected IConverterHandler ConverterHandler { get; set; }
+
+        #endregion Properties
 
         #region Methods
 
@@ -199,7 +238,7 @@ namespace KSP_To_Boldly_Go.Common.Serializers
                             {
                                 var sb = new StringBuilder();
                                 // Check if any converter can convert this type, if not assume some "simple" value
-                                var converter = ConverterManager.GetConverterForType(propValue.GetType());
+                                var converter = ConverterHandler.CreateConverter(propValue.GetType());
                                 if (converter != null)
                                 {
                                     AppendLine(sb, tabIndent, "{0} = {1}", property.Name, converter.ToString(propValue, random));

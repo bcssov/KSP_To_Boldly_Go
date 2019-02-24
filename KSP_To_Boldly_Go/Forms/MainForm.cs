@@ -13,6 +13,8 @@
 // ***********************************************************************
 using System;
 using System.Windows.Forms;
+using KSP_To_Boldly_Go.Common;
+using Newtonsoft.Json;
 
 namespace KSP_To_Boldly_Go.Forms
 {
@@ -34,19 +36,26 @@ namespace KSP_To_Boldly_Go.Forms
         /// </summary>
         private IFormHandler formHandler;
 
+        /// <summary>
+        /// The json settings
+        /// </summary>
+        private IJsonSerializerSettings jsonSettings;
+
         #endregion Fields
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainForm"/> class.
+        /// Initializes a new instance of the <see cref="MainForm" /> class.
         /// </summary>
         /// <param name="config">The configuration.</param>
         /// <param name="formHandler">The form handler.</param>
-        public MainForm(IConfiguration config, IFormHandler formHandler)
+        /// <param name="jsonSettings">The json settings.</param>
+        public MainForm(IConfiguration config, IFormHandler formHandler, IJsonSerializerSettings jsonSettings)
         {
             this.config = config;
             this.formHandler = formHandler;
+            this.jsonSettings = jsonSettings;
             InitializeComponent();
             Initialize();
         }
@@ -89,7 +98,7 @@ namespace KSP_To_Boldly_Go.Forms
         private void Initialize()
         {
             btnDevMode.Visible = config.DevMode;
-            Common.Startup.Initialize();
+            JsonConvert.DefaultSettings = () => { return jsonSettings.GetSettings(); };
         }
 
         /// <summary>

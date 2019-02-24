@@ -11,9 +11,9 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System;
 using KSP_To_Boldly_Go.Common.Types;
 using Newtonsoft.Json;
-using System;
 
 namespace KSP_To_Boldly_Go.Common.Converters.Serializer
 {
@@ -25,6 +25,16 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
     /// <seealso cref="KSP_To_Boldly_Go.Common.Converters.Serializer.IConverter" />
     public abstract class TypeConverter<T> : JsonConverter, IConverter<T> where T : IType
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets a value indicating whether this instance can convert json.
+        /// </summary>
+        /// <value><c>true</c> if this instance can convert json; otherwise, <c>false</c>.</value>
+        public abstract bool CanConvertJson { get; }
+
+        #endregion Properties
+
         #region Methods
 
         /// <summary>
