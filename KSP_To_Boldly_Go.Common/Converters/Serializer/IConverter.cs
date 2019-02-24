@@ -4,9 +4,9 @@
 // Created          : 01-23-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-24-2017
+// Last Modified On : 02-24-2019
 // ***********************************************************************
-// <copyright file="IConverter.cs" company="">
+// <copyright file="IConverter.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>

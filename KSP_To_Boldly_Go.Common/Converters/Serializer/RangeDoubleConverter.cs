@@ -4,7 +4,7 @@
 // Created          : 01-23-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-14-2019
+// Last Modified On : 02-24-2019
 // ***********************************************************************
 // <copyright file="RangeDoubleConverter.cs" company="Mario">
 //     Copyright ©  2017
@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 using KSP_To_Boldly_Go.Common.Types;
+using Newtonsoft.Json;
 using System;
 
 namespace KSP_To_Boldly_Go.Common.Converters.Serializer
@@ -28,7 +29,10 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
         /// Gets a value indicating whether this instance can convert json.
         /// </summary>
         /// <value><c>true</c> if this instance can convert json; otherwise, <c>false</c>.</value>
-        public override bool CanConvertJson => true;
+        public override bool CanConvertJson
+        {
+            get { return this is JsonConverter; }
+        }
 
         #endregion Properties
     }

@@ -37,28 +37,28 @@ namespace KSP_To_Boldly_Go.Common
         {
             #region Converters
 
-            container.Collection.Register(typeof(IConverter<>));
+            container.Collection.Register(typeof(IConverter<>), typeof(IConverter<>).Assembly);
 
             #endregion Converters
 
             #region Models
 
-            container.Collection.Register(typeof(IKopernicusObject));
-            container.Collection.Register(typeof(IKopernicusRootObject));
+            container.Collection.Register(typeof(IKopernicusObject), typeof(IKopernicusObject).Assembly);
+            container.Collection.Register(typeof(IKopernicusRootObject), typeof(IKopernicusRootObject).Assembly);
 
             #endregion Models
 
             #region Types
 
-            container.Collection.Register(typeof(IRangeNumber<>));
-            container.Collection.Register(typeof(IRangeType<>));
-            container.Collection.Register(typeof(IType));
+            container.Collection.Register(typeof(IRangeNumber<>), typeof(IRangeNumber<>).Assembly);
+            container.Collection.Register(typeof(IRangeType<>), typeof(IRangeType<>).Assembly);
+            container.Collection.Register(typeof(IType), typeof(IType).Assembly);
 
             #endregion Types
 
             #region Validators
 
-            container.Collection.Register(typeof(IValidator));
+            container.Collection.Register(typeof(IValidator), typeof(IValidator).Assembly);
 
             #endregion Validators
 
