@@ -88,6 +88,7 @@
     <Compile Include="Types\IRangeType.cs" />
     <Compile Include="Types\IType.cs" />
     <Compile Include="Types\IRangeNumber.cs" />
+    <Compile Include="Types\ITypeHandler.cs" />
     <Compile Include="Types\RangeColor.cs" />
     <Compile Include="Types\RangeDecimal.cs" />
     <Compile Include="Types\RangeDouble.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Types\RangeLong.cs" />
     <Compile Include="Types\RangeShort.cs" />
     <Compile Include="Types\RangeType.cs" />
+    <Compile Include="Types\TypeHandler.cs" />
     <Compile Include="UI\CollectionEditor.cs" />
     <Compile Include="Models\IKopernicusRootObject.cs" />
     <Compile Include="Models\KopernicusCorona.cs" />

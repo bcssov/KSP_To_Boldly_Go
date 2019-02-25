@@ -4,9 +4,9 @@
 // Created          : 01-23-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 02-25-2019
 // ***********************************************************************
-// <copyright file="RangeConverter.cs" company="">
+// <copyright file="RangeConverter.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -21,6 +21,7 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
     /// Class TypeConverter.
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Converters.Serializer.IConverter{T}" />
     /// <seealso cref="Newtonsoft.Json.JsonConverter" />
     /// <seealso cref="KSP_To_Boldly_Go.Common.Converters.Serializer.IConverter" />
     public abstract class TypeConverter<T> : JsonConverter, IConverter<T> where T : IType
@@ -77,7 +78,7 @@ namespace KSP_To_Boldly_Go.Common.Converters.Serializer
             {
                 return default(T);
             }
-            var instance = Activator.CreateInstance<T>();
+            var instance = (T)DependencyInjection.DIContainer.Container.GetInstance(typeof(T));
             if (instance.Parse(value))
             {
                 return instance;

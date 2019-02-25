@@ -14,6 +14,7 @@
 using System;
 using KSP_To_Boldly_Go.Common.Converters.Serializer;
 using KSP_To_Boldly_Go.Common.Models;
+using KSP_To_Boldly_Go.Common.Types;
 
 namespace KSP_To_Boldly_Go.Common
 {
@@ -36,6 +37,12 @@ namespace KSP_To_Boldly_Go.Common
         /// </summary>
         /// <returns>IModelHandler.</returns>
         public IModelHandler CreateModelHandler() => DependencyInjection.DIContainer.Container.GetInstance<IModelHandler>();
+
+        /// <summary>
+        /// Creates the type handler.
+        /// </summary>
+        /// <returns>ITypeHandler.</returns>
+        public ITypeHandler CreateTypeHandler() => DependencyInjection.DIContainer.Container.GetInstance<ITypeHandler>();
 
         #endregion Methods
     }

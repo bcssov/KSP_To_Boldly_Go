@@ -76,6 +76,7 @@ namespace KSP_To_Boldly_Go.Common
 
             container.RegisterSingleton<IConverterHandler, ConverterHandler>();
             container.RegisterSingleton<IModelHandler, ModelHandler>();
+            container.RegisterSingleton<ITypeHandler, TypeHandler>();
 
             #endregion Handlers
 
