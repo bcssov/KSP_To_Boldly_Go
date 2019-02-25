@@ -4,17 +4,19 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-24-2017
+// Last Modified On : 02-25-2019
 // ***********************************************************************
-// <copyright file="KopernicusLight.cs" company="">
+// <copyright file="KopernicusLight.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 using System.ComponentModel;
+using System.Drawing.Design;
 using KSP_To_Boldly_Go.Common.Converters.Object;
 using KSP_To_Boldly_Go.Common.Types;
 using System;
+using KSP_To_Boldly_Go.Common.UI;
 
 namespace KSP_To_Boldly_Go.Common.Models
 {
@@ -28,9 +30,10 @@ namespace KSP_To_Boldly_Go.Common.Models
         #region Properties
 
         /// <summary>
-        /// Gets the color of the ambient light.
+        /// Gets or sets the color of the ambient light.
         /// </summary>
         /// <value>The color of the ambient light.</value>
+        [Editor(typeof(RangeColorEditor), typeof(UITypeEditor))]
         public RangeColor ambientLightColor
         {
             get;
@@ -44,9 +47,10 @@ namespace KSP_To_Boldly_Go.Common.Models
         public bool? givesOffLight { get; set; } = null;
 
         /// <summary>
-        /// Gets the color of the iva sun.
+        /// Gets or sets the color of the iva sun.
         /// </summary>
         /// <value>The color of the iva sun.</value>
+        [Editor(typeof(RangeColorEditor), typeof(UITypeEditor))]
         public RangeColor IVASunColor
         {
             get;
@@ -74,9 +78,10 @@ namespace KSP_To_Boldly_Go.Common.Models
         }
 
         /// <summary>
-        /// Gets the color of the scaled sunlight.
+        /// Gets or sets the color of the scaled sunlight.
         /// </summary>
         /// <value>The color of the scaled sunlight.</value>
+        [Editor(typeof(RangeColorEditor), typeof(UITypeEditor))]
         public RangeColor scaledSunlightColor
         {
             get;
@@ -94,9 +99,10 @@ namespace KSP_To_Boldly_Go.Common.Models
         }
 
         /// <summary>
-        /// Gets the color of the sun lens flare.
+        /// Gets or sets the color of the sun lens flare.
         /// </summary>
         /// <value>The color of the sun lens flare.</value>
+        [Editor(typeof(RangeColorEditor), typeof(UITypeEditor))]
         public RangeColor sunLensFlareColor
         {
             get;
@@ -104,9 +110,10 @@ namespace KSP_To_Boldly_Go.Common.Models
         }
 
         /// <summary>
-        /// Gets the color of the sunlight.
+        /// Gets or sets the color of the sunlight.
         /// </summary>
         /// <value>The color of the sunlight.</value>
+        [Editor(typeof(RangeColorEditor), typeof(UITypeEditor))]
         public RangeColor sunlightColor
         {
             get;

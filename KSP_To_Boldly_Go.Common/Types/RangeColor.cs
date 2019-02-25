@@ -4,9 +4,9 @@
 // Created          : 01-24-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-24-2017
+// Last Modified On : 02-25-2019
 // ***********************************************************************
-// <copyright file="RangeColor.cs" company="">
+// <copyright file="RangeColor.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -54,10 +54,19 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// Validates the maximum.
         /// </summary>
         /// <param name="newValue">The new value.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Min value was not selected.
+        /// or
+        /// </exception>
         /// <exception cref="System.ArgumentOutOfRangeException"></exception>
         protected override void ValidateMax(Color newValue)
         {
             List<string> errors = new List<string>();
+
+            if (Min == null)
+            {
+                throw new ArgumentOutOfRangeException("Min value was not selected.");
+            }
 
             if (newValue.A.GetValueOrDefault() < Min.A.GetValueOrDefault())
             {
@@ -85,6 +94,7 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// Validates the minimum.
         /// </summary>
         /// <param name="newValue">The new value.</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="System.ArgumentOutOfRangeException"></exception>
         protected override void ValidateMin(Color newValue)
         {

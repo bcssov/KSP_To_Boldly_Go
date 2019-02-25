@@ -4,17 +4,19 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-24-2017
+// Last Modified On : 02-25-2019
 // ***********************************************************************
-// <copyright file="KopernicusMaterial.cs" company="">
+// <copyright file="KopernicusMaterial.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System.ComponentModel;
+using System.Drawing.Design;
 using KSP_To_Boldly_Go.Common.Converters.Object;
 using KSP_To_Boldly_Go.Common.Types;
+using KSP_To_Boldly_Go.Common.UI;
 using System;
-using System.ComponentModel;
 
 namespace KSP_To_Boldly_Go.Common.Models
 {
@@ -28,9 +30,10 @@ namespace KSP_To_Boldly_Go.Common.Models
         #region Properties
 
         /// <summary>
-        /// Gets the emit color0.
+        /// Gets or sets the emit color0.
         /// </summary>
         /// <value>The emit color0.</value>
+        [Editor(typeof(RangeColorEditor), typeof(UITypeEditor))]
         public RangeColor emitColor0
         {
             get;
@@ -38,9 +41,10 @@ namespace KSP_To_Boldly_Go.Common.Models
         }
 
         /// <summary>
-        /// Gets the emit color1.
+        /// Gets or sets the emit color1.
         /// </summary>
         /// <value>The emit color1.</value>
+        [Editor(typeof(RangeColorEditor), typeof(UITypeEditor))]
         public RangeColor emitColor1
         {
             get;
@@ -54,9 +58,10 @@ namespace KSP_To_Boldly_Go.Common.Models
         public RangeDouble inverseFade { get; set; }
 
         /// <summary>
-        /// Gets the color of the rim.
+        /// Gets or sets the color of the rim.
         /// </summary>
         /// <value>The color of the rim.</value>
+        [Editor(typeof(RangeColorEditor), typeof(UITypeEditor))]
         public RangeColor rimColor
         {
             get;
@@ -64,9 +69,10 @@ namespace KSP_To_Boldly_Go.Common.Models
         }
 
         /// <summary>
-        /// Gets the sunspot colors.
+        /// Gets or sets the sunspot colors.
         /// </summary>
         /// <value>The sunspot colors.</value>
+        [Editor(typeof(RangeColorEditor), typeof(UITypeEditor))]
         public RangeColor sunspotColors
         {
             get;

@@ -119,6 +119,7 @@
     <Compile Include="Converters\Object\SerializableExpandableObjectConverter.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Types\Color.cs" />
+    <Compile Include="UI\RangeColorEditor.cs" />
     <Compile Include="Validators\IValidationResult.cs" />
     <Compile Include="Validators\IValidator.cs" />
     <Compile Include="Validators\IValidatorHandler.cs" />
