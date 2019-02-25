@@ -4,17 +4,19 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-24-2017
+// Last Modified On : 02-25-2019
 // ***********************************************************************
-// <copyright file="KopernicusOrbit.cs" company="">
+// <copyright file="KopernicusOrbit.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System.ComponentModel;
+using System.Drawing.Design;
 using KSP_To_Boldly_Go.Common.Converters.Object;
 using KSP_To_Boldly_Go.Common.Types;
+using KSP_To_Boldly_Go.Common.UI;
 using System;
-using System.ComponentModel;
 
 namespace KSP_To_Boldly_Go.Common.Models
 {
@@ -38,9 +40,10 @@ namespace KSP_To_Boldly_Go.Common.Models
         }
 
         /// <summary>
-        /// Gets the color.
+        /// Gets or sets the color.
         /// </summary>
         /// <value>The color.</value>
+        [Editor(typeof(RangeColorEditor), typeof(UITypeEditor))]
         public RangeColor color
         {
             get;
