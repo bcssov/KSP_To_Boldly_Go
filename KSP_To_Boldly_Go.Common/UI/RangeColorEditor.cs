@@ -45,8 +45,8 @@ namespace KSP_To_Boldly_Go.Common.UI
             {
                 rangeColor = new RangeColor();
             }
-            var colorDialogMin = InitColorDialog(rangeColor.Min);
-            var colorDialogMax = InitColorDialog(rangeColor.Max);
+            var colorDialogMin = InitColorDialog(rangeColor.Min, "Min Color");
+            var colorDialogMax = InitColorDialog(rangeColor.Max, "Max Color");
 
             var minColor = MapColorDialog(colorDialogMin);
             var maxColor = MapColorDialog(colorDialogMax);
@@ -76,11 +76,15 @@ namespace KSP_To_Boldly_Go.Common.UI
         /// Initializes the color dialog.
         /// </summary>
         /// <param name="color">The color.</param>
+        /// <param name="title">The title.</param>
         /// <returns>ColorDialog.</returns>
-        private ColorDialog InitColorDialog(Color color)
+        private ColorDialog InitColorDialog(Color color, string title)
         {
-            var colorDialog = new ColorDialog();
-            colorDialog.Color = color != null ? System.Drawing.Color.FromArgb(color.A.GetValueOrDefault(), color.R.GetValueOrDefault(), color.G.GetValueOrDefault(), color.B.GetValueOrDefault()) : System.Drawing.Color.Empty;
+            var colorDialog = new ColorDialog
+            {
+                Color = color != null ? System.Drawing.Color.FromArgb(color.A.GetValueOrDefault(), color.R.GetValueOrDefault(), color.G.GetValueOrDefault(), color.B.GetValueOrDefault()) : System.Drawing.Color.Empty,
+                Title = title
+            };
             return colorDialog;
         }
 
