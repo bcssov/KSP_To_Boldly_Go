@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-24-2019
+// Last Modified On : 02-25-2019
 // ***********************************************************************
 // <copyright file="KopernicusObject.cs" company="Mario">
 //     Copyright ©  2017
@@ -366,17 +366,17 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// </summary>
         protected virtual void Initialize()
         {
+            var handler = DependencyInjection.DIContainer.Container.GetInstance<IModelHandler>();
             foreach (var property in GetType().GetProperties())
             {
                 if (typeof(IEnumerable<IKopernicusObject>).IsAssignableFrom(property.PropertyType))
                 {
-                    var generic = property.PropertyType.GetGenericArguments().First();
-                    var instance = Activator.CreateInstance(typeof(List<>).MakeGenericType(generic));
+                    var instance = handler.CreateCollection(property.PropertyType);
                     property.SetValue(this, instance, null);
                 }
                 else if (typeof(IKopernicusObject).IsAssignableFrom(property.PropertyType))
                 {
-                    var instance = Activator.CreateInstance(property.PropertyType);
+                    var instance = handler.CreateModel(property.PropertyType);
                     property.SetValue(this, instance);
                 }
             }

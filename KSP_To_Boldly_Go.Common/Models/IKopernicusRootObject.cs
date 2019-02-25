@@ -4,9 +4,9 @@
 // Created          : 01-22-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-22-2017
+// Last Modified On : 02-14-2019
 // ***********************************************************************
-// <copyright file="IKopernicusRootObject.cs" company="">
+// <copyright file="IKopernicusRootObject.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>

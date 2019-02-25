@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-24-2019
+// Last Modified On : 02-25-2019
 // ***********************************************************************
 // <copyright file="KopernicusSerializer.cs" company="Mario">
 //     Copyright ©  2017
@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using KSP_To_Boldly_Go.Common.Converters.Serializer;
 using KSP_To_Boldly_Go.Common.Extensions;
 using KSP_To_Boldly_Go.Common.Models;
 
@@ -51,10 +50,10 @@ namespace KSP_To_Boldly_Go.Common.Serializers
         /// <summary>
         /// Initializes a new instance of the <see cref="KopernicusSerializer" /> class.
         /// </summary>
-        /// <param name="converterHandler">The converter handler.</param>
-        public KopernicusSerializer(IConverterHandler converterHandler)
+        /// <param name="handlerFactory">The handler factory.</param>
+        public KopernicusSerializer(IHandlerFactory handlerFactory)
         {
-            ConverterHandler = converterHandler;
+            HandlerFactory = handlerFactory;
         }
 
         #endregion Constructors
@@ -82,10 +81,10 @@ namespace KSP_To_Boldly_Go.Common.Serializers
         }
 
         /// <summary>
-        /// Gets or sets the converter handler.
+        /// Gets or sets the handler factory.
         /// </summary>
-        /// <value>The converter handler.</value>
-        protected IConverterHandler ConverterHandler { get; set; }
+        /// <value>The handler factory.</value>
+        protected IHandlerFactory HandlerFactory { get; set; }
 
         #endregion Properties
 
@@ -148,7 +147,7 @@ namespace KSP_To_Boldly_Go.Common.Serializers
         /// Writes the stream.
         /// </summary>
         /// <param name="stream">The stream.</param>
-        /// <param name="obj">The graph.</param>
+        /// <param name="obj">The object.</param>
         /// <param name="tabIndent">The tab indent.</param>
         private void WriteStream(StreamWriter stream, object obj, int tabIndent)
         {
@@ -238,7 +237,7 @@ namespace KSP_To_Boldly_Go.Common.Serializers
                             {
                                 var sb = new StringBuilder();
                                 // Check if any converter can convert this type, if not assume some "simple" value
-                                var converter = ConverterHandler.CreateConverter(propValue.GetType());
+                                var converter = HandlerFactory.CreateConverterHandler().CreateConverter(propValue.GetType());
                                 if (converter != null)
                                 {
                                     AppendLine(sb, tabIndent, "{0} = {1}", property.Name, converter.ToString(propValue, random));

@@ -4,7 +4,7 @@
 // Created          : 01-22-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-23-2019
+// Last Modified On : 02-25-2019
 // ***********************************************************************
 // <copyright file="NewObjectForm.cs" company="Mario">
 //     Copyright ©  2017
@@ -13,8 +13,9 @@
 // ***********************************************************************
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
-using KSP_To_Boldly_Go.Common.Models;
+using KSP_To_Boldly_Go.Common;
 
 namespace KSP_To_Boldly_Go.Forms
 {
@@ -31,6 +32,11 @@ namespace KSP_To_Boldly_Go.Forms
         /// </summary>
         private List<string> dataSource;
 
+        /// <summary>
+        /// The handler factory
+        /// </summary>
+        private IHandlerFactory handlerFactory;
+
         #endregion Fields
 
         #region Constructors
@@ -38,11 +44,12 @@ namespace KSP_To_Boldly_Go.Forms
         /// <summary>
         /// Initializes a new instance of the <see cref="NewObjectForm" /> class.
         /// </summary>
-        public NewObjectForm()
+        /// <param name="handlerFactory">The handler factory.</param>
+        public NewObjectForm(IHandlerFactory handlerFactory)
         {
             InitializeComponent();
-            dataSource = ModelManager.GetListOfKopernicusObjects();
-            cbList.DataSource = dataSource;
+            this.handlerFactory = handlerFactory;
+            InitDataSource();
         }
 
         #endregion Constructors
@@ -74,6 +81,15 @@ namespace KSP_To_Boldly_Go.Forms
             {
                 SelectedType = string.Empty;
             }
+        }
+
+        /// <summary>
+        /// Initializes the data source.
+        /// </summary>
+        private void InitDataSource()
+        {
+            dataSource = handlerFactory.CreateModelHandler().GetOrderedRootObjectNames().ToList();
+            cbList.DataSource = dataSource;
         }
 
         #endregion Methods

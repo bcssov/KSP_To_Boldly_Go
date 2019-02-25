@@ -31,12 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IFactory, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\IFactory.0.2.0\lib\net45\IFactory.dll</HintPath>
-    </Reference>
-    <Reference Include="IFactory.SimpleInjector, Version=0.1.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\IFactory.SimpleInjector.0.1.5\lib\net45\IFactory.SimpleInjector.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -80,11 +74,15 @@
     <Compile Include="Converters\Serializer\TypeConverter.cs" />
     <Compile Include="Converters\Serializer\RangeDoubleConverter.cs" />
     <Compile Include="Converters\Serializer\RangeLongConverter.cs" />
-    <Compile Include="DIContainer.cs" />
+    <Compile Include="DIPackage.cs" />
+    <Compile Include="HandlerFactory.cs" />
+    <Compile Include="IHandlerFactory.cs" />
     <Compile Include="IJsonSerializerSettings.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="JsonSerializerSettings.cs" />
+    <Compile Include="Models\IModelHandler.cs" />
     <Compile Include="Models\KopernicusInfo.cs" />
+    <Compile Include="Models\ModelHandler.cs" />
     <Compile Include="Serializers\IKopernicusSerializer.cs" />
     <Compile Include="Serializers\KopernicusSerializer.cs" />
     <Compile Include="Types\IRangeType.cs" />
@@ -115,7 +113,6 @@
     <Compile Include="Models\KopernicusProperties.cs" />
     <Compile Include="Models\KopernicusScaledVersion.cs" />
     <Compile Include="Models\KopernicusTemplate.cs" />
-    <Compile Include="Models\ModelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Converters\Object\SerializableExpandableObjectConverter.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />

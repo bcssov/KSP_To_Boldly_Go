@@ -4,7 +4,7 @@
 // Created          : 02-24-2019
 //
 // Last Modified By : Mario
-// Last Modified On : 02-24-2019
+// Last Modified On : 02-25-2019
 // ***********************************************************************
 // <copyright file="JsonSerializerSettings.cs" company="Mario">
 //     Copyright ©  2017
@@ -13,7 +13,6 @@
 // ***********************************************************************
 using System;
 using System.Linq;
-using KSP_To_Boldly_Go.Common.Converters.Serializer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -28,9 +27,9 @@ namespace KSP_To_Boldly_Go.Common
         #region Fields
 
         /// <summary>
-        /// The converter handler
+        /// The handler factory
         /// </summary>
-        private IConverterHandler converterHandler;
+        private IHandlerFactory handlerFactory;
 
         #endregion Fields
 
@@ -39,10 +38,10 @@ namespace KSP_To_Boldly_Go.Common
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSerializerSettings" /> class.
         /// </summary>
-        /// <param name="converterHandler">The converter handler.</param>
-        public JsonSerializerSettings(IConverterHandler converterHandler)
+        /// <param name="handlerFactory">The handler factory.</param>
+        public JsonSerializerSettings(IHandlerFactory handlerFactory)
         {
-            this.converterHandler = converterHandler;
+            this.handlerFactory = handlerFactory;
         }
 
         #endregion Constructors
@@ -61,7 +60,7 @@ namespace KSP_To_Boldly_Go.Common
                 TypeNameHandling = TypeNameHandling.None,
                 // Don't use camel case, using a bit non standard approach to map classes and properties directly
                 ContractResolver = new DefaultContractResolver(),
-                Converters = converterHandler.CreateJsonConverters().ToList()
+                Converters = handlerFactory.CreateConverterHandler().CreateJsonConverters().ToList()
             };
         }
 

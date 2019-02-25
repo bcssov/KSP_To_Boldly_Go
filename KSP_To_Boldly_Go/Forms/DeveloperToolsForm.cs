@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-24-2019
+// Last Modified On : 02-25-2019
 // ***********************************************************************
 // <copyright file="DeveloperToolsForm.cs" company="Mario">
 //     Copyright ©  2017
@@ -17,6 +17,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using KSP_To_Boldly_Go.Common;
 using KSP_To_Boldly_Go.Common.Models;
 using KSP_To_Boldly_Go.Common.Serializers;
 using KSP_To_Boldly_Go.Common.Validators;
@@ -41,6 +42,11 @@ namespace KSP_To_Boldly_Go.Forms
         /// The form handler
         /// </summary>
         private IFormHandler formHandler;
+
+        /// <summary>
+        /// The handler factory
+        /// </summary>
+        private IHandlerFactory handlerFactory;
 
         /// <summary>
         /// The initial title
@@ -72,12 +78,14 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="config">The configuration.</param>
         /// <param name="formHandler">The form handler.</param>
         /// <param name="serializer">The serializer.</param>
-        public DeveloperToolsForm(IConfiguration config, IFormHandler formHandler, IKopernicusSerializer serializer)
+        /// <param name="handlerFactory">The handler factory.</param>
+        public DeveloperToolsForm(IConfiguration config, IFormHandler formHandler, IKopernicusSerializer serializer, IHandlerFactory handlerFactory)
         {
             InitializeComponent();
             this.config = config;
             this.formHandler = formHandler;
             this.serializer = serializer;
+            this.handlerFactory = handlerFactory;
             initialTitle = Text;
             pgData.PropertySort = PropertySort.Alphabetical;
         }
@@ -114,7 +122,7 @@ namespace KSP_To_Boldly_Go.Forms
                 foreach (var file in files)
                 {
                     var contents = File.ReadAllText(file);
-                    var kopernicusObject = ModelManager.GetKoperniusObjectFromJson(contents);
+                    var kopernicusObject = handlerFactory.CreateModelHandler().CreateModelFromJSON(contents);
                     kopernicusObject.FileName = file;
                     kopernicusObjects.Add(kopernicusObject);
                 }
@@ -153,7 +161,7 @@ namespace KSP_To_Boldly_Go.Forms
             {
                 path = openFileDialog1.FileName;
                 var contents = File.ReadAllText(path);
-                model = ModelManager.GetKoperniusObjectFromJson(contents);
+                model = handlerFactory.CreateModelHandler().CreateModelFromJSON(contents);
                 if (model != null)
                 {
                     UpdateModelPath();
@@ -177,7 +185,7 @@ namespace KSP_To_Boldly_Go.Forms
             var form = formHandler.GetFormOrDefault<NewObjectForm>();
             if (form.ShowDialog(this) == DialogResult.OK)
             {
-                var instance = ModelManager.GetKopernicusObjectFromType(form.SelectedType);
+                var instance = handlerFactory.CreateModelHandler().CreateModel(form.SelectedType);
                 pgData.SelectedObject = instance;
                 model = instance;
                 Text = string.Format("{0}: {1}", initialTitle, form.SelectedType);
