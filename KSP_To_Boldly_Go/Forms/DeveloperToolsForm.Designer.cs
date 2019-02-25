@@ -54,18 +54,18 @@
             this.panel2.Controls.Add(this.menuStrip1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1275, 726);
+            this.panel2.Size = new System.Drawing.Size(1091, 726);
             this.panel2.TabIndex = 4;
             // 
             // pgData
             // 
             this.pgData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pgData.Location = new System.Drawing.Point(0, 25);
-            this.pgData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pgData.Margin = new System.Windows.Forms.Padding(4);
             this.pgData.Name = "pgData";
-            this.pgData.Size = new System.Drawing.Size(1275, 701);
+            this.pgData.Size = new System.Drawing.Size(1091, 701);
             this.pgData.TabIndex = 1;
             this.pgData.ToolbarVisible = false;
             // 
@@ -77,7 +77,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1275, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(1091, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -180,10 +180,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1275, 726);
+            this.ClientSize = new System.Drawing.Size(1091, 726);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DeveloperToolsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "To Boldly Go Developer Tools";

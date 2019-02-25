@@ -38,9 +38,9 @@
             this.cbList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbList.FormattingEnabled = true;
             this.cbList.Location = new System.Drawing.Point(13, 13);
-            this.cbList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbList.Margin = new System.Windows.Forms.Padding(4);
             this.cbList.Name = "cbList";
-            this.cbList.Size = new System.Drawing.Size(407, 26);
+            this.cbList.Size = new System.Drawing.Size(395, 26);
             this.cbList.TabIndex = 0;
             this.cbList.SelectedIndexChanged += new System.EventHandler(this.cbList_SelectedIndexChanged);
             // 
@@ -48,7 +48,7 @@
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.Location = new System.Drawing.Point(13, 55);
-            this.btnOk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(4);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(180, 32);
             this.btnOk.TabIndex = 1;
@@ -58,8 +58,8 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(240, 55);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Location = new System.Drawing.Point(228, 55);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(180, 32);
             this.btnCancel.TabIndex = 2;
@@ -70,13 +70,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(440, 103);
+            this.ClientSize = new System.Drawing.Size(421, 103);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.cbList);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewObjectForm";
