@@ -4,31 +4,44 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 02-25-2019
 // ***********************************************************************
-// <copyright file="KSPSerializer.cs" company="">
+// <copyright file="KopernicusSerializer.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Converters.Serializer;
-using KSP_To_Boldly_Go.Common.Extensions;
-using KSP_To_Boldly_Go.Common.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using KSP_To_Boldly_Go.Common.Extensions;
+using KSP_To_Boldly_Go.Common.Models;
 
+/// <summary>
+/// The Serializers namespace.
+/// </summary>
 namespace KSP_To_Boldly_Go.Common.Serializers
 {
     /// <summary>
     /// Class KopernicusSerializer.
     /// </summary>
-    public class KopernicusSerializer
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Serializers.IKopernicusSerializer" />
+    public class KopernicusSerializer : IKopernicusSerializer
     {
         #region Fields
+
+        /// <summary>
+        /// The tab spaces
+        /// </summary>
+        private const short tabSpaces = 4;
+
+        /// <summary>
+        /// The seed
+        /// </summary>
+        private int _seed;
 
         /// <summary>
         /// The random
@@ -42,13 +55,43 @@ namespace KSP_To_Boldly_Go.Common.Serializers
         /// <summary>
         /// Initializes a new instance of the <see cref="KopernicusSerializer" /> class.
         /// </summary>
-        /// <param name="seed">The seed.</param>
-        public KopernicusSerializer(int seed)
+        /// <param name="handlerFactory">The handler factory.</param>
+        public KopernicusSerializer(IHandlerFactory handlerFactory)
         {
-            random = new Random(seed);
+            HandlerFactory = handlerFactory;
         }
 
         #endregion Constructors
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the seed.
+        /// </summary>
+        /// <value>The seed.</value>
+        public int Seed
+        {
+            get
+            {
+                return _seed;
+            }
+            set
+            {
+                if (value != _seed)
+                {
+                    random = new Random(_seed);
+                }
+                _seed = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the handler factory.
+        /// </summary>
+        /// <value>The handler factory.</value>
+        protected IHandlerFactory HandlerFactory { get; set; }
+
+        #endregion Properties
 
         #region Methods
 
@@ -93,7 +136,12 @@ namespace KSP_To_Boldly_Go.Common.Serializers
         {
             for (int i = 0; i < tabIndent; i++)
             {
-                sb.Append("\t");
+                short spaces = 0;
+                while (spaces < tabSpaces)
+                {
+                    spaces++;
+                    sb.Append(" ");                    
+                }
             }
             if (values.Count() > 0)
             {
@@ -109,7 +157,7 @@ namespace KSP_To_Boldly_Go.Common.Serializers
         /// Writes the stream.
         /// </summary>
         /// <param name="stream">The stream.</param>
-        /// <param name="obj">The graph.</param>
+        /// <param name="obj">The object.</param>
         /// <param name="tabIndent">The tab indent.</param>
         private void WriteStream(StreamWriter stream, object obj, int tabIndent)
         {
@@ -199,7 +247,7 @@ namespace KSP_To_Boldly_Go.Common.Serializers
                             {
                                 var sb = new StringBuilder();
                                 // Check if any converter can convert this type, if not assume some "simple" value
-                                var converter = ConverterManager.GetConverterForType(propValue.GetType());
+                                var converter = HandlerFactory.CreateConverterHandler().CreateConverter(propValue.GetType());
                                 if (converter != null)
                                 {
                                     AppendLine(sb, tabIndent, "{0} = {1}", property.Name, converter.ToString(propValue, random));

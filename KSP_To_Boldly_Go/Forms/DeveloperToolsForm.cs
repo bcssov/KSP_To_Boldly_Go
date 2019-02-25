@@ -4,23 +4,23 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 04-01-2017
+// Last Modified On : 02-25-2019
 // ***********************************************************************
-// <copyright file="DeveloperToolsForm.cs" company="">
+// <copyright file="DeveloperToolsForm.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Models;
-using KSP_To_Boldly_Go.Common.Serializers;
-using KSP_To_Boldly_Go.Common.Validators;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using KSP_To_Boldly_Go.Common;
+using KSP_To_Boldly_Go.Common.Models;
+using KSP_To_Boldly_Go.Common.Serializers;
+using Newtonsoft.Json;
 
 namespace KSP_To_Boldly_Go.Forms
 {
@@ -31,6 +31,21 @@ namespace KSP_To_Boldly_Go.Forms
     public partial class DeveloperToolsForm : Form
     {
         #region Fields
+
+        /// <summary>
+        /// The configuration
+        /// </summary>
+        private IConfiguration config;
+
+        /// <summary>
+        /// The form handler
+        /// </summary>
+        private IFormHandler formHandler;
+
+        /// <summary>
+        /// The handler factory
+        /// </summary>
+        private IHandlerFactory handlerFactory;
 
         /// <summary>
         /// The initial title
@@ -47,6 +62,11 @@ namespace KSP_To_Boldly_Go.Forms
         /// </summary>
         private string path = string.Empty;
 
+        /// <summary>
+        /// The serializer
+        /// </summary>
+        private IKopernicusSerializer serializer;
+
         #endregion Fields
 
         #region Constructors
@@ -54,9 +74,17 @@ namespace KSP_To_Boldly_Go.Forms
         /// <summary>
         /// Initializes a new instance of the <see cref="DeveloperToolsForm" /> class.
         /// </summary>
-        public DeveloperToolsForm()
+        /// <param name="config">The configuration.</param>
+        /// <param name="formHandler">The form handler.</param>
+        /// <param name="serializer">The serializer.</param>
+        /// <param name="handlerFactory">The handler factory.</param>
+        public DeveloperToolsForm(IConfiguration config, IFormHandler formHandler, IKopernicusSerializer serializer, IHandlerFactory handlerFactory)
         {
             InitializeComponent();
+            this.config = config;
+            this.formHandler = formHandler;
+            this.serializer = serializer;
+            this.handlerFactory = handlerFactory;
             initialTitle = Text;
             pgData.PropertySort = PropertySort.Alphabetical;
         }
@@ -70,10 +98,14 @@ namespace KSP_To_Boldly_Go.Forms
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Justification = "Already checking if can dispose, code analysis is playing dumb!")]
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-            Dispose();
+            if (!IsDisposed && !Disposing)
+            {
+                Dispose();
+            }
         }
 
         /// <summary>
@@ -82,14 +114,14 @@ namespace KSP_To_Boldly_Go.Forms
         /// <returns>List&lt;IKopernicusObject&gt;.</returns>
         private List<IKopernicusObject> GetKopernicusObjectsFromDirectory()
         {
-            var files = Directory.EnumerateFileSystemEntries(Configuration.JsonConfigPath, "*.json", SearchOption.AllDirectories);
+            var files = Directory.EnumerateFileSystemEntries(config.JsonConfigPath, Constants.JSONExtension, SearchOption.AllDirectories);
             if (files != null && files.Count() > 0)
             {
                 List<IKopernicusObject> kopernicusObjects = new List<IKopernicusObject>();
                 foreach (var file in files)
                 {
                     var contents = File.ReadAllText(file);
-                    var kopernicusObject = ModelManager.GetKoperniusObjectFromJson(contents);
+                    var kopernicusObject = handlerFactory.CreateModelHandler().CreateModelFromJSON(contents);
                     kopernicusObject.FileName = file;
                     kopernicusObjects.Add(kopernicusObject);
                 }
@@ -123,17 +155,17 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = Configuration.JsonConfigPath;
+            openFileDialog1.InitialDirectory = config.JsonConfigPath;
             if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
             {
                 path = openFileDialog1.FileName;
                 var contents = File.ReadAllText(path);
-                model = ModelManager.GetKoperniusObjectFromJson(contents);
+                model = handlerFactory.CreateModelHandler().CreateModelFromJSON(contents);
                 if (model != null)
                 {
                     UpdateModelPath();
                     pgData.SelectedObject = model;
-                    Text = string.Format("{0}: {1}", initialTitle, Path.GetFileName(path));
+                    Text = $"{initialTitle} : {Path.GetFileName(path)}";
                 }
                 else
                 {
@@ -149,13 +181,13 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new NewObjectForm();
+            var form = formHandler.GetFormOrDefault<NewObjectForm>();
             if (form.ShowDialog(this) == DialogResult.OK)
             {
-                var instance = ModelManager.GetKopernicusObjectFromType(form.SelectedType);
+                var instance = handlerFactory.CreateModelHandler().CreateModel(form.SelectedType);
                 pgData.SelectedObject = instance;
                 model = instance;
-                Text = string.Format("{0}: {1}", initialTitle, form.SelectedType);
+                Text = $"{initialTitle} : {form.SelectedType}";
                 path = string.Empty;
                 UpdateModelPath();
             }
@@ -172,12 +204,12 @@ namespace KSP_To_Boldly_Go.Forms
             {
                 if (string.IsNullOrWhiteSpace(path))
                 {
-                    saveFileDialog1.InitialDirectory = Configuration.JsonConfigPath;
+                    saveFileDialog1.InitialDirectory = config.JsonConfigPath;
                     if (saveFileDialog1.ShowDialog(this) == DialogResult.OK)
                     {
                         path = saveFileDialog1.FileName;
                         UpdateModelPath();
-                        Text = string.Format("{0}: {1}", initialTitle, Path.GetFileName(path));
+                        Text = $"{initialTitle} : {Path.GetFileName(path)}";
                         File.WriteAllText(path, JsonConvert.SerializeObject(model));
                     }
                 }
@@ -199,10 +231,11 @@ namespace KSP_To_Boldly_Go.Forms
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    var serializer = new KopernicusSerializer("To Boldly Go".GetHashCode());
+                    serializer.Seed = Constants.SerializationHashCode.GetHashCode();
                     serializer.Serialize(model, ms);
                     var output = Encoding.ASCII.GetString(ms.ToArray());
-                    var form = new GenericOutputForm(string.Format("Serialization Test Output: {0}", path), output);
+                    var form = formHandler.GetFormOrDefault<GenericOutputForm>();
+                    form.SetContent($"{Constants.SerializationFormTitle} : {path}", output);
                     form.ShowDialog(this);
                     form.Dispose();
                 }
@@ -225,12 +258,49 @@ namespace KSP_To_Boldly_Go.Forms
         private void validateConfigsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             List<IKopernicusObject> kopernicusObjects = GetKopernicusObjectsFromDirectory();
-            var validationResults = ValidatorManager.ValidateModels(kopernicusObjects);
-            var form = new GenericOutputForm(string.Format("Validation Results: {0}", Configuration.JsonConfigPath), string.Join(Environment.NewLine, validationResults));
+            var handler = handlerFactory.CreateValidationHandler();
+            var validationResults = handler.Validate(kopernicusObjects);
+            var isValid = handler.ValidateResults(validationResults);
+            var form = formHandler.GetFormOrDefault<GenericOutputForm>();
+            form.SetContent(Constants.ValidationResults, $"Directory: {config.JsonConfigPath}{Environment.NewLine}Is Valid: {isValid}{Environment.NewLine}{Environment.NewLine}{handler.FormatMessages(validationResults)}");
             form.ShowDialog(this);
             form.Dispose();
         }
 
         #endregion Methods
+
+        #region Classes
+
+        /// <summary>
+        /// Class Constants.
+        /// </summary>
+        private class Constants
+        {
+            #region Fields
+
+            /// <summary>
+            /// The json extension
+            /// </summary>
+            public const string JSONExtension = "*.json";
+
+            /// <summary>
+            /// The serialization form title
+            /// </summary>
+            public const string SerializationFormTitle = "Serialization Test Output";
+
+            /// <summary>
+            /// The serialization hash code
+            /// </summary>
+            public const string SerializationHashCode = "To Boldly Go";
+
+            /// <summary>
+            /// The validation results
+            /// </summary>
+            public const string ValidationResults = "Validation Results";
+
+            #endregion Fields
+        }
+
+        #endregion Classes
     }
 }

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KSP_To_Boldly_Go.Common</RootNamespace>
     <AssemblyName>KSP_To_Boldly_Go.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -34,6 +34,12 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SimpleInjector, Version=4.4.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.4.3\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Packaging, Version=4.4.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Packaging.4.4.3\lib\net40\SimpleInjector.Packaging.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -57,8 +63,9 @@
     <Compile Include="Converters\Object\RangeLongConverter.cs" />
     <Compile Include="Converters\Serializer\ColorConverter.cs" />
     <Compile Include="Converters\Object\ColorConverter.cs" />
-    <Compile Include="Converters\Serializer\ConverterManager.cs" />
+    <Compile Include="Converters\Serializer\ConverterHandler.cs" />
     <Compile Include="Converters\Serializer\IConverter.cs" />
+    <Compile Include="Converters\Serializer\IConverterHandler.cs" />
     <Compile Include="Converters\Serializer\RangeColorConverter.cs" />
     <Compile Include="Converters\Serializer\RangeDecimalConverter.cs" />
     <Compile Include="Converters\Serializer\RangeFloatConverter.cs" />
@@ -67,12 +74,21 @@
     <Compile Include="Converters\Serializer\TypeConverter.cs" />
     <Compile Include="Converters\Serializer\RangeDoubleConverter.cs" />
     <Compile Include="Converters\Serializer\RangeLongConverter.cs" />
-    <Compile Include="Initialize.cs" />
+    <Compile Include="DIPackage.cs" />
+    <Compile Include="HandlerFactory.cs" />
+    <Compile Include="IHandlerFactory.cs" />
+    <Compile Include="IJsonSerializerSettings.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
+    <Compile Include="JsonSerializerSettings.cs" />
+    <Compile Include="Models\IModelHandler.cs" />
     <Compile Include="Models\KopernicusInfo.cs" />
+    <Compile Include="Models\ModelHandler.cs" />
+    <Compile Include="Serializers\IKopernicusSerializer.cs" />
+    <Compile Include="Serializers\KopernicusSerializer.cs" />
     <Compile Include="Types\IRangeType.cs" />
     <Compile Include="Types\IType.cs" />
     <Compile Include="Types\IRangeNumber.cs" />
+    <Compile Include="Types\ITypeHandler.cs" />
     <Compile Include="Types\RangeColor.cs" />
     <Compile Include="Types\RangeDecimal.cs" />
     <Compile Include="Types\RangeDouble.cs" />
@@ -82,6 +98,7 @@
     <Compile Include="Types\RangeLong.cs" />
     <Compile Include="Types\RangeShort.cs" />
     <Compile Include="Types\RangeType.cs" />
+    <Compile Include="Types\TypeHandler.cs" />
     <Compile Include="UI\CollectionEditor.cs" />
     <Compile Include="Models\IKopernicusRootObject.cs" />
     <Compile Include="Models\KopernicusCorona.cs" />
@@ -98,18 +115,27 @@
     <Compile Include="Models\KopernicusProperties.cs" />
     <Compile Include="Models\KopernicusScaledVersion.cs" />
     <Compile Include="Models\KopernicusTemplate.cs" />
-    <Compile Include="Models\ModelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Converters\Object\SerializableExpandableObjectConverter.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
-    <Compile Include="Serializers\KopernicusSerializer.cs" />
     <Compile Include="Types\Color.cs" />
+    <Compile Include="Validators\IValidationResult.cs" />
     <Compile Include="Validators\IValidator.cs" />
+    <Compile Include="Validators\IValidatorHandler.cs" />
     <Compile Include="Validators\OrderValidator.cs" />
-    <Compile Include="Validators\ValidatorManager.cs" />
+    <Compile Include="Validators\ValidationResult.cs" />
+    <Compile Include="Validators\Enums.cs" />
+    <Compile Include="Validators\ValidatorHandler.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KSP_To_Boldly_Go.DependencyInjection\KSP_To_Boldly_Go.DependencyInjection.csproj">
+      <Project>{8b67a6df-f1ce-46e0-9261-7e55130b41e8}</Project>
+      <Name>KSP_To_Boldly_Go.DependencyInjection</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

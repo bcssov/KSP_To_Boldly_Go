@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KSP_To_Boldly_Go</RootNamespace>
     <AssemblyName>KSP_To_Boldly_Go</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -46,7 +46,13 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.5.10\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.6.0-rc1\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=4.4.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.4.3\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Packaging, Version=4.4.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Packaging.4.4.3\lib\net40\SimpleInjector.Packaging.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -73,6 +79,8 @@
     <Compile Include="Forms\DeveloperToolsForm.Designer.cs">
       <DependentUpon>DeveloperToolsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormHandler.cs" />
+    <Compile Include="Forms\IFormHandler.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,7 +99,9 @@
     <Compile Include="Forms\GenericOutputForm.Designer.cs">
       <DependentUpon>GenericOutputForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Log.cs" />
+    <Compile Include="IConfiguration.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\DeveloperToolsForm.resx">
@@ -171,6 +181,10 @@
     <ProjectReference Include="..\KSP_To_Boldly_Go.Common\KSP_To_Boldly_Go.Common.csproj">
       <Project>{eb222025-6859-4ab3-a4fa-351642c63adf}</Project>
       <Name>KSP_To_Boldly_Go.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KSP_To_Boldly_Go.DependencyInjection\KSP_To_Boldly_Go.DependencyInjection.csproj">
+      <Project>{8b67a6df-f1ce-46e0-9261-7e55130b41e8}</Project>
+      <Name>KSP_To_Boldly_Go.DependencyInjection</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

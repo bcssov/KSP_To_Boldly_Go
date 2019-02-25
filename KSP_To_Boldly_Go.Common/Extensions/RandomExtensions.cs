@@ -258,7 +258,7 @@ namespace KSP_To_Boldly_Go.Common.Extensions
                 var a = random.Next();
                 var b = random.Next();
                 var c = random.Next(542101087);
-                sample = new Decimal(a, b, c, false, 28);
+                sample = new decimal(a, b, c, false, 28);
             }
             return sample;
         }

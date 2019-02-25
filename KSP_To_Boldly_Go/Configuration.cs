@@ -4,9 +4,9 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-20-2017
+// Last Modified On : 02-23-2019
 // ***********************************************************************
-// <copyright file="Configuration.cs" company="">
+// <copyright file="Configuration.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -20,48 +20,42 @@ namespace KSP_To_Boldly_Go
     /// <summary>
     /// Class Configuration.
     /// </summary>
-    public static class Configuration
+    /// <seealso cref="KSP_To_Boldly_Go.IConfiguration" />
+    public class Configuration : IConfiguration
     {
-        #region Fields
-
-        /// <summary>
-        /// The dev mode
-        /// </summary>
-        private static readonly bool _devMode = Properties.Settings.Default.DeveloperMode;
-
-        /// <summary>
-        /// The json configuration path
-        /// </summary>
-        private static readonly string _jsonConfigPath = Path.Combine(Application.StartupPath, "ConfigResources");
-
-        #endregion Fields
-
         #region Properties
 
         /// <summary>
         /// Gets a value indicating whether [dev mode].
         /// </summary>
         /// <value><c>true</c> if [dev mode]; otherwise, <c>false</c>.</value>
-        public static bool DevMode
-        {
-            get
-            {
-                return _devMode;
-            }
-        }
+        public bool DevMode { get; } = Properties.Settings.Default.DeveloperMode;
 
         /// <summary>
         /// Gets the json configuration path.
         /// </summary>
         /// <value>The json configuration path.</value>
-        public static string JsonConfigPath
-        {
-            get
-            {
-                return _jsonConfigPath;
-            }
-        }
+        public string JsonConfigPath { get; } = Path.Combine(Application.StartupPath, Constants.ConfigResources);
 
         #endregion Properties
+
+        #region Classes
+
+        /// <summary>
+        /// Class Constants.
+        /// </summary>
+        private class Constants
+        {
+            #region Fields
+
+            /// <summary>
+            /// The configuration resources
+            /// </summary>
+            public const string ConfigResources = "ConfigResources";
+
+            #endregion Fields
+        }
+
+        #endregion Classes
     }
 }

@@ -4,18 +4,18 @@
 // Created          : 01-23-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-24-2017
+// Last Modified On : 02-24-2019
 // ***********************************************************************
-// <copyright file="RangeConverter.cs" company="">
+// <copyright file="RangeConverter.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Converters.Serializer;
-using KSP_To_Boldly_Go.Common.Types;
 using System;
 using System.ComponentModel;
 using System.Globalization;
+using KSP_To_Boldly_Go.Common.Converters.Serializer;
+using KSP_To_Boldly_Go.Common.Types;
 
 namespace KSP_To_Boldly_Go.Common.Converters.Object
 {
@@ -36,11 +36,7 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
         /// <returns>true if this converter can perform the conversion; otherwise, false.</returns>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            if (sourceType == typeof(string))
-            {
-                return true;
-            }
-            return base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(string) ? true : base.CanConvertFrom(context, sourceType);
         }
 
         /// <summary>
@@ -51,11 +47,7 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
         /// <returns>true if this converter can perform the conversion; otherwise, false.</returns>
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            if (destinationType == typeof(string) || destinationType == typeof(T))
-            {
-                return true;
-            }
-            return base.CanConvertFrom(context, destinationType);
+            return destinationType == typeof(string) || destinationType == typeof(T) ? true : base.CanConvertFrom(context, destinationType);
         }
 
         /// <summary>
@@ -73,8 +65,7 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
             }
             else if (value is string)
             {
-                var converter = ConverterManager.GetConverterForType<T>();
-                return converter.ToObject(value.ToString());
+                return ConvertStringToObject(value);
             }
             return base.ConvertFrom(context, culture, value);
         }
@@ -97,8 +88,7 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
                 }
                 else if (value is T)
                 {
-                    var converter = ConverterManager.GetConverterForType<T>();
-                    return converter.ToString(value, null);
+                    return ConvertObjectToString(value);
                 }
             }
             else if (destinationType == typeof(T))
@@ -109,11 +99,34 @@ namespace KSP_To_Boldly_Go.Common.Converters.Object
                 }
                 else if (value is string)
                 {
-                    var converter = ConverterManager.GetConverterForType<T>();
-                    return converter.ToObject(value.ToString());
+                    return ConvertStringToObject(value);
                 }
             }
             return base.ConvertTo(context, culture, value, destinationType);
+        }
+
+        /// <summary>
+        /// Converts the object to string.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.Object.</returns>
+        private object ConvertObjectToString(object value)
+        {
+            var handler = DependencyInjection.DIContainer.Container.GetInstance<IConverterHandler>();
+            var converter = handler.CreateConverter<T>();
+            return converter.ToString(value, null);
+        }
+
+        /// <summary>
+        /// Converts the string to object.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.Object.</returns>
+        private object ConvertStringToObject(object value)
+        {
+            var handler = DependencyInjection.DIContainer.Container.GetInstance<IConverterHandler>();
+            var converter = handler.CreateConverter<T>();
+            return converter.ToObject(value.ToString());
         }
 
         #endregion Methods

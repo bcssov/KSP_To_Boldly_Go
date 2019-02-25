@@ -11,11 +11,11 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Converters.Serializer;
-using KSP_To_Boldly_Go.Common.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using KSP_To_Boldly_Go.Common.Converters.Serializer;
+using KSP_To_Boldly_Go.Common.Extensions;
 
 namespace KSP_To_Boldly_Go.Common.Types
 {
@@ -33,7 +33,6 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// </summary>
         /// <param name="random">The random.</param>
         /// <returns>T.</returns>
-        /// <exception cref="System.NotImplementedException"></exception>
         protected override Color GetRandomInRange(Random random)
         {
             return random.NextColor(Min, Max);
@@ -46,7 +45,8 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// <returns>T.</returns>
         protected override Color ParseValue(string value)
         {
-            var converter = ConverterManager.GetConverterForType<Color>();
+            var handler = DependencyInjection.DIContainer.Container.GetInstance<IConverterHandler>();
+            var converter = handler.CreateConverter<Color>();
             return converter.ToObject(value);
         }
 

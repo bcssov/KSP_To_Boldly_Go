@@ -4,29 +4,30 @@
 // Created          : 01-21-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-21-2017
+// Last Modified On : 02-23-2019
 // ***********************************************************************
-// <copyright file="Logger.cs" company="">
+// <copyright file="Logger.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using NLog;
 using System;
+using NLog;
 
 namespace KSP_To_Boldly_Go
 {
     /// <summary>
-    /// Class Log.
+    /// Class Logger.
     /// </summary>
-    public class Log
+    /// <seealso cref="KSP_To_Boldly_Go.ILogger" />
+    public class Logger : ILogger
     {
         #region Fields
 
         /// <summary>
         /// The log
         /// </summary>
-        private static Logger log = LogManager.GetCurrentClassLogger();
+        private static NLog.Logger log = LogManager.GetCurrentClassLogger();
 
         #endregion Fields
 
@@ -36,7 +37,7 @@ namespace KSP_To_Boldly_Go
         /// Logs the error.
         /// </summary>
         /// <param name="ex">The ex.</param>
-        public static void Error(Exception ex)
+        public void Error(Exception ex)
         {
             if (ex != null)
             {
@@ -48,7 +49,7 @@ namespace KSP_To_Boldly_Go
         /// Logs the information.
         /// </summary>
         /// <param name="message">The message.</param>
-        public static void Info(string message)
+        public void Info(string message)
         {
             if (!string.IsNullOrEmpty(message))
             {

@@ -4,16 +4,16 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 02-25-2019
 // ***********************************************************************
-// <copyright file="KopernicusMain.cs" company="">
+// <copyright file="KopernicusMain.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System.ComponentModel;
 using KSP_To_Boldly_Go.Common.Converters.Object;
 using System;
-using System.ComponentModel;
 
 namespace KSP_To_Boldly_Go.Common.Models
 {

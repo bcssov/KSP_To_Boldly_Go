@@ -4,21 +4,22 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 04-01-2017
+// Last Modified On : 02-25-2019
 // ***********************************************************************
-// <copyright file="KopernicusObject.cs" company="">
+// <copyright file="KopernicusObject.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Extensions;
-using KSP_To_Boldly_Go.Common.Serializers;
-using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using KSP_To_Boldly_Go.Common.Extensions;
+using KSP_To_Boldly_Go.Common.Serializers;
+using Newtonsoft.Json;
 
 /// <summary>
 /// The Models namespace.
@@ -35,24 +36,9 @@ namespace KSP_To_Boldly_Go.Common.Models
         #region Fields
 
         /// <summary>
-        /// The hidden internal properties
-        /// </summary>
-        protected static readonly string[] hiddenInternalProperties = new string[] { "Order", "Type", "ShowInternalProperties", "FileName" };
-
-        /// <summary>
-        /// The partial hidden internal properties
-        /// </summary>
-        protected static readonly string[] partialHiddenInternalProperties = new string[] { "ShowInternalProperties", "FileName" };
-
-        /// <summary>
         /// The internal properties
         /// </summary>
         protected static List<string> internalProperties;
-
-        /// <summary>
-        /// The show internal properties
-        /// </summary>
-        protected bool _showInternalProperties = false;
 
         #endregion Fields
 
@@ -61,6 +47,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="KopernicusObject" /> class.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "Design decision.")]
         public KopernicusObject()
         {
             Initialize();
@@ -113,17 +100,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <value><c>true</c> if [show internal properties]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
         [KopernicusSerializeIgnore]
-        public bool ShowInternalProperties
-        {
-            get
-            {
-                return _showInternalProperties;
-            }
-            set
-            {
-                _showInternalProperties = value;
-            }
-        }
+        public bool ShowInternalProperties { get; set; } = false;
 
         /// <summary>
         /// Gets or sets the type.
@@ -236,9 +213,9 @@ namespace KSP_To_Boldly_Go.Common.Models
 
             if (!ShowInternalProperties)
             {
-                return FilterProperties(properties, hiddenInternalProperties);
+                return FilterProperties(properties, Constants.HiddenInternalProperties);
             }
-            return FilterProperties(properties, partialHiddenInternalProperties);
+            return FilterProperties(properties, Constants.PartialHiddenInternalProperties);
         }
 
         /// <summary>
@@ -252,9 +229,9 @@ namespace KSP_To_Boldly_Go.Common.Models
 
             if (!ShowInternalProperties)
             {
-                return FilterProperties(properties, hiddenInternalProperties);
+                return FilterProperties(properties, Constants.HiddenInternalProperties);
             }
-            return FilterProperties(properties, partialHiddenInternalProperties);
+            return FilterProperties(properties, Constants.PartialHiddenInternalProperties);
         }
 
         /// <summary>
@@ -277,7 +254,7 @@ namespace KSP_To_Boldly_Go.Common.Models
             if (internalProperties == null || internalProperties.Count() == 0)
             {
                 internalProperties = new List<string>();
-                internalProperties.AddRange(typeof(IKopernicusObject).GetProperties().Where(p => p.Name != "Header").Select(p => p.Name));
+                internalProperties.AddRange(typeof(IKopernicusObject).GetProperties().Where(p => p.Name != Constants.Header).Select(p => p.Name));
             }
             var properties = GetType().GetProperties();
             Dictionary<string, bool> results = new Dictionary<string, bool>();
@@ -389,22 +366,51 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// </summary>
         protected virtual void Initialize()
         {
+            var handler = DependencyInjection.DIContainer.Container.GetInstance<IModelHandler>();
             foreach (var property in GetType().GetProperties())
             {
                 if (typeof(IEnumerable<IKopernicusObject>).IsAssignableFrom(property.PropertyType))
                 {
-                    var generic = property.PropertyType.GetGenericArguments().First();
-                    var instance = Activator.CreateInstance(typeof(List<>).MakeGenericType(generic));
+                    var instance = handler.CreateCollection(property.PropertyType);
                     property.SetValue(this, instance, null);
                 }
                 else if (typeof(IKopernicusObject).IsAssignableFrom(property.PropertyType))
                 {
-                    var instance = Activator.CreateInstance(property.PropertyType);
+                    var instance = handler.CreateModel(property.PropertyType);
                     property.SetValue(this, instance);
                 }
             }
         }
 
         #endregion Methods
+
+        #region Classes
+
+        /// <summary>
+        /// Class Constants.
+        /// </summary>
+        protected class Constants
+        {
+            #region Fields
+
+            /// <summary>
+            /// The header
+            /// </summary>
+            public const string Header = "Header";
+
+            /// <summary>
+            /// The hidden internal properties
+            /// </summary>
+            public static readonly string[] HiddenInternalProperties = new string[] { "Order", "Type", "ShowInternalProperties", "FileName" };
+
+            /// <summary>
+            /// The partial hidden internal properties
+            /// </summary>
+            public static readonly string[] PartialHiddenInternalProperties = new string[] { "ShowInternalProperties", "FileName" };
+
+            #endregion Fields
+        }
+
+        #endregion Classes
     }
 }

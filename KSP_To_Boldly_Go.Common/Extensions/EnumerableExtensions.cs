@@ -4,9 +4,9 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-23-2017
+// Last Modified On : 02-24-2019
 // ***********************************************************************
-// <copyright file="Extensions.cs" company="">
+// <copyright file="Extensions.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -22,7 +22,7 @@ namespace KSP_To_Boldly_Go.Common.Extensions
     /// <summary>
     /// Class EnumerableExtensions.
     /// </summary>
-    public static partial class EnumerableExtensions
+    public static class EnumerableExtensions
     {
         #region Methods
 
@@ -47,6 +47,5 @@ namespace KSP_To_Boldly_Go.Common.Extensions
         }
 
         #endregion Methods
-
     }
 }

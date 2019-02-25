@@ -4,9 +4,9 @@
 // Created          : 01-23-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-24-2017
+// Last Modified On : 02-25-2019
 // ***********************************************************************
-// <copyright file="RangeLong.cs" company="">
+// <copyright file="RangeLong.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -141,7 +141,7 @@ namespace KSP_To_Boldly_Go.Common.Types
                 }
                 else
                 {
-                    return string.Format("{0} To {1}", Min.GetValueOrDefault(), Max.GetValueOrDefault());
+                    return $"{Min.GetValueOrDefault()} To {Max.GetValueOrDefault()}";
                 }
             }
         }

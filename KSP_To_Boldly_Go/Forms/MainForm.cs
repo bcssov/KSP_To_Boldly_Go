@@ -4,15 +4,17 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-22-2017
+// Last Modified On : 02-24-2019
 // ***********************************************************************
-// <copyright file="MainForm.cs" company="">
+// <copyright file="MainForm.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 using System;
 using System.Windows.Forms;
+using KSP_To_Boldly_Go.Common;
+using Newtonsoft.Json;
 
 namespace KSP_To_Boldly_Go.Forms
 {
@@ -25,9 +27,19 @@ namespace KSP_To_Boldly_Go.Forms
         #region Fields
 
         /// <summary>
-        /// The form
+        /// The configuration
         /// </summary>
-        private DeveloperToolsForm form;
+        private IConfiguration config;
+
+        /// <summary>
+        /// The form handler
+        /// </summary>
+        private IFormHandler formHandler;
+
+        /// <summary>
+        /// The json settings
+        /// </summary>
+        private IJsonSerializerSettings jsonSettings;
 
         #endregion Fields
 
@@ -36,8 +48,14 @@ namespace KSP_To_Boldly_Go.Forms
         /// <summary>
         /// Initializes a new instance of the <see cref="MainForm" /> class.
         /// </summary>
-        public MainForm()
+        /// <param name="config">The configuration.</param>
+        /// <param name="formHandler">The form handler.</param>
+        /// <param name="jsonSettings">The json settings.</param>
+        public MainForm(IConfiguration config, IFormHandler formHandler, IJsonSerializerSettings jsonSettings)
         {
+            this.config = config;
+            this.formHandler = formHandler;
+            this.jsonSettings = jsonSettings;
             InitializeComponent();
             Initialize();
         }
@@ -53,10 +71,10 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void btnDevMode_Click(object sender, EventArgs e)
         {
-            if (form == null || form.IsDisposed || form.Disposing)
+            var form = formHandler.GetFormOrDefault<DeveloperToolsForm>();
+            if (!form.Visible || form.Disposing || form.IsDisposed)
             {
                 Hide();
-                form = new DeveloperToolsForm();
                 form.FormClosed += DeveloperForm_FormClosed;
                 form.Show(this);
             }
@@ -66,9 +84,10 @@ namespace KSP_To_Boldly_Go.Forms
         /// Handles the FormClosed event of the Form control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FormClosedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="FormClosedEventArgs" /> instance containing the event data.</param>
         private void DeveloperForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            var form = formHandler.GetFormOrDefault<DeveloperToolsForm>();
             Show();
             form.FormClosed -= DeveloperForm_FormClosed;
         }
@@ -78,8 +97,8 @@ namespace KSP_To_Boldly_Go.Forms
         /// </summary>
         private void Initialize()
         {
-            btnDevMode.Visible = Configuration.DevMode;
-            Common.Startup.Initialize();
+            btnDevMode.Visible = config.DevMode;
+            JsonConvert.DefaultSettings = () => { return jsonSettings.GetSettings(); };
         }
 
         /// <summary>

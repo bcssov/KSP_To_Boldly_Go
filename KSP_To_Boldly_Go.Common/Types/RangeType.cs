@@ -4,9 +4,9 @@
 // Created          : 01-24-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-24-2017
+// Last Modified On : 02-25-2019
 // ***********************************************************************
-// <copyright file="RangeType.cs" company="">
+// <copyright file="RangeType.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -142,7 +142,7 @@ namespace KSP_To_Boldly_Go.Common.Types
                 }
                 else
                 {
-                    return string.Format("{0} To {1}", Min.ToString(random), Max.ToString(random));
+                    return $"{Min.ToString(random)} To {Max.ToString(random)}";
                 }
             }
         }

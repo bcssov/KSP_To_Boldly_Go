@@ -4,9 +4,9 @@
 // Created          : 01-22-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 04-01-2017
+// Last Modified On : 02-23-2019
 // ***********************************************************************
-// <copyright file="SerializationTestOutput.cs" company="">
+// <copyright file="SerializationTestOutput.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -25,17 +25,28 @@ namespace KSP_To_Boldly_Go.Forms
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenericOutputForm"/> class.
+        /// Initializes a new instance of the <see cref="GenericOutputForm" /> class.
+        /// </summary>
+        public GenericOutputForm()
+        {
+            InitializeComponent();
+        }
+
+        #endregion Constructors
+
+        #region Methods
+
+        /// <summary>
+        /// Sets the content.
         /// </summary>
         /// <param name="title">The title.</param>
         /// <param name="content">The content.</param>
-        public GenericOutputForm(string title, string content)
+        public void SetContent(string title, string content)
         {
-            InitializeComponent();
             Text = title;
             txtOutput.Text = content;
         }
 
-        #endregion Constructors
+        #endregion Methods
     }
 }
