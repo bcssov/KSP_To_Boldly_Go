@@ -1,46 +1,45 @@
 ﻿// ***********************************************************************
 // Assembly         : KSP_To_Boldly_Go.Common
 // Author           : Mario
-// Created          : 04-01-2017
+// Created          : 02-25-2019
 //
 // Last Modified By : Mario
 // Last Modified On : 02-25-2019
 // ***********************************************************************
-// <copyright file="IValidator.cs" company="Mario">
+// <copyright file="IValidationResult.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 using System.Collections.Generic;
-using KSP_To_Boldly_Go.Common.Models;
-using System;
 
 namespace KSP_To_Boldly_Go.Common.Validators
 {
     /// <summary>
-    /// Interface IValidator
+    /// Interface IValidationResult
     /// </summary>
-    public interface IValidator
+    public interface IValidationResult
     {
         #region Properties
 
         /// <summary>
-        /// Gets the name.
+        /// Gets the errors.
         /// </summary>
-        /// <value>The name.</value>
-        string Name { get; }
-
-        #endregion Properties
-
-        #region Methods
+        /// <value>The errors.</value>
+        IEnumerable<string> Errors { get; }
 
         /// <summary>
-        /// Validates the specified kopernicus objects.
+        /// Gets the state.
         /// </summary>
-        /// <param name="kopernicusObjects">The kopernicus objects.</param>
-        /// <returns>IValidationResult.</returns>
-        IValidationResult Validate(IEnumerable<IKopernicusObject> kopernicusObjects);
+        /// <value>The state.</value>
+        ValidationResultState State { get; }
 
-        #endregion Methods
+        /// <summary>
+        /// Gets the type of the validation.
+        /// </summary>
+        /// <value>The type of the validation.</value>
+        string ValidationType { get; }
+
+        #endregion Properties
     }
 }

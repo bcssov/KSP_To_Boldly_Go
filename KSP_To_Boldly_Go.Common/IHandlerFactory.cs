@@ -13,6 +13,8 @@
 // ***********************************************************************
 using KSP_To_Boldly_Go.Common.Converters.Serializer;
 using KSP_To_Boldly_Go.Common.Models;
+using KSP_To_Boldly_Go.Common.Types;
+using KSP_To_Boldly_Go.Common.Validators;
 
 namespace KSP_To_Boldly_Go.Common
 {
@@ -34,6 +36,18 @@ namespace KSP_To_Boldly_Go.Common
         /// </summary>
         /// <returns>IModelHandler.</returns>
         IModelHandler CreateModelHandler();
+
+        /// <summary>
+        /// Creates the type handler.
+        /// </summary>
+        /// <returns>ITypeHandler.</returns>
+        ITypeHandler CreateTypeHandler();
+
+        /// <summary>
+        /// Creates the validation handler.
+        /// </summary>
+        /// <returns>IValidatorHandler.</returns>
+        IValidatorHandler CreateValidationHandler();
 
         #endregion Methods
     }

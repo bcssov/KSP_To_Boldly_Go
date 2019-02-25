@@ -15,6 +15,7 @@ using System;
 using KSP_To_Boldly_Go.Common.Converters.Serializer;
 using KSP_To_Boldly_Go.Common.Models;
 using KSP_To_Boldly_Go.Common.Types;
+using KSP_To_Boldly_Go.Common.Validators;
 
 namespace KSP_To_Boldly_Go.Common
 {
@@ -43,6 +44,12 @@ namespace KSP_To_Boldly_Go.Common
         /// </summary>
         /// <returns>ITypeHandler.</returns>
         public ITypeHandler CreateTypeHandler() => DependencyInjection.DIContainer.Container.GetInstance<ITypeHandler>();
+
+        /// <summary>
+        /// Creates the validation handler.
+        /// </summary>
+        /// <returns>IValidatorHandler.</returns>
+        public IValidatorHandler CreateValidationHandler() => DependencyInjection.DIContainer.Container.GetInstance<IValidatorHandler>();
 
         #endregion Methods
     }

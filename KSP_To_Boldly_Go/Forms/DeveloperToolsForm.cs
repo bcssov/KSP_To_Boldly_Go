@@ -20,7 +20,6 @@ using System.Windows.Forms;
 using KSP_To_Boldly_Go.Common;
 using KSP_To_Boldly_Go.Common.Models;
 using KSP_To_Boldly_Go.Common.Serializers;
-using KSP_To_Boldly_Go.Common.Validators;
 using Newtonsoft.Json;
 
 namespace KSP_To_Boldly_Go.Forms
@@ -259,14 +258,13 @@ namespace KSP_To_Boldly_Go.Forms
         private void validateConfigsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             List<IKopernicusObject> kopernicusObjects = GetKopernicusObjectsFromDirectory();
-            var validationResults = ValidatorManager.ValidateModels(kopernicusObjects);
-            if (validationResults?.Count > 0)
-            {
-                var form = formHandler.GetFormOrDefault<GenericOutputForm>();
-                form.SetContent(string.Format(Constants.ValidationResults, config.JsonConfigPath), string.Join(Environment.NewLine, validationResults));
-                form.ShowDialog(this);
-                form.Dispose();
-            }
+            var handler = handlerFactory.CreateValidationHandler();
+            var validationResults = handler.Validate(kopernicusObjects);
+            var isValid = handler.ValidateResults(validationResults);
+            var form = formHandler.GetFormOrDefault<GenericOutputForm>();
+            form.SetContent(Constants.ValidationResults, $"Directory: {config.JsonConfigPath}{Environment.NewLine}Is Valid: {isValid}{Environment.NewLine}{Environment.NewLine}{handler.FormatMessages(validationResults)}");
+            form.ShowDialog(this);
+            form.Dispose();
         }
 
         #endregion Methods
@@ -298,7 +296,7 @@ namespace KSP_To_Boldly_Go.Forms
             /// <summary>
             /// The validation results
             /// </summary>
-            public const string ValidationResults = "Validation Results: {0}";
+            public const string ValidationResults = "Validation Results";
 
             #endregion Fields
         }

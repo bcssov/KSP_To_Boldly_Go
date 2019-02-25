@@ -4,46 +4,60 @@
 // Created          : 04-01-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 04-01-2017
+// Last Modified On : 02-25-2019
 // ***********************************************************************
-// <copyright file="OrderValidator.cs" company="">
+// <copyright file="OrderValidator.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 using System;
-using KSP_To_Boldly_Go.Common.Models;
 using System.Collections.Generic;
 using System.Linq;
+using KSP_To_Boldly_Go.Common.Models;
 
 namespace KSP_To_Boldly_Go.Common.Validators
 {
     /// <summary>
     /// Class OrderValidator.
     /// </summary>
-    /// <seealso cref="KSP_To_Boldly_Go.Common.Validator.IValidator" />
+    /// <seealso cref="KSP_To_Boldly_Go.Common.Validators.IValidator" />
     public class OrderValidator : IValidator
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>The name.</value>
+        public string Name => typeof(OrderValidator).Name;
+
+        #endregion Properties
+
         #region Methods
 
         /// <summary>
-        /// Validates the specified kopernicus object.
+        /// Validates the specified kopernicus objects.
         /// </summary>
-        /// <param name="kopernicusObject">The kopernicus object.</param>
-        /// <returns>List&lt;System.String&gt;.</returns>
-        public List<string> Validate(IEnumerable<IKopernicusObject> kopernicusObject)
+        /// <param name="kopernicusObjects">The kopernicus objects.</param>
+        /// <returns>IEnumerable&lt;System.String&gt;.</returns>
+        public IValidationResult Validate(IEnumerable<IKopernicusObject> kopernicusObjects)
         {
-            var orders = kopernicusObject.GroupBy(p => p.Order).Where(p => p.Skip(1).Any()).SelectMany(p => p);
-            if (orders != null && orders.Count() > 0)
+            var result = new ValidationResult()
             {
-                List<string> results = new List<string>();
+                ValidationType = Name
+            };
+            var orders = kopernicusObjects.GroupBy(p => p.Order).Where(p => p.Skip(1).Any()).SelectMany(p => p);
+            if (orders?.Count() > 0)
+            {
+                var errors = new List<string>();
                 foreach (var order in orders)
                 {
-                    results.Add(string.Format("File {0} has the same order as {1}", order.FileName, order.Order));
+                    errors.Add($"File {order.FileName} has the same order as {order.Order}");
                 }
-                return results;
+                result.Errors = errors;
             }
-            return null;
+            return result;
         }
 
         #endregion Methods

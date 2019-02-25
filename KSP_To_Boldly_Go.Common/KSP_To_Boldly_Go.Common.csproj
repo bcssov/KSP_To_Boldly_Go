@@ -119,9 +119,13 @@
     <Compile Include="Converters\Object\SerializableExpandableObjectConverter.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Types\Color.cs" />
+    <Compile Include="Validators\IValidationResult.cs" />
     <Compile Include="Validators\IValidator.cs" />
+    <Compile Include="Validators\IValidatorHandler.cs" />
     <Compile Include="Validators\OrderValidator.cs" />
-    <Compile Include="Validators\ValidatorManager.cs" />
+    <Compile Include="Validators\ValidationResult.cs" />
+    <Compile Include="Validators\Enums.cs" />
+    <Compile Include="Validators\ValidatorHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

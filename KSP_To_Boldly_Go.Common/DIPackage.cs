@@ -63,6 +63,7 @@ namespace KSP_To_Boldly_Go.Common
             #region Validators
 
             container.Collection.Register(typeof(IValidator), typeof(IValidator).Assembly);
+            container.Register<IValidationResult, ValidationResult>();
 
             #endregion Validators
 
@@ -77,6 +78,7 @@ namespace KSP_To_Boldly_Go.Common
             container.RegisterSingleton<IConverterHandler, ConverterHandler>();
             container.RegisterSingleton<IModelHandler, ModelHandler>();
             container.RegisterSingleton<ITypeHandler, TypeHandler>();
+            container.RegisterSingleton<IValidatorHandler, ValidatorHandler>();
 
             #endregion Handlers
 
