@@ -165,7 +165,7 @@ namespace KSP_To_Boldly_Go.Forms
                 {
                     UpdateModelPath();
                     pgData.SelectedObject = model;
-                    Text = string.Format("{0}: {1}", initialTitle, Path.GetFileName(path));
+                    Text = $"{initialTitle} : {Path.GetFileName(path)}";
                 }
                 else
                 {
@@ -187,7 +187,7 @@ namespace KSP_To_Boldly_Go.Forms
                 var instance = handlerFactory.CreateModelHandler().CreateModel(form.SelectedType);
                 pgData.SelectedObject = instance;
                 model = instance;
-                Text = string.Format("{0}: {1}", initialTitle, form.SelectedType);
+                Text = $"{initialTitle} : {form.SelectedType}";
                 path = string.Empty;
                 UpdateModelPath();
             }
@@ -209,7 +209,7 @@ namespace KSP_To_Boldly_Go.Forms
                     {
                         path = saveFileDialog1.FileName;
                         UpdateModelPath();
-                        Text = string.Format("{0}: {1}", initialTitle, Path.GetFileName(path));
+                        Text = $"{initialTitle} : {Path.GetFileName(path)}";
                         File.WriteAllText(path, JsonConvert.SerializeObject(model));
                     }
                 }
@@ -235,7 +235,7 @@ namespace KSP_To_Boldly_Go.Forms
                     serializer.Serialize(model, ms);
                     var output = Encoding.ASCII.GetString(ms.ToArray());
                     var form = formHandler.GetFormOrDefault<GenericOutputForm>();
-                    form.SetContent(string.Format(Constants.SerializationFormTitle, path), output);
+                    form.SetContent($"{Constants.SerializationFormTitle} : {path}", output);
                     form.ShowDialog(this);
                     form.Dispose();
                 }
@@ -286,7 +286,7 @@ namespace KSP_To_Boldly_Go.Forms
             /// <summary>
             /// The serialization form title
             /// </summary>
-            public const string SerializationFormTitle = "Serialization Test Output: {0}";
+            public const string SerializationFormTitle = "Serialization Test Output";
 
             /// <summary>
             /// The serialization hash code

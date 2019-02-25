@@ -34,6 +34,11 @@ namespace KSP_To_Boldly_Go.Common.Serializers
         #region Fields
 
         /// <summary>
+        /// The tab spaces
+        /// </summary>
+        private const short tabSpaces = 4;
+
+        /// <summary>
         /// The seed
         /// </summary>
         private int _seed;
@@ -131,7 +136,12 @@ namespace KSP_To_Boldly_Go.Common.Serializers
         {
             for (int i = 0; i < tabIndent; i++)
             {
-                sb.Append("\t");
+                short spaces = 0;
+                while (spaces < tabSpaces)
+                {
+                    spaces++;
+                    sb.Append(" ");                    
+                }
             }
             if (values.Count() > 0)
             {

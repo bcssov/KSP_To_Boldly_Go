@@ -4,17 +4,17 @@
 // Created          : 01-23-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 01-24-2017
+// Last Modified On : 02-25-2019
 // ***********************************************************************
-// <copyright file="Color.cs" company="">
+// <copyright file="Color.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using KSP_To_Boldly_Go.Common.Converters.Object;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using KSP_To_Boldly_Go.Common.Converters.Object;
 
 namespace KSP_To_Boldly_Go.Common.Types
 {
@@ -202,11 +202,10 @@ namespace KSP_To_Boldly_Go.Common.Types
         {
             if (random != null)
             {
-                return string.Format("{0},{1},{2},{3}",
-                    Math.Round(Convert.ToDouble(R.GetValueOrDefault()) / 255D, 2).ToString(),
-                    Math.Round(Convert.ToDouble(G.GetValueOrDefault()) / 255D, 2).ToString(),
-                    Math.Round(Convert.ToDouble(B.GetValueOrDefault()) / 255D, 2).ToString(),
-                    Math.Round(Convert.ToDouble(A.GetValueOrDefault()) / 255D, 2).ToString());
+                return $"{Math.Round(Convert.ToDouble(R.GetValueOrDefault()) / 255D, 2).ToString()}," +
+                    $"{Math.Round(Convert.ToDouble(G.GetValueOrDefault()) / 255D, 2).ToString()}," +
+                    $"{Math.Round(Convert.ToDouble(B.GetValueOrDefault()) / 255D, 2).ToString()}," +
+                    $"{Math.Round(Convert.ToDouble(A.GetValueOrDefault()) / 255D, 2).ToString()}";
             }
             else
             {
@@ -229,12 +228,13 @@ namespace KSP_To_Boldly_Go.Common.Types
         /// </summary>
         /// <param name="property">The property.</param>
         /// <param name="value">The value.</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="System.ArgumentOutOfRangeException"></exception>
         private void ValidateEntry(string property, int? value)
         {
             if (value.GetValueOrDefault() < 0 || value.GetValueOrDefault() > 255)
             {
-                throw new ArgumentOutOfRangeException(string.Format("Invalid value {0} for {1}", property, value.GetValueOrDefault()));
+                throw new ArgumentOutOfRangeException($"Invalid value {property} for {value.GetValueOrDefault()}");
             }
         }
 
