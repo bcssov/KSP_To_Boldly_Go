@@ -76,7 +76,6 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <value><c>true</c> if this instance is changed; otherwise, <c>false</c>.</value>
         [JsonIgnore]
         [KopernicusSerializeIgnore]
-        [Browsable(false)]
         public bool IsChanged { get; set; }
 
         /// <summary>
@@ -285,7 +284,8 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <returns><c>true</c> if this instance is dirty; otherwise, <c>false</c>.</returns>
         public virtual bool IsDirty()
         {
-            var results = new List<bool>();
+            var results = new List<bool>() { IsChanged };
+
             foreach (var property in GetType().GetProperties())
             {
                 if (typeof(IEnumerable<IKopernicusObject>).IsAssignableFrom(property.PropertyType))
@@ -302,10 +302,11 @@ namespace KSP_To_Boldly_Go.Common.Models
                 else if (typeof(IKopernicusObject).IsAssignableFrom(property.PropertyType))
                 {
                     var propValue = property.GetValue(this);
-                    results.Add(!((IKopernicusObject)propValue).IsDirty());
+                    results.Add(((IKopernicusObject)propValue).IsDirty());
                 }
             }
-            return results.Count() == 0 ? false : results.All(p => p == true);
+
+            return results.Count() == 0 ? false : results.Any(p => p);
         }
 
         /// <summary>
@@ -478,12 +479,12 @@ namespace KSP_To_Boldly_Go.Common.Models
             /// <summary>
             /// The hidden internal properties
             /// </summary>
-            public static readonly string[] HiddenInternalProperties = new string[] { "Order", "Type", "ShowInternalProperties", "FileName" };
+            public static readonly string[] HiddenInternalProperties = new string[] { "Order", "Type", "IsChanged", "ShowInternalProperties", "FileName" };
 
             /// <summary>
             /// The partial hidden internal properties
             /// </summary>
-            public static readonly string[] PartialHiddenInternalProperties = new string[] { "ShowInternalProperties", "FileName" };
+            public static readonly string[] PartialHiddenInternalProperties = new string[] { "IsChanged", "ShowInternalProperties", "FileName" };
 
             #endregion Fields
         }
