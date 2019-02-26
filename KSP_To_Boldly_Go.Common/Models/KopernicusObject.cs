@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-25-2019
+// Last Modified On : 02-26-2019
 // ***********************************************************************
 // <copyright file="KopernicusObject.cs" company="Mario">
 //     Copyright ©  2017
@@ -15,11 +15,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using KSP_To_Boldly_Go.Common.Extensions;
 using KSP_To_Boldly_Go.Common.Serializers;
 using Newtonsoft.Json;
+using PropertyChanged;
 
 /// <summary>
 /// The Models namespace.
@@ -29,8 +29,9 @@ namespace KSP_To_Boldly_Go.Common.Models
     /// <summary>
     /// Class KopernicusObject.
     /// </summary>
-    /// <seealso cref="System.ComponentModel.ICustomTypeDescriptor" />
     /// <seealso cref="KSP_To_Boldly_Go.Common.Models.IKopernicusObject" />
+    /// <seealso cref="System.ComponentModel.ICustomTypeDescriptor" />
+    [AddINotifyPropertyChangedInterface]
     public abstract class KopernicusObject : IKopernicusObject, ICustomTypeDescriptor
     {
         #region Fields
@@ -42,19 +43,6 @@ namespace KSP_To_Boldly_Go.Common.Models
 
         #endregion Fields
 
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KopernicusObject" /> class.
-        /// </summary>
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "Design decision.")]
-        public KopernicusObject()
-        {
-            Initialize();
-        }
-
-        #endregion Constructors
-
         #region Properties
 
         /// <summary>
@@ -63,6 +51,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <value>The name of the file.</value>
         [JsonIgnore]
         [KopernicusSerializeIgnore]
+        [DoNotSetChanged]
         public string FileName
         {
             get;
@@ -82,11 +71,20 @@ namespace KSP_To_Boldly_Go.Common.Models
         }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this instance is changed.
+        /// </summary>
+        /// <value><c>true</c> if this instance is changed; otherwise, <c>false</c>.</value>
+        [JsonIgnore]
+        [KopernicusSerializeIgnore]
+        public bool IsChanged { get; set; }
+
+        /// <summary>
         /// Gets or sets the order.
         /// </summary>
         /// <value>The order.</value>
         [JsonProperty("$order")]
         [KopernicusSerializeIgnore]
+        [DoNotSetChanged]
         [Description("Determines in which order the config is serialized. Internal program property.")]
         public int Order
         {
@@ -100,6 +98,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <value><c>true</c> if [show internal properties]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
         [KopernicusSerializeIgnore]
+        [DoNotSetChanged]
         public bool ShowInternalProperties { get; set; } = false;
 
         /// <summary>
@@ -108,6 +107,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <value>The type.</value>
         [JsonProperty("$objectType")]
         [KopernicusSerializeIgnore]
+        [DoNotSetChanged]
         [Description("Used to initialize correct type. Internal program property.")]
         [ReadOnly(true)]
         public string Type
@@ -245,6 +245,71 @@ namespace KSP_To_Boldly_Go.Common.Models
         }
 
         /// <summary>
+        /// Initializes this instance.
+        /// </summary>
+        public virtual void Initialize()
+        {
+            var handler = DependencyInjection.DIContainer.Container.GetInstance<IModelHandler>();
+            foreach (var property in GetType().GetProperties())
+            {
+                if (typeof(IEnumerable<IKopernicusObject>).IsAssignableFrom(property.PropertyType))
+                {
+                    var col = property.GetValue(this, null) as IEnumerable;
+                    if (col == null)
+                    {
+                        var instance = handler.CreateCollection(property.PropertyType);
+                        foreach (var item in instance)
+                        {
+                            item.Initialize();
+                        }
+                        property.SetValue(this, instance, null);
+                    }
+                }
+                else if (typeof(IKopernicusObject).IsAssignableFrom(property.PropertyType))
+                {
+                    var propValue = property.GetValue(this);
+                    if (propValue == null)
+                    {
+                        var instance = handler.CreateModel(property.PropertyType);
+                        instance.Initialize();
+                        property.SetValue(this, instance);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Determines whether this instance is dirty.
+        /// </summary>
+        /// <returns><c>true</c> if this instance is dirty; otherwise, <c>false</c>.</returns>
+        public virtual bool IsDirty()
+        {
+            var results = new List<bool>() { IsChanged };
+
+            foreach (var property in GetType().GetProperties())
+            {
+                if (typeof(IEnumerable<IKopernicusObject>).IsAssignableFrom(property.PropertyType))
+                {
+                    var col = property.GetValue(this, null) as IEnumerable;
+                    if (col?.GetCount() > 0)
+                    {
+                        foreach (var item in col)
+                        {
+                            results.Add(((IKopernicusObject)item).IsDirty());
+                        }
+                    }
+                }
+                else if (typeof(IKopernicusObject).IsAssignableFrom(property.PropertyType))
+                {
+                    var propValue = property.GetValue(this);
+                    results.Add(((IKopernicusObject)propValue).IsDirty());
+                }
+            }
+
+            return results.Count() == 0 ? false : results.Any(p => p);
+        }
+
+        /// <summary>
         /// Determines whether this instance is empty.
         /// </summary>
         /// <returns><c>true</c> if this instance is empty; otherwise, <c>false</c>.</returns>
@@ -310,6 +375,40 @@ namespace KSP_To_Boldly_Go.Common.Models
         }
 
         /// <summary>
+        /// Sets the dirty flag.
+        /// </summary>
+        /// <param name="isDirty">if set to <c>true</c> [is dirty].</param>
+        public virtual void SetDirtyFlag(bool isDirty)
+        {
+            foreach (var property in GetType().GetProperties())
+            {
+                if (typeof(IEnumerable<IKopernicusObject>).IsAssignableFrom(property.PropertyType))
+                {
+                    var col = property.GetValue(this, null) as IEnumerable;
+                    if (col?.GetCount() > 0)
+                    {
+                        foreach (var item in col)
+                        {
+                            if (item != null)
+                            {
+                                ((IKopernicusObject)item).SetDirtyFlag(isDirty);
+                            }
+                        }
+                    }
+                }
+                else if (typeof(IKopernicusObject).IsAssignableFrom(property.PropertyType))
+                {
+                    var propValue = property.GetValue(this);
+                    if (propValue != null)
+                    {
+                        ((IKopernicusObject)propValue).SetDirtyFlag(isDirty);
+                    }
+                }
+            }
+            IsChanged = isDirty;
+        }
+
+        /// <summary>
         /// Shoulds the serialize order.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
@@ -361,27 +460,6 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <returns>System.String.</returns>
         protected abstract string GetObjectName();
 
-        /// <summary>
-        /// Initializes this instance.
-        /// </summary>
-        protected virtual void Initialize()
-        {
-            var handler = DependencyInjection.DIContainer.Container.GetInstance<IModelHandler>();
-            foreach (var property in GetType().GetProperties())
-            {
-                if (typeof(IEnumerable<IKopernicusObject>).IsAssignableFrom(property.PropertyType))
-                {
-                    var instance = handler.CreateCollection(property.PropertyType);
-                    property.SetValue(this, instance, null);
-                }
-                else if (typeof(IKopernicusObject).IsAssignableFrom(property.PropertyType))
-                {
-                    var instance = handler.CreateModel(property.PropertyType);
-                    property.SetValue(this, instance);
-                }
-            }
-        }
-
         #endregion Methods
 
         #region Classes
@@ -401,12 +479,12 @@ namespace KSP_To_Boldly_Go.Common.Models
             /// <summary>
             /// The hidden internal properties
             /// </summary>
-            public static readonly string[] HiddenInternalProperties = new string[] { "Order", "Type", "ShowInternalProperties", "FileName" };
+            public static readonly string[] HiddenInternalProperties = new string[] { "Order", "Type", "IsChanged", "ShowInternalProperties", "FileName" };
 
             /// <summary>
             /// The partial hidden internal properties
             /// </summary>
-            public static readonly string[] PartialHiddenInternalProperties = new string[] { "ShowInternalProperties", "FileName" };
+            public static readonly string[] PartialHiddenInternalProperties = new string[] { "IsChanged", "ShowInternalProperties", "FileName" };
 
             #endregion Fields
         }

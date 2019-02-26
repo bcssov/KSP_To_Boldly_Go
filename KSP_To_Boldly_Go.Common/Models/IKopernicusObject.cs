@@ -4,9 +4,9 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 04-01-2017
+// Last Modified On : 02-26-2019
 // ***********************************************************************
-// <copyright file="IKopernicusObject.cs" company="">
+// <copyright file="IKopernicusObject.cs" company="Mario">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
@@ -35,6 +35,12 @@ namespace KSP_To_Boldly_Go.Common.Models
         string Header { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this instance is changed.
+        /// </summary>
+        /// <value><c>true</c> if this instance is changed; otherwise, <c>false</c>.</value>
+        bool IsChanged { get; set; }
+
+        /// <summary>
         /// Gets or sets the order.
         /// </summary>
         /// <value>The order.</value>
@@ -57,10 +63,27 @@ namespace KSP_To_Boldly_Go.Common.Models
         #region Methods
 
         /// <summary>
+        /// Initializes this instance.
+        /// </summary>
+        void Initialize();
+
+        /// <summary>
+        /// Determines whether this instance is dirty.
+        /// </summary>
+        /// <returns><c>true</c> if this instance is dirty; otherwise, <c>false</c>.</returns>
+        bool IsDirty();
+
+        /// <summary>
         /// Determines whether this instance is empty.
         /// </summary>
         /// <returns><c>true</c> if this instance is empty; otherwise, <c>false</c>.</returns>
         bool IsEmpty();
+
+        /// <summary>
+        /// Sets the dirty flag.
+        /// </summary>
+        /// <param name="isDirty">if set to <c>true</c> [is dirty].</param>
+        void SetDirtyFlag(bool isDirty);
 
         #endregion Methods
     }

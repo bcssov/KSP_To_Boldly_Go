@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-25-2019
+// Last Modified On : 02-26-2019
 // ***********************************************************************
 // <copyright file="DeveloperToolsForm.cs" company="Mario">
 //     Copyright ©  2017
@@ -53,6 +53,11 @@ namespace KSP_To_Boldly_Go.Forms
         private string initialTitle = string.Empty;
 
         /// <summary>
+        /// The is dirty
+        /// </summary>
+        private bool isDirty = false;
+
+        /// <summary>
         /// The model
         /// </summary>
         private IKopernicusObject model = null;
@@ -87,11 +92,25 @@ namespace KSP_To_Boldly_Go.Forms
             this.handlerFactory = handlerFactory;
             initialTitle = Text;
             pgData.PropertySort = PropertySort.Alphabetical;
+            pgData.PropertyValueChanged += PgData_PropertyValueChanged;
+            FormClosing += DeveloperToolsForm_FormClosing;
         }
 
         #endregion Constructors
 
         #region Methods
+
+        /// <summary>
+        /// Checks the state of the model.
+        /// </summary>
+        private void CheckModelState()
+        {
+            isDirty = model.IsDirty();
+            if (isDirty)
+            {
+                Text = $"{Text}*";
+            }
+        }
 
         /// <summary>
         /// Handles the Click event of the closeToolStripMenuItem control.
@@ -105,6 +124,22 @@ namespace KSP_To_Boldly_Go.Forms
             if (!IsDisposed && !Disposing)
             {
                 Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Handles the FormClosing event of the DeveloperToolsForm control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
+        private void DeveloperToolsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isDirty)
+            {
+                if (MessageBox.Show(Constants.ChangesNotSavedMessage, Constants.ChangesNotSavedTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                }
             }
         }
 
@@ -166,6 +201,7 @@ namespace KSP_To_Boldly_Go.Forms
                     UpdateModelPath();
                     pgData.SelectedObject = model;
                     Text = $"{initialTitle} : {Path.GetFileName(path)}";
+                    CheckModelState();
                 }
                 else
                 {
@@ -190,7 +226,18 @@ namespace KSP_To_Boldly_Go.Forms
                 Text = $"{initialTitle} : {form.SelectedType}";
                 path = string.Empty;
                 UpdateModelPath();
+                CheckModelState();
             }
+        }
+
+        /// <summary>
+        /// Handles the PropertyValueChanged event of the PgData control.
+        /// </summary>
+        /// <param name="s">The source of the event.</param>
+        /// <param name="e">The <see cref="PropertyValueChangedEventArgs" /> instance containing the event data.</param>
+        private void PgData_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            CheckModelState();
         }
 
         /// <summary>
@@ -277,6 +324,16 @@ namespace KSP_To_Boldly_Go.Forms
         private class Constants
         {
             #region Fields
+
+            /// <summary>
+            /// The changes not saved message
+            /// </summary>
+            public const string ChangesNotSavedMessage = "Changes haven't been saved. Leave the form open?";
+
+            /// <summary>
+            /// The changes not saved title
+            /// </summary>
+            public const string ChangesNotSavedTitle = "Not Saved";
 
             /// <summary>
             /// The json extension
