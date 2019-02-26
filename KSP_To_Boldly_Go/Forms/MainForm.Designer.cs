@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnDevMode = new System.Windows.Forms.Button();
+            this.btnDevMode = new MaterialSkin.Controls.MaterialFlatButton();
             this.SuspendLayout();
             // 
             // btnDevMode
@@ -61,7 +61,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnDevMode;
+        private MaterialSkin.Controls.MaterialFlatButton btnDevMode;
     }
 }
 
