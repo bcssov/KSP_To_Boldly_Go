@@ -84,7 +84,10 @@
       },
       "Header": "@ScaledVersion"
     },
-    "Template": null,
+    "Template": {
+      "name": null,
+      "Header": null
+    },
     "Header": "@Body[Sun]"
   },
   "Header": "@Kopernicus:AFTER[Kopernicus]",
