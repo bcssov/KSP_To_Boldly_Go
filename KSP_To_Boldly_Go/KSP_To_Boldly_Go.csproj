@@ -79,6 +79,12 @@
     <Compile Include="Forms\DeveloperToolsForm.Designer.cs">
       <DependentUpon>DeveloperToolsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ColorSelectorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ColorSelectorForm.Designer.cs">
+      <DependentUpon>ColorSelectorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormHandler.cs" />
     <Compile Include="Forms\IFormHandler.cs" />
     <Compile Include="Forms\MainForm.cs">
@@ -106,6 +112,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\DeveloperToolsForm.resx">
       <DependentUpon>DeveloperToolsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ColorSelectorForm.resx">
+      <DependentUpon>ColorSelectorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

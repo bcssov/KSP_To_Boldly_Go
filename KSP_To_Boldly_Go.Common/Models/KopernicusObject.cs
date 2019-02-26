@@ -264,6 +264,13 @@ namespace KSP_To_Boldly_Go.Common.Models
                         }
                         property.SetValue(this, instance, null);
                     }
+                    else if (col.GetCount() > 0)
+                    {
+                        foreach (var item in col)
+                        {
+                            ((IKopernicusObject)item).Initialize();
+                        }
+                    }
                 }
                 else if (typeof(IKopernicusObject).IsAssignableFrom(property.PropertyType))
                 {
@@ -273,6 +280,10 @@ namespace KSP_To_Boldly_Go.Common.Models
                         var instance = handler.CreateModel(property.PropertyType);
                         instance.Initialize();
                         property.SetValue(this, instance);
+                    }
+                    else
+                    {
+                        ((IKopernicusObject)propValue).Initialize();
                     }
                 }
             }

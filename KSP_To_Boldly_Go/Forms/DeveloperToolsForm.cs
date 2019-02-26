@@ -131,12 +131,12 @@ namespace KSP_To_Boldly_Go.Forms
         /// Handles the FormClosing event of the DeveloperToolsForm control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs" /> instance containing the event data.</param>
         private void DeveloperToolsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (isDirty)
             {
-                if (MessageBox.Show(Constants.ChangesNotSavedMessage, Constants.ChangesNotSavedTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (!(MessageBox.Show(Constants.ChangesNotSavedMessage, Constants.ChangesNotSavedTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes))
                 {
                     e.Cancel = true;
                 }
@@ -328,7 +328,7 @@ namespace KSP_To_Boldly_Go.Forms
             /// <summary>
             /// The changes not saved message
             /// </summary>
-            public const string ChangesNotSavedMessage = "Changes haven't been saved. Leave the form open?";
+            public const string ChangesNotSavedMessage = "Changes haven't been saved. Are you sure you want to close the form?";
 
             /// <summary>
             /// The changes not saved title
