@@ -21,9 +21,9 @@ namespace KSP_To_Boldly_Go.Forms
     /// <summary>
     /// Class ColorSelectorForm.
     /// </summary>
-    /// <seealso cref="System.Windows.Forms.Form" />
+    /// <seealso cref="KSP_To_Boldly_Go.Forms.BaseStaticMaterialForm" />
     /// <seealso cref="KSP_To_Boldly_Go.Common.UI.IRangeColorForm" />
-    public partial class ColorSelectorForm : Form, IRangeColorForm
+    public partial class ColorSelectorForm : BaseStaticMaterialForm, IRangeColorForm
     {
         #region Constructors
 

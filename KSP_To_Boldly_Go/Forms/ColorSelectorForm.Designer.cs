@@ -45,7 +45,7 @@
             // pbMin
             // 
             this.pbMin.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbMin.Location = new System.Drawing.Point(12, 12);
+            this.pbMin.Location = new System.Drawing.Point(12, 68);
             this.pbMin.Name = "pbMin";
             this.pbMin.Size = new System.Drawing.Size(158, 57);
             this.pbMin.TabIndex = 0;
@@ -54,7 +54,7 @@
             // pbMax
             // 
             this.pbMax.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbMax.Location = new System.Drawing.Point(266, 12);
+            this.pbMax.Location = new System.Drawing.Point(266, 68);
             this.pbMax.Name = "pbMax";
             this.pbMax.Size = new System.Drawing.Size(158, 57);
             this.pbMax.TabIndex = 1;
@@ -62,7 +62,7 @@
             // 
             // btnMin
             // 
-            this.btnMin.Location = new System.Drawing.Point(12, 111);
+            this.btnMin.Location = new System.Drawing.Point(12, 167);
             this.btnMin.Name = "btnMin";
             this.btnMin.Size = new System.Drawing.Size(158, 35);
             this.btnMin.TabIndex = 2;
@@ -72,7 +72,7 @@
             // 
             // btnMax
             // 
-            this.btnMax.Location = new System.Drawing.Point(266, 111);
+            this.btnMax.Location = new System.Drawing.Point(266, 167);
             this.btnMax.Name = "btnMax";
             this.btnMax.Size = new System.Drawing.Size(158, 35);
             this.btnMax.TabIndex = 3;
@@ -83,7 +83,7 @@
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(12, 171);
+            this.button1.Location = new System.Drawing.Point(12, 227);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(189, 35);
             this.button1.TabIndex = 4;
@@ -93,7 +93,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(235, 171);
+            this.btnCancel.Location = new System.Drawing.Point(235, 227);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(189, 35);
             this.btnCancel.TabIndex = 5;
@@ -110,7 +110,7 @@
             // 
             // txtMin
             // 
-            this.txtMin.Location = new System.Drawing.Point(12, 81);
+            this.txtMin.Location = new System.Drawing.Point(12, 137);
             this.txtMin.Name = "txtMin";
             this.txtMin.ReadOnly = true;
             this.txtMin.Size = new System.Drawing.Size(158, 24);
@@ -119,7 +119,7 @@
             // 
             // txtMax
             // 
-            this.txtMax.Location = new System.Drawing.Point(266, 81);
+            this.txtMax.Location = new System.Drawing.Point(266, 137);
             this.txtMax.Name = "txtMax";
             this.txtMax.ReadOnly = true;
             this.txtMax.Size = new System.Drawing.Size(158, 24);
@@ -130,7 +130,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 220);
+            this.ClientSize = new System.Drawing.Size(436, 276);
             this.Controls.Add(this.txtMax);
             this.Controls.Add(this.txtMin);
             this.Controls.Add(this.btnCancel);
@@ -140,7 +140,6 @@
             this.Controls.Add(this.pbMax);
             this.Controls.Add(this.pbMin);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ColorSelectorForm";
             this.Text = "Color Selector";

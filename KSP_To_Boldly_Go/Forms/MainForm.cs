@@ -21,8 +21,8 @@ namespace KSP_To_Boldly_Go.Forms
     /// <summary>
     /// Class MainForm.
     /// </summary>
-    /// <seealso cref="System.Windows.Forms.Form" />
-    public partial class MainForm : Form
+    /// <seealso cref="KSP_To_Boldly_Go.Forms.BaseMaterialForm" />
+    public partial class MainForm : BaseMaterialForm
     {
         #region Fields
 
