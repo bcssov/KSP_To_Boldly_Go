@@ -105,6 +105,12 @@
     <Compile Include="Forms\GenericOutputForm.Designer.cs">
       <DependentUpon>GenericOutputForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\YesNoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\YesNoForm.Designer.cs">
+      <DependentUpon>YesNoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="IConfiguration.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="Logger.cs" />
@@ -124,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GenericOutputForm.resx">
       <DependentUpon>GenericOutputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\YesNoForm.resx">
+      <DependentUpon>YesNoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

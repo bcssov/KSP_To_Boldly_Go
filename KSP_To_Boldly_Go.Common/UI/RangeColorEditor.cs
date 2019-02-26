@@ -61,6 +61,8 @@ namespace KSP_To_Boldly_Go.Common.UI
                 {
                     rangeColor.Max = maxColor;
                 }
+                form.Close();
+                form.Dispose();
             }
 
             return rangeColor;

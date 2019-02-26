@@ -64,8 +64,8 @@ namespace KSP_To_Boldly_Go.Forms
         {
             pbMax.BackColor = max;
             pbMin.BackColor = min;
-            txtMin.Text = min.ToString();
-            txtMax.Text = max.ToString();
+            txtMin.Text = FormatColorString(min);
+            txtMax.Text = FormatColorString(max);
         }
 
         /// <summary>
@@ -89,6 +89,16 @@ namespace KSP_To_Boldly_Go.Forms
         }
 
         /// <summary>
+        /// Formats the color string.
+        /// </summary>
+        /// <param name="color">The color.</param>
+        /// <returns>System.String.</returns>
+        private string FormatColorString(Color color)
+        {
+            return $"R:{color.R}, G:{color.G}, B:{color.B}, A:{color.A}";
+        }
+
+        /// <summary>
         /// Sets the color selection.
         /// </summary>
         /// <param name="colorDialog">The color dialog.</param>
@@ -99,7 +109,7 @@ namespace KSP_To_Boldly_Go.Forms
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 pb.BackColor = colorDialog.Color;
-                txt.Text = pb.BackColor.ToString();
+                txt.Text = FormatColorString(pb.BackColor);
             }
         }
 

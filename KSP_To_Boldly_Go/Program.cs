@@ -137,6 +137,7 @@ namespace KSP_To_Boldly_Go
             container.RegisterWithoutTransientWarning<DeveloperToolsForm>();
             container.RegisterWithoutTransientWarning<GenericOutputForm>();
             container.RegisterWithoutTransientWarning<NewObjectForm>();
+            container.RegisterWithoutTransientWarning<YesNoForm>();
             container.RegisterWithoutTransientWarning<IRangeColorForm, ColorSelectorForm>();
 
             #endregion Forms

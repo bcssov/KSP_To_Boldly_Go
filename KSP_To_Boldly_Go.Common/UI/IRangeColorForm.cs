@@ -20,7 +20,8 @@ namespace KSP_To_Boldly_Go.Common.UI
     /// <summary>
     /// Interface IRangeColorForm
     /// </summary>
-    public interface IRangeColorForm
+    /// <seealso cref="System.IDisposable" />
+    public interface IRangeColorForm : IDisposable
     {
         #region Properties
 
@@ -39,6 +40,11 @@ namespace KSP_To_Boldly_Go.Common.UI
         #endregion Properties
 
         #region Methods
+
+        /// <summary>
+        /// Closes this instance.
+        /// </summary>
+        void Close();
 
         /// <summary>
         /// Sets the colors.

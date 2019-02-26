@@ -136,10 +136,14 @@ namespace KSP_To_Boldly_Go.Forms
         {
             if (isDirty)
             {
-                if (!(MessageBox.Show(Constants.ChangesNotSavedMessage, Constants.ChangesNotSavedTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes))
+                var form = formHandler.GetFormOrDefault<YesNoForm>();
+                form.SetContent(Constants.ChangesNotSavedTitle, Constants.ChangesNotSavedMessage);
+                if (form.ShowDialog(this) == DialogResult.Yes)
                 {
                     e.Cancel = true;
                 }
+                form.Close();
+                form.Dispose();
             }
         }
 
@@ -328,7 +332,7 @@ namespace KSP_To_Boldly_Go.Forms
             /// <summary>
             /// The changes not saved message
             /// </summary>
-            public const string ChangesNotSavedMessage = "Changes haven't been saved. Are you sure you want to close the form?";
+            public const string ChangesNotSavedMessage = "Changes haven't been saved. Do you want to cancel the closing operation?";
 
             /// <summary>
             /// The changes not saved title
