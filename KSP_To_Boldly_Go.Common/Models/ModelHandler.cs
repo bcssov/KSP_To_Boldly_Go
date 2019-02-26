@@ -4,7 +4,7 @@
 // Created          : 02-25-2019
 //
 // Last Modified By : Mario
-// Last Modified On : 02-25-2019
+// Last Modified On : 02-26-2019
 // ***********************************************************************
 // <copyright file="ModelHandler.cs" company="Mario">
 //     Copyright ©  2017
@@ -28,7 +28,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModelHandler"/> class.
+        /// Initializes a new instance of the <see cref="ModelHandler" /> class.
         /// </summary>
         /// <param name="kopernicusObjects">The kopernicus objects.</param>
         /// <param name="kopernicusRootObjects">The kopernicus root objects.</param>
@@ -70,6 +70,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>IEnumerable&lt;IKopernicusObject&gt;.</returns>
+        /// <exception cref="System.ArgumentException">Invalid type.</exception>
         /// <exception cref="ArgumentException">Invalid type.</exception>
         public IEnumerable<IKopernicusObject> CreateCollection(Type type)
         {
@@ -94,6 +95,7 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>IKopernicusObject.</returns>
+        /// <exception cref="System.ArgumentException">Invalid type.</exception>
         /// <exception cref="ArgumentException">Invalid type.</exception>
         public IKopernicusObject CreateModel(Type type)
         {
@@ -101,7 +103,13 @@ namespace KSP_To_Boldly_Go.Common.Models
             {
                 throw new ArgumentException("Invalid type.");
             }
-            return (IKopernicusObject)DependencyInjection.DIContainer.Container.GetInstance(type);
+            var instance = (IKopernicusObject)DependencyInjection.DIContainer.Container.GetInstance(type);
+            if (instance is IKopernicusRootObject)
+            {
+                instance.Initialize();
+                instance.SetDirtyFlag(false);
+            }
+            return instance;
         }
 
         /// <summary>
@@ -133,6 +141,11 @@ namespace KSP_To_Boldly_Go.Common.Models
                     var type = KopernicusObjects.FirstOrDefault(p => p.GetType().Name == obj.Type).GetType();
                     var instance = (IKopernicusObject)JsonConvert.DeserializeObject(json, type);
                     instance.ShowInternalProperties = true;
+                    if (instance is IKopernicusRootObject)
+                    {
+                        instance.Initialize();
+                        instance.SetDirtyFlag(false);
+                    }
                     return instance;
                 }
             }
