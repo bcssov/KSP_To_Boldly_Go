@@ -4,7 +4,7 @@
 // Created          : 02-23-2019
 //
 // Last Modified By : Mario
-// Last Modified On : 02-25-2019
+// Last Modified On : 02-26-2019
 // ***********************************************************************
 // <copyright file="DIExtensions.cs" company="Mario">
 //     Copyright ©  2019
@@ -36,6 +36,7 @@ namespace KSP_To_Boldly_Go.DependencyInjection
         /// </summary>
         /// <typeparam name="TFactory">The type of the t factory.</typeparam>
         /// <param name="container">The container.</param>
+        /// <exception cref="System.ArgumentException"></exception>
         /// <exception cref="ArgumentException"></exception>
         public static void RegisterFactory<TFactory>(this Container container)
         {
@@ -61,6 +62,19 @@ namespace KSP_To_Boldly_Go.DependencyInjection
         public static void RegisterWithoutTransientWarning<T>(this Container container) where T : class
         {
             container.Register<T>();
+            var registration = container.GetRegistration(typeof(T)).Registration;
+            registration.SuppressDiagnosticWarning(SimpleInjector.Diagnostics.DiagnosticType.DisposableTransientComponent, "Using WinForms.");
+        }
+
+        /// <summary>
+        /// Registers the without transient warning.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T2">The type of the t2.</typeparam>
+        /// <param name="container">The container.</param>
+        public static void RegisterWithoutTransientWarning<T, T2>(this Container container) where T : class where T2 : class, T
+        {
+            container.Register<T, T2>();
             var registration = container.GetRegistration(typeof(T)).Registration;
             registration.SuppressDiagnosticWarning(SimpleInjector.Diagnostics.DiagnosticType.DisposableTransientComponent, "Using WinForms.");
         }

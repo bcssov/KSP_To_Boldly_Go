@@ -4,7 +4,7 @@
 // Created          : 02-25-2019
 //
 // Last Modified By : Mario
-// Last Modified On : 02-25-2019
+// Last Modified On : 02-26-2019
 // ***********************************************************************
 // <copyright file="RangeColorEditor.cs" company="Mario">
 //     Copyright ©  2017
@@ -45,18 +45,22 @@ namespace KSP_To_Boldly_Go.Common.UI
             {
                 rangeColor = new RangeColor();
             }
-            var colorDialogMin = InitColorDialog(rangeColor.Min, "Min Color");
-            var colorDialogMax = InitColorDialog(rangeColor.Max, "Max Color");
 
-            var minColor = MapColorDialog(colorDialogMin);
-            var maxColor = MapColorDialog(colorDialogMax);
-            if (minColor != null)
+            var form = (IRangeColorForm)DependencyInjection.DIContainer.Container.GetInstance(typeof(IRangeColorForm));
+            form.SetColors(ToSystemColor(rangeColor.Min), ToSystemColor(rangeColor.Max));
+
+            if (form.ShowDialog() == DialogResult.OK)
             {
-                rangeColor.Min = minColor;
-            }
-            if (maxColor != null)
-            {
-                rangeColor.Max = maxColor;
+                var minColor = FromSystemColor(form.Min);
+                var maxColor = FromSystemColor(form.Max);
+                if (minColor != null)
+                {
+                    rangeColor.Min = minColor;
+                }
+                if (maxColor != null)
+                {
+                    rangeColor.Max = maxColor;
+                }
             }
 
             return rangeColor;
@@ -73,39 +77,36 @@ namespace KSP_To_Boldly_Go.Common.UI
         }
 
         /// <summary>
-        /// Initializes the color dialog.
+        /// Froms the color of the system.
         /// </summary>
         /// <param name="color">The color.</param>
-        /// <param name="title">The title.</param>
-        /// <returns>ColorDialog.</returns>
-        private ColorDialog InitColorDialog(Color color, string title)
-        {
-            var colorDialog = new ColorDialog
-            {
-                Color = color != null ? System.Drawing.Color.FromArgb(color.A.GetValueOrDefault(), color.R.GetValueOrDefault(), color.G.GetValueOrDefault(), color.B.GetValueOrDefault()) : System.Drawing.Color.Empty,
-                Title = title
-            };
-            return colorDialog;
-        }
-
-        /// <summary>
-        /// Maps the color dialog.
-        /// </summary>
-        /// <param name="dialog">The dialog.</param>
         /// <returns>Color.</returns>
-        private Color MapColorDialog(ColorDialog dialog)
+        private Color FromSystemColor(System.Drawing.Color color)
         {
-            if (dialog.ShowDialog() == DialogResult.OK && dialog.Color != System.Drawing.Color.Empty)
+            if (color != System.Drawing.Color.Empty)
             {
                 return new Color()
                 {
-                    A = dialog.Color.A,
-                    B = dialog.Color.B,
-                    G = dialog.Color.G,
-                    R = dialog.Color.R
+                    A = color.A,
+                    B = color.B,
+                    G = color.G,
+                    R = color.R
                 };
             }
             return null;
+        }
+
+        /// <summary>
+        /// To the color of the system.
+        /// </summary>
+        /// <param name="color">The color.</param>
+        /// <returns>System.Drawing.Color.</returns>
+        private System.Drawing.Color ToSystemColor(Color color)
+        {
+            return color != null ? System.Drawing.Color.FromArgb(color.A.GetValueOrDefault(),
+                color.R.GetValueOrDefault(),
+                color.G.GetValueOrDefault(),
+                color.B.GetValueOrDefault()) : System.Drawing.Color.Empty;
         }
 
         #endregion Methods

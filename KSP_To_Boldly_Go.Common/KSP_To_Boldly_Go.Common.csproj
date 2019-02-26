@@ -129,6 +129,7 @@
     <Compile Include="UI\ColorDialog.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\IRangeColorForm.cs" />
     <Compile Include="UI\RangeColorEditor.cs" />
     <Compile Include="Validators\IValidationResult.cs" />
     <Compile Include="Validators\IValidator.cs" />

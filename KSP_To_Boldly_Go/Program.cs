@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-25-2019
+// Last Modified On : 02-26-2019
 // ***********************************************************************
 // <copyright file="Program.cs" company="Mario">
 //     Copyright ©  2017
@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
+using KSP_To_Boldly_Go.Common.UI;
 using KSP_To_Boldly_Go.DependencyInjection;
 using KSP_To_Boldly_Go.Forms;
 
@@ -136,6 +137,7 @@ namespace KSP_To_Boldly_Go
             container.RegisterWithoutTransientWarning<DeveloperToolsForm>();
             container.RegisterWithoutTransientWarning<GenericOutputForm>();
             container.RegisterWithoutTransientWarning<NewObjectForm>();
+            container.RegisterWithoutTransientWarning<IRangeColorForm, ColorSelectorForm>();
 
             #endregion Forms
 
