@@ -37,6 +37,26 @@ namespace KSP_To_Boldly_Go
         /// <value>The json configuration path.</value>
         public string JsonConfigPath { get; } = Path.Combine(Application.StartupPath, Constants.ConfigResources);
 
+        /// <summary>
+        /// Gets or sets the theme.
+        /// </summary>
+        /// <value>The theme.</value>
+        public Theme Theme
+        {
+            get
+            {
+                return Properties.Settings.Default.Theme;
+            }
+            set
+            {
+                if (value != Properties.Settings.Default.Theme)
+                {
+                    Properties.Settings.Default.Theme = value;
+                    Properties.Settings.Default.Save();
+                }
+            }
+        }
+
         #endregion Properties
 
         #region Classes

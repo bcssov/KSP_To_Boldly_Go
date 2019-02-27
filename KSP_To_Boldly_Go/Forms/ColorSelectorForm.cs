@@ -28,9 +28,10 @@ namespace KSP_To_Boldly_Go.Forms
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ColorSelectorForm" /> class.
+        /// Initializes a new instance of the <see cref="ColorSelectorForm"/> class.
         /// </summary>
-        public ColorSelectorForm()
+        /// <param name="config">The configuration.</param>
+        public ColorSelectorForm(IConfiguration config) : base(config)
         {
             InitializeComponent();
         }

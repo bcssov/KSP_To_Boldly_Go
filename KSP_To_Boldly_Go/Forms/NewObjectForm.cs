@@ -41,10 +41,11 @@ namespace KSP_To_Boldly_Go.Forms
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NewObjectForm" /> class.
+        /// Initializes a new instance of the <see cref="NewObjectForm"/> class.
         /// </summary>
         /// <param name="handlerFactory">The handler factory.</param>
-        public NewObjectForm(IHandlerFactory handlerFactory)
+        /// <param name="config">The configuration.</param>
+        public NewObjectForm(IHandlerFactory handlerFactory, IConfiguration config) : base(config)
         {
             InitializeComponent();
             this.handlerFactory = handlerFactory;

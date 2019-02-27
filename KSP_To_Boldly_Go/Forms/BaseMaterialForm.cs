@@ -4,7 +4,7 @@
 // Created          : 02-26-2019
 //
 // Last Modified By : Mario
-// Last Modified On : 02-26-2019
+// Last Modified On : 02-27-2019
 // ***********************************************************************
 // <copyright file="BaseMaterialForm.cs" company="Mario">
 //     Copyright ©  2017-2019
@@ -24,14 +24,25 @@ namespace KSP_To_Boldly_Go.Forms
     /// <seealso cref="MaterialForm" />
     public class BaseMaterialForm : MaterialForm
     {
+        #region Fields
+
+        /// <summary>
+        /// The configuration
+        /// </summary>
+        protected IConfiguration configuration;
+
+        #endregion Fields
+
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseMaterialForm"/> class.
+        /// Initializes a new instance of the <see cref="BaseMaterialForm" /> class.
         /// </summary>
-        public BaseMaterialForm()
+        /// <param name="configuration">The configuration.</param>
+        public BaseMaterialForm(IConfiguration configuration)
         {
-            InitSkin();
+            InitForm();
+            this.configuration = configuration;
         }
 
         #endregion Constructors
@@ -39,15 +50,32 @@ namespace KSP_To_Boldly_Go.Forms
         #region Methods
 
         /// <summary>
-        /// Initializes the skin.
+        /// Initializes the form.
         /// </summary>
-        private void InitSkin()
+        protected void InitForm()
         {
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+        }
+
+        /// <summary>
+        /// Initializes the skin.
+        /// </summary>
+        protected void InitSkin()
+        {
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.Theme = configuration.Theme == Theme.Dark ? MaterialSkinManager.Themes.DARK : MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Form.Load" /> event.
+        /// </summary>
+        /// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            InitSkin();
         }
 
         #endregion Methods

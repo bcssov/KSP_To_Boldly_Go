@@ -33,11 +33,6 @@ namespace KSP_To_Boldly_Go.Forms
         #region Fields
 
         /// <summary>
-        /// The configuration
-        /// </summary>
-        private IConfiguration config;
-
-        /// <summary>
         /// The form handler
         /// </summary>
         private IFormHandler formHandler;
@@ -77,16 +72,15 @@ namespace KSP_To_Boldly_Go.Forms
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DeveloperToolsForm" /> class.
+        /// Initializes a new instance of the <see cref="DeveloperToolsForm"/> class.
         /// </summary>
         /// <param name="config">The configuration.</param>
         /// <param name="formHandler">The form handler.</param>
         /// <param name="serializer">The serializer.</param>
         /// <param name="handlerFactory">The handler factory.</param>
-        public DeveloperToolsForm(IConfiguration config, IFormHandler formHandler, IKopernicusSerializer serializer, IHandlerFactory handlerFactory)
+        public DeveloperToolsForm(IConfiguration config, IFormHandler formHandler, IKopernicusSerializer serializer, IHandlerFactory handlerFactory) : base(config)
         {
-            InitializeComponent();
-            this.config = config;
+            InitializeComponent();            
             this.formHandler = formHandler;
             this.serializer = serializer;
             this.handlerFactory = handlerFactory;
@@ -155,7 +149,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// <returns>List&lt;IKopernicusObject&gt;.</returns>
         private List<IKopernicusObject> GetKopernicusObjectsFromDirectory()
         {
-            var files = Directory.EnumerateFileSystemEntries(config.JsonConfigPath, Constants.JSONExtension, SearchOption.AllDirectories);
+            var files = Directory.EnumerateFileSystemEntries(configuration.JsonConfigPath, Constants.JSONExtension, SearchOption.AllDirectories);
             if (files != null && files.Count() > 0)
             {
                 List<IKopernicusObject> kopernicusObjects = new List<IKopernicusObject>();
@@ -196,7 +190,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = config.JsonConfigPath;
+            openFileDialog1.InitialDirectory = configuration.JsonConfigPath;
             if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
             {
                 path = openFileDialog1.FileName;
@@ -257,7 +251,7 @@ namespace KSP_To_Boldly_Go.Forms
             {
                 if (string.IsNullOrWhiteSpace(path))
                 {
-                    saveFileDialog1.InitialDirectory = config.JsonConfigPath;
+                    saveFileDialog1.InitialDirectory = configuration.JsonConfigPath;
                     if (saveFileDialog1.ShowDialog(this) == DialogResult.OK)
                     {
                         path = saveFileDialog1.FileName;
@@ -315,7 +309,7 @@ namespace KSP_To_Boldly_Go.Forms
             var validationResults = handler.Validate(kopernicusObjects);
             var isValid = handler.ValidateResults(validationResults);
             var form = formHandler.GetFormOrDefault<GenericOutputForm>();
-            form.SetContent(Constants.ValidationResults, $"Directory: {config.JsonConfigPath}{Environment.NewLine}Is Valid: {isValid}{Environment.NewLine}{Environment.NewLine}{handler.FormatMessages(validationResults)}");
+            form.SetContent(Constants.ValidationResults, $"Directory: {configuration.JsonConfigPath}{Environment.NewLine}Is Valid: {isValid}{Environment.NewLine}{Environment.NewLine}{handler.FormatMessages(validationResults)}");
             form.ShowDialog(this);
             form.Dispose();
         }
