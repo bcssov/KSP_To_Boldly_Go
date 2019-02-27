@@ -84,7 +84,6 @@ namespace KSP_To_Boldly_Go.Common.Models
         /// <value>The order.</value>
         [JsonProperty("$order")]
         [KopernicusSerializeIgnore]
-        [DoNotSetChanged]
         [Description("Determines in which order the config is serialized. Internal program property.")]
         public int Order
         {

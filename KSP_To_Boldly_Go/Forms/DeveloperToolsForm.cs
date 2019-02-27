@@ -100,12 +100,12 @@ namespace KSP_To_Boldly_Go.Forms
         private void CheckModelState()
         {
             isDirty = model.IsDirty();
-            if (isDirty)
+            if (isDirty && !Text.EndsWith("*"))
             {
                 Text = $"{Text}*";
-                // Workaround for theming slow update
-                Refresh();
             }
+            // Workaround for theming slow update
+            Refresh();
         }
 
         /// <summary>
@@ -179,6 +179,7 @@ namespace KSP_To_Boldly_Go.Forms
                 {
                     model.Order = kopernicusObjects.OrderByDescending(p => p.Order).First().Order + 1;
                     pgData.Refresh();
+                    CheckModelState();
                 }
             }
         }
@@ -281,10 +282,13 @@ namespace KSP_To_Boldly_Go.Forms
                     serializer.Seed = Constants.SerializationHashCode.GetHashCode();
                     serializer.Serialize(model, ms);
                     var output = Encoding.ASCII.GetString(ms.ToArray());
-                    var form = formHandler.GetFormOrDefault<GenericOutputForm>();
-                    form.SetContent($"{Constants.SerializationFormTitle} : {path}", output);
-                    form.ShowDialog(this);
-                    form.Dispose();
+                    if (!string.IsNullOrWhiteSpace(output))
+                    {
+                        var form = formHandler.GetFormOrDefault<GenericOutputForm>();
+                        form.SetContent($"{Constants.SerializationFormTitle} : {path}", output);
+                        form.ShowDialog(this);
+                        form.Dispose();
+                    }                    
                 }
             }
         }
