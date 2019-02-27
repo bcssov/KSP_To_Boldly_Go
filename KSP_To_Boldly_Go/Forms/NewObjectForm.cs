@@ -14,7 +14,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 using KSP_To_Boldly_Go.Common;
 
 namespace KSP_To_Boldly_Go.Forms
@@ -22,8 +21,8 @@ namespace KSP_To_Boldly_Go.Forms
     /// <summary>
     /// Class NewObjectForm.
     /// </summary>
-    /// <seealso cref="System.Windows.Forms.Form" />
-    public partial class NewObjectForm : Form
+    /// <seealso cref="KSP_To_Boldly_Go.Forms.BaseStaticMaterialForm" />
+    public partial class NewObjectForm : BaseStaticMaterialForm
     {
         #region Fields
 

@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnDevMode = new System.Windows.Forms.Button();
+            this.btnDevMode = new Controls.FlatMaterialButton();
             this.SuspendLayout();
             // 
             // btnDevMode
             // 
             this.btnDevMode.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnDevMode.Location = new System.Drawing.Point(209, 17);
-            this.btnDevMode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDevMode.Location = new System.Drawing.Point(218, 71);
+            this.btnDevMode.Margin = new System.Windows.Forms.Padding(4);
             this.btnDevMode.Name = "btnDevMode";
             this.btnDevMode.Size = new System.Drawing.Size(112, 32);
             this.btnDevMode.TabIndex = 0;
@@ -51,7 +51,7 @@
             this.ClientSize = new System.Drawing.Size(576, 250);
             this.Controls.Add(this.btnDevMode);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "To Boldly Go";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -61,7 +61,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnDevMode;
+        private Controls.FlatMaterialButton btnDevMode;
     }
 }
 

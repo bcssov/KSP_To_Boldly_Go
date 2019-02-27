@@ -21,9 +21,9 @@ namespace KSP_To_Boldly_Go.Forms
     /// <summary>
     /// Class ColorSelectorForm.
     /// </summary>
-    /// <seealso cref="System.Windows.Forms.Form" />
+    /// <seealso cref="KSP_To_Boldly_Go.Forms.BaseStaticMaterialForm" />
     /// <seealso cref="KSP_To_Boldly_Go.Common.UI.IRangeColorForm" />
-    public partial class ColorSelectorForm : Form, IRangeColorForm
+    public partial class ColorSelectorForm : BaseStaticMaterialForm, IRangeColorForm
     {
         #region Constructors
 
@@ -104,7 +104,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="colorDialog">The color dialog.</param>
         /// <param name="pb">The pb.</param>
         /// <param name="txt">The text.</param>
-        private void SetColorSelection(Common.UI.ColorDialog colorDialog, PictureBox pb, TextBox txt)
+        private void SetColorSelection(Common.UI.ColorDialog colorDialog, PictureBox pb, MaterialSkin.Controls.MaterialSingleLineTextField txt)
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {

@@ -50,13 +50,15 @@
             // 
             // panel2
             // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.pgData);
             this.panel2.Controls.Add(this.menuStrip1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Location = new System.Drawing.Point(0, 62);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1091, 726);
+            this.panel2.Size = new System.Drawing.Size(1092, 664);
             this.panel2.TabIndex = 4;
             // 
             // pgData
@@ -65,7 +67,7 @@
             this.pgData.Location = new System.Drawing.Point(0, 25);
             this.pgData.Margin = new System.Windows.Forms.Padding(4);
             this.pgData.Name = "pgData";
-            this.pgData.Size = new System.Drawing.Size(1091, 701);
+            this.pgData.Size = new System.Drawing.Size(1092, 639);
             this.pgData.TabIndex = 1;
             this.pgData.ToolbarVisible = false;
             // 
@@ -77,7 +79,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1091, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(1092, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 

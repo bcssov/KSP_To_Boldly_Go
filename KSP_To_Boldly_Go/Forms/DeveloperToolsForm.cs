@@ -27,8 +27,8 @@ namespace KSP_To_Boldly_Go.Forms
     /// <summary>
     /// Class DeveloperToolsForm.
     /// </summary>
-    /// <seealso cref="System.Windows.Forms.Form" />
-    public partial class DeveloperToolsForm : Form
+    /// <seealso cref="KSP_To_Boldly_Go.Forms.BaseMaterialForm" />
+    public partial class DeveloperToolsForm : BaseMaterialForm
     {
         #region Fields
 
@@ -109,6 +109,8 @@ namespace KSP_To_Boldly_Go.Forms
             if (isDirty)
             {
                 Text = $"{Text}*";
+                // Workaround for theming slow update
+                Refresh();
             }
         }
 

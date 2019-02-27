@@ -12,15 +12,14 @@
 // <summary></summary>
 // ***********************************************************************
 using System;
-using System.Windows.Forms;
 
 namespace KSP_To_Boldly_Go.Forms
 {
     /// <summary>
     /// Class GenericOutputForm.
     /// </summary>
-    /// <seealso cref="System.Windows.Forms.Form" />
-    public partial class GenericOutputForm : Form
+    /// <seealso cref="KSP_To_Boldly_Go.Forms.BaseStaticMaterialForm" />
+    public partial class GenericOutputForm : BaseStaticMaterialForm
     {
         #region Constructors
 
