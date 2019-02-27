@@ -30,10 +30,10 @@
         {
             this.pbMin = new System.Windows.Forms.PictureBox();
             this.pbMax = new System.Windows.Forms.PictureBox();
-            this.btnMin = new MaterialSkin.Controls.MaterialFlatButton();
-            this.btnMax = new MaterialSkin.Controls.MaterialFlatButton();
-            this.btnOk = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.btnCancel = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.btnMin = new Controls.FlatMaterialButton();
+            this.btnMax = new Controls.FlatMaterialButton();
+            this.btnOk = new Controls.RaisedMaterialButton();
+            this.btnCancel = new Controls.RaisedMaterialButton();
             this.minColor = new KSP_To_Boldly_Go.Common.UI.ColorDialog();
             this.maxColor = new KSP_To_Boldly_Go.Common.UI.ColorDialog();
             this.txtMin = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -197,10 +197,10 @@
 
         private System.Windows.Forms.PictureBox pbMin;
         private System.Windows.Forms.PictureBox pbMax;
-        private MaterialSkin.Controls.MaterialFlatButton btnMin;
-        private MaterialSkin.Controls.MaterialFlatButton btnMax;
-        private MaterialSkin.Controls.MaterialRaisedButton btnOk;
-        private MaterialSkin.Controls.MaterialRaisedButton btnCancel;
+        private Controls.FlatMaterialButton btnMin;
+        private Controls.FlatMaterialButton btnMax;
+        private Controls.RaisedMaterialButton btnOk;
+        private Controls.RaisedMaterialButton btnCancel;
         private Common.UI.ColorDialog minColor;
         private Common.UI.ColorDialog maxColor;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtMin;

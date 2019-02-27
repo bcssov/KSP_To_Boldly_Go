@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.cbList = new System.Windows.Forms.ComboBox();
-            this.btnOk = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.btnCancel = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.btnOk = new Controls.RaisedMaterialButton();
+            this.btnCancel = new Controls.RaisedMaterialButton();
             this.SuspendLayout();
             // 
             // cbList
@@ -97,7 +97,7 @@
         #endregion
 
         private System.Windows.Forms.ComboBox cbList;
-        private MaterialSkin.Controls.MaterialRaisedButton btnOk;
-        private MaterialSkin.Controls.MaterialRaisedButton btnCancel;
+        private Controls.RaisedMaterialButton btnOk;
+        private Controls.RaisedMaterialButton btnCancel;
     }
 }

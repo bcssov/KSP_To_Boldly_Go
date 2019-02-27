@@ -76,6 +76,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
+    <Compile Include="Controls\FlatMaterialButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\RaisedMaterialButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\BaseMaterialForm.cs">
       <SubType>Form</SubType>
     </Compile>

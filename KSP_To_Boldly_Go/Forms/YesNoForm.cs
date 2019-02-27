@@ -20,7 +20,7 @@ namespace KSP_To_Boldly_Go.Forms
     /// Class YesNoForm.
     /// </summary>
     /// <seealso cref="System.Windows.Forms.Form" />
-    public partial class YesNoForm : Form
+    public partial class YesNoForm : BaseStaticMaterialForm
     {
         #region Constructors
 
