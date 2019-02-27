@@ -109,6 +109,8 @@ namespace KSP_To_Boldly_Go.Forms
             if (isDirty)
             {
                 Text = $"{Text}*";
+                // Workaround for theming slow update
+                Refresh();
             }
         }
 
