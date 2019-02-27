@@ -24,9 +24,10 @@ namespace KSP_To_Boldly_Go.Forms
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenericOutputForm" /> class.
+        /// Initializes a new instance of the <see cref="GenericOutputForm"/> class.
         /// </summary>
-        public GenericOutputForm()
+        /// <param name="configuration">The configuration.</param>
+        public GenericOutputForm(IConfiguration configuration) : base(configuration)
         {
             InitializeComponent();
         }

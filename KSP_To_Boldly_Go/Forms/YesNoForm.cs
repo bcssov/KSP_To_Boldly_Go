@@ -12,7 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 using System;
-using System.Windows.Forms;
 
 namespace KSP_To_Boldly_Go.Forms
 {
@@ -27,7 +26,8 @@ namespace KSP_To_Boldly_Go.Forms
         /// <summary>
         /// Initializes a new instance of the <see cref="YesNoForm"/> class.
         /// </summary>
-        public YesNoForm()
+        /// <param name="config">The configuration.</param>
+        public YesNoForm(IConfiguration config) : base(config)
         {
             InitializeComponent();
         }

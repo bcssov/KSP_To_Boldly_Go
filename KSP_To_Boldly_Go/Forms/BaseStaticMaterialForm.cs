@@ -4,7 +4,7 @@
 // Created          : 02-26-2019
 //
 // Last Modified By : Mario
-// Last Modified On : 02-26-2019
+// Last Modified On : 02-27-2019
 // ***********************************************************************
 // <copyright file="BaseStaticMaterialForm.cs" company="Mario">
 //     Copyright ©  2017-2019
@@ -26,8 +26,22 @@ namespace KSP_To_Boldly_Go.Forms
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseStaticMaterialForm"/> class.
         /// </summary>
-        public BaseStaticMaterialForm()
-        {            
+        /// <param name="configuration">The configuration.</param>
+        public BaseStaticMaterialForm(IConfiguration configuration) : base(configuration)
+        {
+            InitForm();
+        }
+
+        #endregion Constructors
+
+        #region Methods
+
+        /// <summary>
+        /// Initializes the form.
+        /// </summary>
+        protected new void InitForm()
+        {
+            base.InitForm();
             MaximizeBox = false;
             MinimizeBox = false;
             ShowIcon = false;
@@ -36,6 +50,6 @@ namespace KSP_To_Boldly_Go.Forms
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
         }
 
-        #endregion Constructors
+        #endregion Methods
     }
 }

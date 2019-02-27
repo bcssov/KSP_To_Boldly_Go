@@ -32,6 +32,12 @@ namespace KSP_To_Boldly_Go
         /// <value>The json configuration path.</value>
         string JsonConfigPath { get; }
 
+        /// <summary>
+        /// Gets or sets the theme.
+        /// </summary>
+        /// <value>The theme.</value>
+        Theme Theme { get; set; }
+
         #endregion Properties
     }
 }
