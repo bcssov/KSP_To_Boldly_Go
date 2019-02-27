@@ -80,7 +80,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="handlerFactory">The handler factory.</param>
         public DeveloperToolsForm(IConfiguration config, IFormHandler formHandler, IKopernicusSerializer serializer, IHandlerFactory handlerFactory) : base(config)
         {
-            InitializeComponent();            
+            InitializeComponent();
             this.formHandler = formHandler;
             this.serializer = serializer;
             this.handlerFactory = handlerFactory;

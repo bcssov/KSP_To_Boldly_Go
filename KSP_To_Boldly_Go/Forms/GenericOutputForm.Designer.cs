@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtOutput = new System.Windows.Forms.TextBox();
+            this.txtOutput = new MaterialSkin.Controls.MaterialMultiLineTextField();
             this.SuspendLayout();
             // 
             // txtOutput
@@ -36,14 +36,19 @@
             this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.txtOutput.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtOutput.Depth = 0;
             this.txtOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtOutput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.txtOutput.Hint = "";
             this.txtOutput.Location = new System.Drawing.Point(0, 63);
-            this.txtOutput.Multiline = true;
+            this.txtOutput.MouseState = MaterialSkin.MouseState.HOVER;
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ReadOnly = true;
-            this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOutput.Size = new System.Drawing.Size(807, 475);
+            this.txtOutput.Size = new System.Drawing.Size(807, 470);
             this.txtOutput.TabIndex = 0;
+            this.txtOutput.Text = "";
             // 
             // GenericOutputForm
             // 
@@ -53,12 +58,11 @@
             this.Controls.Add(this.txtOutput);
             this.Name = "GenericOutputForm";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtOutput;
+        private MaterialSkin.Controls.MaterialMultiLineTextField txtOutput;
     }
 }

@@ -4,7 +4,7 @@
 // Created          : 01-23-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-26-2019
+// Last Modified On : 02-27-2019
 // ***********************************************************************
 // <copyright file="CollectionEditor.cs" company="Mario">
 //     Copyright ©  2017
@@ -53,6 +53,7 @@ namespace KSP_To_Boldly_Go.Common.UI
         {
             var collectionForm = base.CreateCollectionForm();
             collectionForm.Text = title;
+            collectionForm.HelpButton = false;
 
             var layout = collectionForm.Controls[0] as TableLayoutPanel;
             if (layout != null)

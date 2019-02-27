@@ -1,3 +1,6 @@
 I don't normally do this. I use nugets for everything. The project for MaterialSkin is dead, one fork is active but without nugets. Since the project is MIT license I've dumped the whole source here in order to more effectively merge fixes and or changes to this project.
 
 Fork source: https://github.com/donaldsteele/MaterialSkin
+Content included from: 
+- https://github.com/jokidz90/MaterialSkin
+- https://github.com/mdempse1/MaterialSkin

@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-23-2019
+// Last Modified On : 02-27-2019
 // ***********************************************************************
 // <copyright file="Configuration.cs" company="Mario">
 //     Copyright ©  2017
@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -26,16 +27,22 @@ namespace KSP_To_Boldly_Go
         #region Properties
 
         /// <summary>
+        /// Gets the application icon.
+        /// </summary>
+        /// <value>The application icon.</value>
+        public Icon AppIcon => Properties.Resources.icon;
+
+        /// <summary>
         /// Gets a value indicating whether [dev mode].
         /// </summary>
         /// <value><c>true</c> if [dev mode]; otherwise, <c>false</c>.</value>
-        public bool DevMode { get; } = Properties.Settings.Default.DeveloperMode;
+        public bool DevMode => Properties.Settings.Default.DeveloperMode;
 
         /// <summary>
         /// Gets the json configuration path.
         /// </summary>
         /// <value>The json configuration path.</value>
-        public string JsonConfigPath { get; } = Path.Combine(Application.StartupPath, Constants.ConfigResources);
+        public string JsonConfigPath => Path.Combine(Application.StartupPath, Constants.ConfigResources);
 
         /// <summary>
         /// Gets or sets the theme.

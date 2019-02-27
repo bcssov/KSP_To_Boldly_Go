@@ -24,12 +24,20 @@ namespace KSP_To_Boldly_Go.Forms
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseStaticMaterialForm"/> class.
+        /// Initializes a new instance of the <see cref="BaseStaticMaterialForm" /> class.
+        /// </summary>
+        public BaseStaticMaterialForm()
+        {
+            Init();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseStaticMaterialForm" /> class.
         /// </summary>
         /// <param name="configuration">The configuration.</param>
         public BaseStaticMaterialForm(IConfiguration configuration) : base(configuration)
         {
-            InitForm();
+            Init();
         }
 
         #endregion Constructors
@@ -48,6 +56,14 @@ namespace KSP_To_Boldly_Go.Forms
             ShowInTaskbar = false;
             Sizable = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+        }
+
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
+        private void Init()
+        {
+            InitForm();
         }
 
         #endregion Methods

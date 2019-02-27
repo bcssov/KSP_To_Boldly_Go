@@ -38,11 +38,19 @@ namespace KSP_To_Boldly_Go.Forms
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseMaterialForm" /> class.
         /// </summary>
+        public BaseMaterialForm()
+        {
+            Init();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseMaterialForm" /> class.
+        /// </summary>
         /// <param name="configuration">The configuration.</param>
         public BaseMaterialForm(IConfiguration configuration)
         {
-            InitForm();
             this.configuration = configuration;
+            Init();
         }
 
         #endregion Constructors
@@ -55,6 +63,10 @@ namespace KSP_To_Boldly_Go.Forms
         protected void InitForm()
         {
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            if (configuration != null)
+            {
+                Icon = configuration.AppIcon;
+            }
         }
 
         /// <summary>
@@ -62,10 +74,13 @@ namespace KSP_To_Boldly_Go.Forms
         /// </summary>
         protected void InitSkin()
         {
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = configuration.Theme == Theme.Dark ? MaterialSkinManager.Themes.DARK : MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+            if (configuration != null)
+            {
+                var materialSkinManager = MaterialSkinManager.Instance;
+                materialSkinManager.AddFormToManage(this);
+                materialSkinManager.Theme = configuration.Theme == Theme.Dark ? MaterialSkinManager.Themes.DARK : MaterialSkinManager.Themes.LIGHT;
+                materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+            }
         }
 
         /// <summary>
@@ -76,6 +91,14 @@ namespace KSP_To_Boldly_Go.Forms
         {
             base.OnLoad(e);
             InitSkin();
+        }
+
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
+        private void Init()
+        {
+            InitForm();
         }
 
         #endregion Methods

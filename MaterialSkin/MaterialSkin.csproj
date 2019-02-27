@@ -75,7 +75,16 @@
     <Compile Include="Controls\MaterialListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MaterialMenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MaterialMessageBox.cs" />
+    <Compile Include="Controls\MaterialPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MaterialPanel.Designer.cs">
+      <DependentUpon>MaterialPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MaterialRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>

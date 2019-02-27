@@ -11,6 +11,8 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System.Drawing;
+
 namespace KSP_To_Boldly_Go
 {
     /// <summary>
@@ -19,6 +21,12 @@ namespace KSP_To_Boldly_Go
     public interface IConfiguration
     {
         #region Properties
+
+        /// <summary>
+        /// Gets the application icon.
+        /// </summary>
+        /// <value>The application icon.</value>
+        Icon AppIcon { get; }
 
         /// <summary>
         /// Gets a value indicating whether [dev mode].
