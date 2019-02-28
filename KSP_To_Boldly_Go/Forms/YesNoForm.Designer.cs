@@ -28,15 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnYes = new Controls.RaisedMaterialButton();
-            this.btnNo = new Controls.RaisedMaterialButton();
+            this.btnYes = new KSP_To_Boldly_Go.Controls.RaisedMaterialButton();
+            this.btnNo = new KSP_To_Boldly_Go.Controls.RaisedMaterialButton();
             this.labMessage = new MaterialSkin.Controls.MaterialLabel();
             this.SuspendLayout();
             // 
             // btnYes
             // 
-            this.btnYes.AutoSize = false;
-            this.btnYes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.btnYes.Depth = 0;
             this.btnYes.DialogResult = System.Windows.Forms.DialogResult.Yes;
             this.btnYes.Icon = null;
@@ -51,8 +49,6 @@
             // 
             // btnNo
             // 
-            this.btnNo.AutoSize = false;
-            this.btnNo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.btnNo.Depth = 0;
             this.btnNo.DialogResult = System.Windows.Forms.DialogResult.No;
             this.btnNo.Icon = null;
@@ -68,7 +64,7 @@
             // labMessage
             // 
             this.labMessage.Depth = 0;
-            this.labMessage.Font = new System.Drawing.Font("Segoe WP SemiLight", 11F);
+            this.labMessage.Font = new System.Drawing.Font("Roboto", 11F);
             this.labMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.labMessage.Location = new System.Drawing.Point(4, 69);
             this.labMessage.MouseState = MaterialSkin.MouseState.HOVER;

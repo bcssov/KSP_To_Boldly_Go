@@ -34,7 +34,7 @@ namespace KSP_To_Boldly_Go.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Dark")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Light")]
         public global::KSP_To_Boldly_Go.Theme Theme {
             get {
                 return ((global::KSP_To_Boldly_Go.Theme)(this["Theme"]));

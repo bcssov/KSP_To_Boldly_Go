@@ -30,10 +30,10 @@
         {
             this.pbMin = new System.Windows.Forms.PictureBox();
             this.pbMax = new System.Windows.Forms.PictureBox();
-            this.btnMin = new Controls.FlatMaterialButton();
-            this.btnMax = new Controls.FlatMaterialButton();
-            this.btnOk = new Controls.RaisedMaterialButton();
-            this.btnCancel = new Controls.RaisedMaterialButton();
+            this.btnMin = new KSP_To_Boldly_Go.Controls.FlatMaterialButton();
+            this.btnMax = new KSP_To_Boldly_Go.Controls.FlatMaterialButton();
+            this.btnOk = new KSP_To_Boldly_Go.Controls.RaisedMaterialButton();
+            this.btnCancel = new KSP_To_Boldly_Go.Controls.RaisedMaterialButton();
             this.minColor = new KSP_To_Boldly_Go.Common.UI.ColorDialog();
             this.maxColor = new KSP_To_Boldly_Go.Common.UI.ColorDialog();
             this.txtMin = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -47,23 +47,21 @@
             this.pbMin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbMin.Location = new System.Drawing.Point(12, 68);
             this.pbMin.Name = "pbMin";
-            this.pbMin.Size = new System.Drawing.Size(158, 57);
+            this.pbMin.Size = new System.Drawing.Size(201, 57);
             this.pbMin.TabIndex = 0;
             this.pbMin.TabStop = false;
             // 
             // pbMax
             // 
             this.pbMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbMax.Location = new System.Drawing.Point(266, 68);
+            this.pbMax.Location = new System.Drawing.Point(269, 68);
             this.pbMax.Name = "pbMax";
-            this.pbMax.Size = new System.Drawing.Size(158, 57);
+            this.pbMax.Size = new System.Drawing.Size(201, 57);
             this.pbMax.TabIndex = 1;
             this.pbMax.TabStop = false;
             // 
             // btnMin
             // 
-            this.btnMin.AutoSize = false;
-            this.btnMin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.btnMin.Depth = 0;
             this.btnMin.Icon = null;
             this.btnMin.Location = new System.Drawing.Point(12, 167);
@@ -71,7 +69,7 @@
             this.btnMin.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnMin.Name = "btnMin";
             this.btnMin.Primary = false;
-            this.btnMin.Size = new System.Drawing.Size(158, 36);
+            this.btnMin.Size = new System.Drawing.Size(201, 36);
             this.btnMin.TabIndex = 2;
             this.btnMin.Text = "Change";
             this.btnMin.UseVisualStyleBackColor = true;
@@ -79,16 +77,14 @@
             // 
             // btnMax
             // 
-            this.btnMax.AutoSize = false;
-            this.btnMax.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.btnMax.Depth = 0;
             this.btnMax.Icon = null;
-            this.btnMax.Location = new System.Drawing.Point(266, 167);
+            this.btnMax.Location = new System.Drawing.Point(269, 167);
             this.btnMax.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnMax.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnMax.Name = "btnMax";
             this.btnMax.Primary = false;
-            this.btnMax.Size = new System.Drawing.Size(158, 36);
+            this.btnMax.Size = new System.Drawing.Size(201, 36);
             this.btnMax.TabIndex = 3;
             this.btnMax.Text = "Change";
             this.btnMax.UseVisualStyleBackColor = true;
@@ -96,8 +92,6 @@
             // 
             // btnOk
             // 
-            this.btnOk.AutoSize = false;
-            this.btnOk.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.btnOk.Depth = 0;
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.Icon = null;
@@ -105,23 +99,21 @@
             this.btnOk.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnOk.Name = "btnOk";
             this.btnOk.Primary = true;
-            this.btnOk.Size = new System.Drawing.Size(158, 36);
+            this.btnOk.Size = new System.Drawing.Size(201, 36);
             this.btnOk.TabIndex = 4;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
-            this.btnCancel.AutoSize = false;
-            this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.btnCancel.Depth = 0;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Icon = null;
-            this.btnCancel.Location = new System.Drawing.Point(266, 227);
+            this.btnCancel.Location = new System.Drawing.Point(269, 227);
             this.btnCancel.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Primary = true;
-            this.btnCancel.Size = new System.Drawing.Size(158, 36);
+            this.btnCancel.Size = new System.Drawing.Size(201, 36);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -147,7 +139,7 @@
             this.txtMin.SelectedText = "";
             this.txtMin.SelectionLength = 0;
             this.txtMin.SelectionStart = 0;
-            this.txtMin.Size = new System.Drawing.Size(158, 25);
+            this.txtMin.Size = new System.Drawing.Size(201, 23);
             this.txtMin.TabIndex = 6;
             this.txtMin.TabStop = false;
             this.txtMin.UseSystemPasswordChar = false;
@@ -157,7 +149,7 @@
             this.txtMax.Depth = 0;
             this.txtMax.Enabled = false;
             this.txtMax.Hint = "";
-            this.txtMax.Location = new System.Drawing.Point(266, 137);
+            this.txtMax.Location = new System.Drawing.Point(269, 137);
             this.txtMax.MaxLength = 32767;
             this.txtMax.MouseState = MaterialSkin.MouseState.HOVER;
             this.txtMax.Name = "txtMax";
@@ -165,7 +157,7 @@
             this.txtMax.SelectedText = "";
             this.txtMax.SelectionLength = 0;
             this.txtMax.SelectionStart = 0;
-            this.txtMax.Size = new System.Drawing.Size(158, 25);
+            this.txtMax.Size = new System.Drawing.Size(201, 23);
             this.txtMax.TabIndex = 7;
             this.txtMax.TabStop = false;
             this.txtMax.UseSystemPasswordChar = false;
@@ -174,7 +166,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 276);
+            this.ClientSize = new System.Drawing.Size(478, 275);
             this.Controls.Add(this.txtMax);
             this.Controls.Add(this.txtMin);
             this.Controls.Add(this.btnCancel);

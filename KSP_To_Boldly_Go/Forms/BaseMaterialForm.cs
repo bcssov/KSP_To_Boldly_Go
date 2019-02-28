@@ -4,7 +4,7 @@
 // Created          : 02-26-2019
 //
 // Last Modified By : Mario
-// Last Modified On : 02-27-2019
+// Last Modified On : 02-28-2019
 // ***********************************************************************
 // <copyright file="BaseMaterialForm.cs" company="Mario">
 //     Copyright ©  2017-2019
@@ -60,9 +60,10 @@ namespace KSP_To_Boldly_Go.Forms
         /// <summary>
         /// Initializes the form.
         /// </summary>
-        protected void InitForm()
+        protected virtual void InitForm()
         {
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            ShowInTaskbar = false;
             if (configuration != null)
             {
                 Icon = configuration.AppIcon;
@@ -72,7 +73,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// <summary>
         /// Initializes the skin.
         /// </summary>
-        protected void InitSkin()
+        protected virtual void InitSkin()
         {
             if (configuration != null)
             {

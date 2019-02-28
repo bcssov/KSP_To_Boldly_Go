@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-27-2019
+// Last Modified On : 02-28-2019
 // ***********************************************************************
 // <copyright file="MainForm.cs" company="Mario">
 //     Copyright ©  2017
@@ -116,6 +116,7 @@ namespace KSP_To_Boldly_Go.Forms
             cbTheme.SelectedItem = configuration.Theme;
             btnDevMode.Visible = configuration.DevMode;
             JsonConvert.DefaultSettings = () => { return jsonSettings.GetSettings(); };
+            ShowInTaskbar = true;
             initializing = false;
         }
 

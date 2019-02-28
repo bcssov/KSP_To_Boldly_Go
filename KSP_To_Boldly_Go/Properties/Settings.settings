@@ -6,7 +6,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="Theme" Type="KSP_To_Boldly_Go.Theme" Scope="User">
-      <Value Profile="(Default)">Dark</Value>
+      <Value Profile="(Default)">Light</Value>
     </Setting>
   </Settings>
 </SettingsFile>

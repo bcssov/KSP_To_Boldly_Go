@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-26-2019
+// Last Modified On : 02-28-2019
 // ***********************************************************************
 // <copyright file="DeveloperToolsForm.cs" company="Mario">
 //     Copyright ©  2017
@@ -72,7 +72,7 @@ namespace KSP_To_Boldly_Go.Forms
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DeveloperToolsForm"/> class.
+        /// Initializes a new instance of the <see cref="DeveloperToolsForm" /> class.
         /// </summary>
         /// <param name="config">The configuration.</param>
         /// <param name="formHandler">The form handler.</param>
@@ -84,10 +84,7 @@ namespace KSP_To_Boldly_Go.Forms
             this.formHandler = formHandler;
             this.serializer = serializer;
             this.handlerFactory = handlerFactory;
-            initialTitle = Text;
-            pgData.PropertySort = PropertySort.Alphabetical;
-            pgData.PropertyValueChanged += PgData_PropertyValueChanged;
-            FormClosing += DeveloperToolsForm_FormClosing;
+            Initialize();
         }
 
         #endregion Constructors
@@ -95,17 +92,26 @@ namespace KSP_To_Boldly_Go.Forms
         #region Methods
 
         /// <summary>
-        /// Checks the state of the model.
+        /// Initializes the skin.
         /// </summary>
-        private void CheckModelState()
+        protected override void InitSkin()
         {
-            isDirty = model.IsDirty();
-            if (isDirty && !Text.EndsWith("*"))
+            base.InitSkin();
+            if (configuration != null)
             {
-                Text = $"{Text}*";
+                if (configuration.Theme == Theme.Light)
+                {
+                    pgData.CanShowVisualStyleGlyphs = true;
+                    pgData.Refresh();
+                    Refresh();
+                }
+                else
+                {
+                    pgData.CanShowVisualStyleGlyphs = false;
+                    pgData.Refresh();
+                    Refresh();
+                }
             }
-            // Workaround for theming slow update
-            Refresh();
         }
 
         /// <summary>
@@ -133,8 +139,8 @@ namespace KSP_To_Boldly_Go.Forms
             if (isDirty)
             {
                 var form = formHandler.GetFormOrDefault<YesNoForm>();
-                form.SetContent(Constants.ChangesNotSavedTitle, Constants.ChangesNotSavedMessage);
-                if (form.ShowDialog(this) == DialogResult.Yes)
+                form.SetContent(Constants.ChangesNotSavedTitle, Constants.ChangesNotSavedMessage, SelectedOption.None);
+                if (form.ShowDialog(this) == DialogResult.No)
                 {
                     e.Cancel = true;
                 }
@@ -179,9 +185,21 @@ namespace KSP_To_Boldly_Go.Forms
                 {
                     model.Order = kopernicusObjects.OrderByDescending(p => p.Order).First().Order + 1;
                     pgData.Refresh();
-                    CheckModelState();
+                    RefreshForm();
                 }
             }
+        }
+
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
+        private void Initialize()
+        {
+            initialTitle = Text;
+            pgData.PropertySort = PropertySort.Alphabetical;
+            pgData.PropertyValueChanged += PgData_PropertyValueChanged;
+            FormClosing += DeveloperToolsForm_FormClosing;
+            ShowInTaskbar = true;
         }
 
         /// <summary>
@@ -202,7 +220,7 @@ namespace KSP_To_Boldly_Go.Forms
                     UpdateModelPath();
                     pgData.SelectedObject = model;
                     Text = $"{initialTitle} : {Path.GetFileName(path)}";
-                    CheckModelState();
+                    RefreshForm();
                 }
                 else
                 {
@@ -227,7 +245,7 @@ namespace KSP_To_Boldly_Go.Forms
                 Text = $"{initialTitle} : {form.SelectedType}";
                 path = string.Empty;
                 UpdateModelPath();
-                CheckModelState();
+                RefreshForm();
             }
         }
 
@@ -238,7 +256,21 @@ namespace KSP_To_Boldly_Go.Forms
         /// <param name="e">The <see cref="PropertyValueChangedEventArgs" /> instance containing the event data.</param>
         private void PgData_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            CheckModelState();
+            RefreshForm();
+        }
+
+        /// <summary>
+        /// Refreshes the form.
+        /// </summary>
+        private void RefreshForm()
+        {
+            isDirty = model.IsDirty();
+            if (isDirty && !Text.EndsWith("*"))
+            {
+                Text = $"{Text}*";
+            }
+            // Workaround for theming slow update
+            Refresh();
         }
 
         /// <summary>
@@ -288,7 +320,7 @@ namespace KSP_To_Boldly_Go.Forms
                         form.SetContent($"{Constants.SerializationFormTitle} : {path}", output);
                         form.ShowDialog(this);
                         form.Dispose();
-                    }                    
+                    }
                 }
             }
         }
@@ -332,7 +364,7 @@ namespace KSP_To_Boldly_Go.Forms
             /// <summary>
             /// The changes not saved message
             /// </summary>
-            public const string ChangesNotSavedMessage = "Changes haven't been saved. Do you want to cancel the closing operation?";
+            public const string ChangesNotSavedMessage = "Changes haven't been saved. Are you sure you want to close?";
 
             /// <summary>
             /// The changes not saved title
