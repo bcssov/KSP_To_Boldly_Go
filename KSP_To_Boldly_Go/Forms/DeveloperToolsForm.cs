@@ -4,7 +4,7 @@
 // Created          : 01-20-2017
 //
 // Last Modified By : Mario
-// Last Modified On : 02-28-2019
+// Last Modified On : 03-02-2019
 // ***********************************************************************
 // <copyright file="DeveloperToolsForm.cs" company="Mario">
 //     Copyright ©  2017
@@ -134,6 +134,7 @@ namespace KSP_To_Boldly_Go.Forms
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FormClosingEventArgs" /> instance containing the event data.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Justification = "Already checking if can dispose, code analysis is playing dumb!")]
         private void DeveloperToolsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (isDirty)
@@ -145,7 +146,10 @@ namespace KSP_To_Boldly_Go.Forms
                     e.Cancel = true;
                 }
                 form.Close();
-                form.Dispose();
+                if (!form.Disposing && !form.IsDisposed)
+                {
+                    form.Dispose();
+                }
             }
         }
 

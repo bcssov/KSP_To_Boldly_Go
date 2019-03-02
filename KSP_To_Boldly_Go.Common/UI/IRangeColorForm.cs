@@ -4,7 +4,7 @@
 // Created          : 02-26-2019
 //
 // Last Modified By : Mario
-// Last Modified On : 02-26-2019
+// Last Modified On : 03-02-2019
 // ***********************************************************************
 // <copyright file="IRangeColorForm.cs" company="Mario">
 //     Copyright ©  2017
@@ -24,6 +24,18 @@ namespace KSP_To_Boldly_Go.Common.UI
     public interface IRangeColorForm : IDisposable
     {
         #region Properties
+
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="IRangeColorForm"/> is disposing.
+        /// </summary>
+        /// <value><c>true</c> if disposing; otherwise, <c>false</c>.</value>
+        bool Disposing { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is disposed.
+        /// </summary>
+        /// <value><c>true</c> if this instance is disposed; otherwise, <c>false</c>.</value>
+        bool IsDisposed { get; }
 
         /// <summary>
         /// Gets the maximum.

@@ -4,7 +4,7 @@
 // Created          : 02-25-2019
 //
 // Last Modified By : Mario
-// Last Modified On : 02-26-2019
+// Last Modified On : 03-02-2019
 // ***********************************************************************
 // <copyright file="RangeColorEditor.cs" company="Mario">
 //     Copyright ©  2017
@@ -34,6 +34,7 @@ namespace KSP_To_Boldly_Go.Common.UI
         /// <param name="provider">An <see cref="T:System.IServiceProvider" /> that this editor can use to obtain services.</param>
         /// <param name="value">The object to edit.</param>
         /// <returns>The new value of the object. If the value of the object has not changed, this should return the same object it was passed.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Justification = "Already checking if can dispose, code analysis is playing dumb!")]
         public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
         {
             RangeColor rangeColor;
@@ -62,7 +63,10 @@ namespace KSP_To_Boldly_Go.Common.UI
                     rangeColor.Max = maxColor;
                 }
                 form.Close();
-                form.Dispose();
+                if (!form.Disposing && !form.IsDisposed)
+                {
+                    form.Dispose();
+                }
             }
 
             return rangeColor;

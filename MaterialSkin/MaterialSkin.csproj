@@ -105,6 +105,7 @@
     </Compile>
     <Compile Include="DrawHelper.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IMaterialControl.cs" />
     <Compile Include="Controls\MaterialRaisedButton.cs">
       <SubType>Component</SubType>
