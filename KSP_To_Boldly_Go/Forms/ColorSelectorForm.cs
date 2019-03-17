@@ -4,7 +4,7 @@
 // Created          : 02-26-2019
 //
 // Last Modified By : Mario
-// Last Modified On : 02-28-2019
+// Last Modified On : 03-17-2019
 // ***********************************************************************
 // <copyright file="ColorSelectorForm.cs" company="Mario">
 //     Copyright ©  2017-2019
@@ -34,8 +34,6 @@ namespace KSP_To_Boldly_Go.Forms
         public ColorSelectorForm(IConfiguration config) : base(config)
         {
             InitializeComponent();
-            pbMax.BackColorChanged += PbMax_BackColorChanged;
-            pbMin.BackColorChanged += PbMin_BackColorChanged;
         }
 
         #endregion Constructors
@@ -72,6 +70,17 @@ namespace KSP_To_Boldly_Go.Forms
         }
 
         /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Form.Load" /> event.
+        /// </summary>
+        /// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            pbMax.BackColor = Max;
+            pbMin.BackColor = Min;
+        }
+
+        /// <summary>
         /// Handles the Click event of the btnMax control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -99,34 +108,6 @@ namespace KSP_To_Boldly_Go.Forms
         private string FormatColorString(Color color)
         {
             return $"R:{color.R}, G:{color.G}, B:{color.B}, A:{color.A}";
-        }
-
-        /// <summary>
-        /// Handles the BackColorChanged event of the PbMax control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void PbMax_BackColorChanged(object sender, EventArgs e)
-        {
-            // Workaround for theme manager
-            if (Max != pbMax.BackColor)
-            {
-                pbMax.BackColor = Max;
-            }
-        }
-
-        /// <summary>
-        /// Handles the BackColorChanged event of the PbMin control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void PbMin_BackColorChanged(object sender, EventArgs e)
-        {
-            // Workaround for theme manager
-            if (Min != pbMin.BackColor)
-            {
-                pbMin.BackColor = Min;
-            }
         }
 
         /// <summary>
